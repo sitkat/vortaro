@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
 import 'package:vortaro/screens/create_word_screen.dart';
 import 'package:vortaro/screens/detail_word_screen.dart';
+import 'package:vortaro/screens/not_found_screen.dart';
 import 'package:vortaro/screens/update_word_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -63,13 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Esperanto'),
-        // actions: <Widget>[
-          // IconButton(
-          //   icon: Icon(Icons.language),
-          //   onPressed: () => Navigator.of(context)
-          //       .push(MaterialPageRoute(builder: (context) => CreateWord())),
-          // )
-        // ],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => CreateWord())),
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -138,11 +140,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }),
           ),
-          FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => CreateWord())),
-          ),
+          // FloatingActionButton(
+          //   child: Icon(Icons.add),
+          //   onPressed: () => Navigator.of(context)
+          //       .push(MaterialPageRoute(builder: (context) => CreateWord())),
+          // ),
         ],
       ),
     );
