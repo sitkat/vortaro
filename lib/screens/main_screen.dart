@@ -16,10 +16,10 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final tabs = [
-    HomeScreen(),
-    NotFoundScreen(),
-    TranslatorScreen(),
-    NotFoundScreen(),
+    const HomeScreen(),
+    const NotFoundScreen(),
+    const TranslatorScreen(),
+    const NotFoundScreen(),
   ];
 
   @override
@@ -27,19 +27,19 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: tabs[_currentIndex],
       bottomNavigationBar: Container(
-        color: Colors.black,
+        color: Colors.lightGreenAccent,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 15.0,
             vertical: 20.0,
           ),
           child: GNav(
-            backgroundColor: Colors.black,
-            color: Colors.white,
-            activeColor: Colors.white,
-            tabBackgroundColor: Colors.grey.shade800,
-            padding: EdgeInsets.all(16),
-            gap: 5,
+            backgroundColor: Colors.lightGreenAccent,
+            color: Colors.black,
+            activeColor: Colors.black,
+            tabBackgroundColor: Colors.white60,
+            padding: const EdgeInsets.all(16),
+            gap: 4,
 
             selectedIndex: _currentIndex,
             onTabChange: (index){

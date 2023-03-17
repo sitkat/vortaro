@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
-import 'package:vortaro/screens/create_word_screen.dart';
 import 'package:vortaro/screens/detail_word_screen.dart';
-import 'package:vortaro/screens/not_found_screen.dart';
 import 'package:vortaro/screens/update_word_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -64,12 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Esperanto'),
+        title: const Text('Esperanto'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => CreateWord())),
+            icon: const Icon(Icons.add),
+            onPressed: () => Navigator.of(context).pushNamed('/create-word'),
           )
         ],
       ),
@@ -84,12 +80,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               decoration: InputDecoration(
-                  hintText: 'Search...',
-                  labelText: 'Search',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25)),
-                  )),
+                hintText: 'Search...',
+                labelText: 'Search',
+                labelStyle: const TextStyle(color: Colors.black38),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: Colors.black38,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 1, color: Colors.black),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 1, color: Colors.black38),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+              ),
             ),
           ),
           Expanded(
@@ -98,17 +104,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, i) {
                   Word word = Word.toFromMap(items[i]);
                   return Card(
-                    margin: EdgeInsets.all(8),
+                    color: Colors.grey.shade300,
+                    margin: const EdgeInsets.all(8),
                     child: ListTile(
-                      title: Text(word.title),
+                      title: Text(
+                        word.title,
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w400),
+                      ),
                       subtitle: Text(word.translation),
                       trailing: Column(
                         children: <Widget>[
                           Expanded(
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.delete,
-                                color: Colors.red,
+                                color: Colors.black87,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -120,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Expanded(
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.edit,
                                 color: Colors.green,
                               ),
