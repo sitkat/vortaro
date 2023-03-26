@@ -4,6 +4,7 @@ import 'package:vortaro/screens/home_screen.dart';
 import 'package:vortaro/screens/not_found_screen.dart';
 import 'package:vortaro/screens/translator_screen.dart';
 
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 

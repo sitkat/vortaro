@@ -151,11 +151,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }),
           ),
-          // FloatingActionButton(
-          //   child: Icon(Icons.add),
-          //   onPressed: () => Navigator.of(context)
-          //       .push(MaterialPageRoute(builder: (context) => CreateWord())),
-          // ),
         ],
       ),
     );
