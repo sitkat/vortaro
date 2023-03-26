@@ -9,9 +9,20 @@ class TranslatorScreen extends StatefulWidget {
 }
 
 class _TranslatorScreenState extends State<TranslatorScreen> {
+  var chosenValueFrom = 'ru';
+  var chosenValueTo = 'eo';
   var chosenValue = 'ru';
   String _txtTranslated = '';
   final _translator = GoogleTranslator();
+
+
+  void _refreshTranslation(String value) async {
+    var trans = await _translator.translate(value,
+        from: chosenValueFrom, to: chosenValueTo);
+    setState(() {
+      _txtTranslated = trans.text;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +77,8 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                       ),
                       TextField(
                         decoration: InputDecoration(hintText: 'Введите текст'),
-                        onChanged: (String? value) {
-                          setState(() {
-                            _txtTranslated = value.toString();
-                            chosenValue = 'ru';
-                          });
+                        onChanged: (String? value) async {
+                          _refreshTranslation(value.toString());
                         },
                       ),
                       SizedBox(
