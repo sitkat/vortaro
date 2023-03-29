@@ -13,8 +13,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DbHelper.instance.init();
   runApp(const MyApp());
-  DataController dataController = DataController();
-  dataController.converter();
+  // DataController dataController = DataController();
+  // dataController.converter();
 }
 
 class MyApp extends StatelessWidget {

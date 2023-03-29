@@ -15,7 +15,6 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   String _txtTranslated = '';
   final _translator = GoogleTranslator();
 
-
   void _refreshTranslation(String value) async {
     var trans = await _translator.translate(value,
         from: chosenValueFrom, to: chosenValueTo);
@@ -30,7 +29,6 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
       appBar: AppBar(
         title: const Text('Esperanto'),
       ),
-
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -46,11 +44,12 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Rusa', textAlign: TextAlign.start),
+                      Text('Русский', textAlign: TextAlign.start),
                       IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.swap_horiz),
-                          iconSize: 20),
+                          iconSize: 20,
+                          splashRadius: 10),
                       Text(
                         'Esperanto',
                         textAlign: TextAlign.end,
@@ -71,7 +70,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     children: [
                       Row(
                         children: [
-                          Text('Rusa'),
+                          Text('Русский'),
                           Icon(Icons.volume_down_outlined),
                         ],
                       ),
@@ -138,44 +137,6 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
           ),
         ),
       ),
-
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //     children: [
-      //       TextField(
-      //         decoration: const InputDecoration(border: OutlineInputBorder()),
-      //         onChanged: (String? value) {
-      //           setState(() {
-      //             _txtTranslated = value.toString();
-      //             chosenValue = 'ru';
-      //           });
-      //         },
-      //       ),
-      //       DropdownButton(
-      //         items: <String>['en', 'ru', 'eo']
-      //             .map<DropdownMenuItem<String>>((String value) {
-      //           return DropdownMenuItem<String>(
-      //             child: Text(value),
-      //             value: value,
-      //           );
-      //         }).toList(),
-      //         onChanged: (String? value) async {
-      //           var trans = await _translator.translate(_txtTranslated,
-      //               from: chosenValue, to: value.toString());
-      //           setState(() {
-      //             _txtTranslated = trans.text;
-      //             chosenValue = value.toString();
-      //           });
-      //         },
-      //       ),
-      //       Text(
-      //         _txtTranslated,
-      //         style: TextStyle(fontSize: 20),
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

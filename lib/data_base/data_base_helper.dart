@@ -1,6 +1,8 @@
-import 'dart:io';
+import 'dart:io' as io;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -16,18 +18,28 @@ class DbHelper {
 
   // DbHelper.internal();
 
-  late final Directory _appDocumnetDirectory;
+  late final io.Directory _appDocumnetDirectory;
   late final String _pathDB;
   late final Database _db;
   int _version = 1;
 
   Future<void> init() async {
     _appDocumnetDirectory =
-    await path_provider.getApplicationDocumentsDirectory();
+        await path_provider.getApplicationDocumentsDirectory();
 
-    _pathDB = join(_appDocumnetDirectory.path, "dbTest2.db");
+    _pathDB = join(_appDocumnetDirectory.path, "dbMain.db");
 
-    if (Platform.isMacOS) {
+    bool dbExists = await io.File(_pathDB).exists();
+
+    if (!dbExists) {
+      ByteData data = await rootBundle.load(join("assets", "dbTest.db"));
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+
+      await io.File(_pathDB).writeAsBytes(bytes, flush: true);
+    }
+
+    if (io.Platform.isMacOS) {
       sqfliteFfiInit();
       _db = await databaseFactoryFfi.openDatabase(_pathDB,
           options: OpenDatabaseOptions(
@@ -36,15 +48,15 @@ class DbHelper {
             onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
           ));
     }
-    // if (Platform.isAndroid) {
-    _db = await openDatabase(
-      _pathDB,
-      version: _version,
-      onCreate: (db, version) async {
-        await onCreateTable(db);
-      },
-      onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
-    );
+    // if (io.Platform.isAndroid) {
+      _db = await openDatabase(
+        _pathDB,
+        version: _version,
+        onCreate: (db, version) async {
+          await onCreateTable(db);
+        },
+        onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
+      );
     // }
   }
 
@@ -90,6 +102,7 @@ class DbHelper {
 
   Future<List<Map<String, dynamic>>> getWords() async {
     var dbClient = await _db;
-    return dbClient.query(DataBaseRequest.tableWord, orderBy: "title");
+    return dbClient.query(DataBaseRequest.tableWord,
+        orderBy: "title", limit: 2000);
   }
 }

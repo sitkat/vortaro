@@ -32,6 +32,7 @@ flutter:
 
   assets:
     - assets/test.txt
+    - assets/dbTest.db
 
   # fonts:
   #   - family: Schyler
