@@ -16,18 +16,16 @@ class DbHelper {
 
   DbHelper._instance();
 
-  // DbHelper.internal();
-
-  late final io.Directory _appDocumnetDirectory;
+  late final io.Directory _appDocumentDirectory;
   late final String _pathDB;
   late final Database _db;
   int _version = 1;
 
   Future<void> init() async {
-    _appDocumnetDirectory =
+    _appDocumentDirectory =
         await path_provider.getApplicationDocumentsDirectory();
 
-    _pathDB = join(_appDocumnetDirectory.path, "dbMain.db");
+    _pathDB = join(_appDocumentDirectory.path, "dbMain.db");
 
     bool dbExists = await io.File(_pathDB).exists();
 

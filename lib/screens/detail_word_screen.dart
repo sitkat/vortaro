@@ -14,8 +14,8 @@ class DetailWord extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
-          children: <Widget>[
-            Text(_word.title,),
+          children: [
+            Text(_word.title.replaceAll('(', '').replaceAll(')', '')),
             SizedBox(height: 20,),
             Text(_word.translation, ),
             SizedBox(height: 20,),

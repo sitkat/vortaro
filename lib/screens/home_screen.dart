@@ -108,11 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.all(8),
                     child: ListTile(
                       title: Text(
-                        word.title,
+                        word.title.replaceAll('(', '').replaceAll(')', ''),
                         style: const TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w400),
                       ),
-                      subtitle: Text(word.translation),
+                      subtitle: Text(word.translation.replaceAll('(', '').replaceAll(')', '')),
                       trailing: Column(
                         children: <Widget>[
                           Expanded(
