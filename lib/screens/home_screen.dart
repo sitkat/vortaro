@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vortaro/UI/app_router/constants_router.dart';
+import 'package:vortaro/UI/app_router/custom_router.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
 import 'package:vortaro/screens/detail_word_screen.dart';
@@ -62,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Esperanto'),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () => Navigator.of(context).pushNamed('/create-word'),
@@ -70,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Column(
-        children: <Widget>[
+        children: [
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextField(
@@ -135,9 +137,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icons.edit,
                                 color: Colors.green,
                               ),
+                              // onPressed: () {
+                              //   Navigator.of(context).push(MaterialPageRoute(
+                              //       builder: (context) => UpdateWord(word)));
+                              // },
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => UpdateWord(word)));
+                                Navigator.pushNamed(context, updateWordRoute, arguments: WordRouteArguments(wordArguments: word));
                               },
                             ),
                           ),

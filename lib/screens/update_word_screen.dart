@@ -4,9 +4,9 @@ import 'package:vortaro/model/word.dart';
 import 'package:vortaro/screens/home_screen.dart';
 
 class UpdateWord extends StatefulWidget {
-  Word _word;
+  const UpdateWord({super.key, required this.word});
 
-  UpdateWord(this._word);
+  final Word word;
 
   @override
   State<UpdateWord> createState() => _UpdateWordState();
@@ -23,9 +23,9 @@ class _UpdateWordState extends State<UpdateWord> {
   void initState() {
     helper = DbHelper.instance;
 
-    _controllerTitle.text = widget._word.title;
-    _controllerTranslation.text = widget._word.translation;
-    _controllerDescription.text = widget._word.description;
+    _controllerTitle.text = widget.word.title;
+    _controllerTranslation.text = widget.word.translation;
+    _controllerDescription.text = widget.word.description;
   }
 
   @override
@@ -54,7 +54,7 @@ class _UpdateWordState extends State<UpdateWord> {
                 child: Text('Save'),
                 onPressed: () async {
                   await helper.onUpdateWord(Word(
-                      id: widget._word.id,
+                      id: widget.word.id,
                       edition: DateTime.now()
                           .add(const Duration(hours: 3))
                           .toString(),
@@ -64,21 +64,6 @@ class _UpdateWordState extends State<UpdateWord> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
-                //   style: ButtonStyle(
-                //     backgroundColor:
-                //     MaterialStateProperty.all(Colors.grey[300]),
-                //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                //       RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(24.0)),
-                //     ),
-                //   ),
-                //   onPressed: () {},
-                //   child: const Text(
-                //   'Войти',
-                //   style: TextStyle(
-                //     color: Colors.lightBlue,
-                //   ),
-                // ),
               ),
             ),
           ],
