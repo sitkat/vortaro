@@ -114,7 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: const TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w400),
                       ),
-                      subtitle: Text(word.translation.replaceAll('(', '').replaceAll(')', '')),
+                      subtitle: Text(word.translation
+                          .replaceAll('(', '')
+                          .replaceAll(')', '')),
                       trailing: Column(
                         children: <Widget>[
                           Expanded(
@@ -137,20 +139,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icons.edit,
                                 color: Colors.green,
                               ),
-                              // onPressed: () {
-                              //   Navigator.of(context).push(MaterialPageRoute(
-                              //       builder: (context) => UpdateWord(word)));
-                              // },
                               onPressed: () {
-                                Navigator.pushNamed(context, updateWordRoute, arguments: WordRouteArguments(wordArguments: word));
+                                Navigator.pushNamed(context, updateWordRoute,
+                                    arguments: WordRouteArguments(
+                                        wordArguments: word));
                               },
                             ),
                           ),
                         ],
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DetailWord(word)));
+                        Navigator.pushNamed(context, detailWordRoute,
+                            arguments: WordRouteArguments(
+                                wordArguments: word));
                       },
                     ),
                   );

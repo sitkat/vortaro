@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vortaro/model/word.dart';
 
 class DetailWord extends StatelessWidget {
-  // const DetailWord({Key? key}) : super(key: key);
+  const DetailWord({super.key, required this.word});
 
-  Word _word;
-  DetailWord(this._word);
+  final Word word;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +14,11 @@ class DetailWord extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            Text(_word.title.replaceAll('(', '').replaceAll(')', '')),
+            Text(word.title.replaceAll('(', '').replaceAll(')', '')),
             SizedBox(height: 20,),
-            Text(_word.translation, ),
+            Text(word.translation, ),
             SizedBox(height: 20,),
-            Text(_word.description.toString(),),
+            Text(word.description.toString(),),
           ],
         ),
       ),

@@ -23,8 +23,11 @@ class CustomRouter {
             builder: (_) => UpdateWord(
                 word:
                     (settings.arguments as WordRouteArguments).wordArguments));
-      // case detailWordRoute:
-      //   return MaterialPageRoute(builder: (_) => DetailWord(_word));
+      case detailWordRoute:
+        return MaterialPageRoute(
+            builder: (_) => DetailWord(
+                word:
+                    (settings.arguments as WordRouteArguments).wordArguments));
       case translatorRoute:
         return MaterialPageRoute(builder: (_) => const TranslatorScreen());
       default:
@@ -35,5 +38,6 @@ class CustomRouter {
 
 class WordRouteArguments {
   WordRouteArguments({required this.wordArguments});
+
   final Word wordArguments;
 }
