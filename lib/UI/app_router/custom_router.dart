@@ -30,6 +30,8 @@ class CustomRouter {
                     (settings.arguments as WordRouteArguments).wordArguments));
       case translatorRoute:
         return MaterialPageRoute(builder: (_) => const TranslatorScreen());
+      case notFoundPageRoute:
+        return MaterialPageRoute(builder: (_) => const NotFoundScreen());
       default:
         return MaterialPageRoute(builder: (_) => const NotFoundScreen());
     }

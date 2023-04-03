@@ -23,7 +23,7 @@ class DbHelper {
 
   Future<void> init() async {
     _appDocumentDirectory =
-        await path_provider.getApplicationDocumentsDirectory();
+    await path_provider.getApplicationDocumentsDirectory();
 
     _pathDB = join(_appDocumentDirectory.path, "dbMain.db");
 
@@ -32,7 +32,7 @@ class DbHelper {
     if (!dbExists) {
       ByteData data = await rootBundle.load(join("assets", "dbTest.db"));
       List<int> bytes =
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
       await io.File(_pathDB).writeAsBytes(bytes, flush: true);
     }
@@ -47,14 +47,14 @@ class DbHelper {
           ));
     }
     // if (io.Platform.isAndroid) {
-      _db = await openDatabase(
-        _pathDB,
-        version: _version,
-        onCreate: (db, version) async {
-          await onCreateTable(db);
-        },
-        onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
-      );
+    _db = await openDatabase(
+      _pathDB,
+      version: _version,
+      onCreate: (db, version) async {
+        await onCreateTable(db);
+      },
+      onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
+    );
     // }
   }
 
@@ -67,7 +67,9 @@ class DbHelper {
   Future<void> onUpdateTable(Database db) async {
     var tables = await db.rawQuery('SELECT name FROM sqlite_master');
     for (var table in DataBaseRequest.tableList.reversed) {
-      if (tables.where((element) => element['name'] == table).isNotEmpty) {
+      if (tables
+          .where((element) => element['name'] == table)
+          .isNotEmpty) {
         await db.execute(DataBaseRequest.deleteTable(table));
       }
     }
@@ -102,5 +104,14 @@ class DbHelper {
     var dbClient = await _db;
     return dbClient.query(DataBaseRequest.tableWord,
         orderBy: "title", limit: 2000);
+    // return dbClient.query(DataBaseRequest.tableWord, where: "Replace(title, '`', '')", limit: 200, orderBy: "title");
+    // return dbClient.query(DataBaseRequest.tableWord, where: "Replace(title, '`', '')", limit: 200, orderBy: "title");
+
+  }
+
+  Future<void> getWord() async {
+    var dbClient = await _db;
+    return dbClient.execute(
+        'SELECT id, edition , Replace(title, "`", ""), translation, description FROM Word');
   }
 }

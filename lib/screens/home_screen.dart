@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           .replaceAll('(', '')
                           .replaceAll(')', '')),
                       trailing: Column(
-                        children: <Widget>[
+                        children: [
                           Expanded(
                             child: IconButton(
                               icon: const Icon(
@@ -133,25 +133,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          Expanded(
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.edit,
-                                color: Colors.green,
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, updateWordRoute,
-                                    arguments: WordRouteArguments(
-                                        wordArguments: word));
-                              },
-                            ),
-                          ),
+                          // Expanded(
+                          //   child: IconButton(
+                          //     icon: const Icon(
+                          //       Icons.edit,
+                          //       color: Colors.green,
+                          //     ),
+                          //     onPressed: () {
+                          //       Navigator.pushNamed(context, updateWordRoute,
+                          //           arguments: WordRouteArguments(
+                          //               wordArguments: word));
+                          //     },
+                          //   ),
+                          // ),
                         ],
                       ),
                       onTap: () {
                         Navigator.pushNamed(context, detailWordRoute,
-                            arguments: WordRouteArguments(
-                                wordArguments: word));
+                            arguments: WordRouteArguments(wordArguments: word));
                       },
                     ),
                   );

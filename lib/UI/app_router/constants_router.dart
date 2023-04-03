@@ -5,3 +5,4 @@ const String updateWordRoute = "updateWord";
 const String detailWordRoute = "detailWord";
 const String translatorRoute = "translator";
 const String settingsRoute = "settings";
+const String notFoundPageRoute = "notFoundPage";

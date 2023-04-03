@@ -85,21 +85,6 @@ class _CreateWordState extends State<CreateWord> {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
-                  //   style: ButtonStyle(
-                  //     backgroundColor:
-                  //     MaterialStateProperty.all(Colors.grey[300]),
-                  //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  //       RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(24.0)),
-                  //     ),
-                  //   ),
-                  //   onPressed: () {},
-                  //   child: const Text(
-                  //   'Войти',
-                  //   style: TextStyle(
-                  //     color: Colors.lightBlue,
-                  //   ),
-                  // ),
                 ),
               ),
             ],
