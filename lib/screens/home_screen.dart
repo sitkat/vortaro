@@ -30,6 +30,68 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  String _stressWord(String title) {
+    if (title.contains("`")) {
+      // Маленькие
+      if (title.contains("`а")) {
+        return title.replaceAll("`а", "а́");
+      }
+      if (title.contains("`е")) {
+        return title.replaceAll("`е", "е́");
+      }
+      if (title.contains("`и")) {
+        return title.replaceAll("`и", "и́");
+      }
+      if (title.contains("`о")) {
+        return title.replaceAll("`о", "о́");
+      }
+      if (title.contains("`у")) {
+        return title.replaceAll("`у", "у́");
+      }
+      if (title.contains("`ы")) {
+        return title.replaceAll("`ы", "ы́");
+      }
+      if (title.contains("`э")) {
+        return title.replaceAll("`э", "э́");
+      }
+      if (title.contains("`ю")) {
+        return title.replaceAll("`ю", "ю́");
+      }
+      if (title.contains("`я")) {
+        return title.replaceAll("`я", "я́");
+      }
+      // Большие
+      if (title.contains("`А")) {
+        return title.replaceAll("`А", "А́");
+      }
+      if (title.contains("`Е")) {
+        return title.replaceAll("`Е", "Е́");
+      }
+      if (title.contains("`И")) {
+        return title.replaceAll("`И", "И́");
+      }
+      if (title.contains("`О")) {
+        return title.replaceAll("`О", "О́");
+      }
+      if (title.contains("`У")) {
+        return title.replaceAll("`У", "У́");
+      }
+      if (title.contains("`Ы")) {
+        return title.replaceAll("`Ы", "Ы́");
+      }
+      if (title.contains("`Э")) {
+        return title.replaceAll("`Э", "Э́");
+      }
+      if (title.contains("`Ю")) {
+        return title.replaceAll("`Ю", "Ю́");
+      }
+      if (title.contains("`Я")) {
+        return title.replaceAll("`Я", "Я́");
+      }
+    }
+    return title;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -110,13 +172,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.all(8),
                     child: ListTile(
                       title: Text(
-                        word.title.replaceAll('(', '').replaceAll(')', ''),
+                        _stressWord(word.title),
                         style: const TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w400),
                       ),
-                      subtitle: Text(word.translation
-                          .replaceAll('(', '')
-                          .replaceAll(')', '')),
+                      subtitle: Text(word.translation),
                       trailing: Column(
                         children: [
                           Expanded(
@@ -133,19 +193,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          // Expanded(
-                          //   child: IconButton(
-                          //     icon: const Icon(
-                          //       Icons.edit,
-                          //       color: Colors.green,
-                          //     ),
-                          //     onPressed: () {
-                          //       Navigator.pushNamed(context, updateWordRoute,
-                          //           arguments: WordRouteArguments(
-                          //               wordArguments: word));
-                          //     },
-                          //   ),
-                          // ),
                         ],
                       ),
                       onTap: () {
