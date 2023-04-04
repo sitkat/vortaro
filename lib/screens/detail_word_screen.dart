@@ -14,7 +14,7 @@ class DetailWord extends StatelessWidget {
     Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Word Details'),
+        title: Text('Информация'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -34,7 +34,7 @@ class DetailWord extends StatelessWidget {
             if (word.description != "null") Text(utils.stressWord(word.description)),
             Container(
               child: TextButton(
-                child: Text('Edit'),
+                child: Text('Изменить'),
                 onPressed: () {
                   Navigator.pushNamed(context, updateWordRoute,
                       arguments: WordRouteArguments(wordArguments: word));

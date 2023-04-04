@@ -31,7 +31,7 @@ class _CreateWordState extends State<CreateWord> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New word'),
+        title: Text('Новое слово'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -39,7 +39,7 @@ class _CreateWordState extends State<CreateWord> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(hintText: 'Enter Word title'),
+                decoration: InputDecoration(hintText: 'Введи слово'),
                 onChanged: (value) {
                   setState(() {
                     title = value;
@@ -50,7 +50,7 @@ class _CreateWordState extends State<CreateWord> {
                 height: 15,
               ),
               TextFormField(
-                decoration: InputDecoration(hintText: 'Enter Word translation'),
+                decoration: InputDecoration(hintText: 'Введите перевод'),
                 onChanged: (value) {
                   setState(() {
                     translation = value;
@@ -61,7 +61,7 @@ class _CreateWordState extends State<CreateWord> {
                 height: 15,
               ),
               TextFormField(
-                decoration: InputDecoration(hintText: 'Enter Word description'),
+                decoration: InputDecoration(hintText: 'Введите описание'),
                 onChanged: (value) {
                   setState(() {
                     description = value;
@@ -75,7 +75,7 @@ class _CreateWordState extends State<CreateWord> {
                 width: 350,
                 height: 40,
                 child: TextButton(
-                  child: Text('Save'),
+                  child: Text('Сохранить'),
                   onPressed: () async {
                     await helper.onCreateWord(Word(
                         edition: DateTime.now()

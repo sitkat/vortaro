@@ -85,8 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               decoration: InputDecoration(
-                hintText: 'Search...',
-                labelText: 'Search',
+                hintText: 'Поиск...',
+                labelText: 'Поиск',
                 labelStyle: const TextStyle(color: Colors.black38),
                 prefixIcon: const Icon(
                   Icons.search,
