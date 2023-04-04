@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vortaro/UI/app_router/constants_router.dart';
+import 'package:vortaro/Utils/utils.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
 import 'package:vortaro/screens/home_screen.dart';
@@ -82,8 +84,7 @@ class _CreateWordState extends State<CreateWord> {
                         title: title,
                         translation: translation,
                         description: description));
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.pushNamed(context, homeRoute);
                   },
                 ),
               ),

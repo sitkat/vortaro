@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vortaro/UI/app_router/constants_router.dart';
 import 'package:vortaro/UI/app_router/custom_router.dart';
+import 'package:vortaro/Utils/utils.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
 import 'package:vortaro/screens/detail_word_screen.dart';
@@ -30,67 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  String _stressWord(String title) {
-    if (title.contains("`")) {
-      // Маленькие
-      if (title.contains("`а")) {
-        return title.replaceAll("`а", "а́");
-      }
-      if (title.contains("`е")) {
-        return title.replaceAll("`е", "е́");
-      }
-      if (title.contains("`и")) {
-        return title.replaceAll("`и", "и́");
-      }
-      if (title.contains("`о")) {
-        return title.replaceAll("`о", "о́");
-      }
-      if (title.contains("`у")) {
-        return title.replaceAll("`у", "у́");
-      }
-      if (title.contains("`ы")) {
-        return title.replaceAll("`ы", "ы́");
-      }
-      if (title.contains("`э")) {
-        return title.replaceAll("`э", "э́");
-      }
-      if (title.contains("`ю")) {
-        return title.replaceAll("`ю", "ю́");
-      }
-      if (title.contains("`я")) {
-        return title.replaceAll("`я", "я́");
-      }
-      // Большие
-      if (title.contains("`А")) {
-        return title.replaceAll("`А", "А́");
-      }
-      if (title.contains("`Е")) {
-        return title.replaceAll("`Е", "Е́");
-      }
-      if (title.contains("`И")) {
-        return title.replaceAll("`И", "И́");
-      }
-      if (title.contains("`О")) {
-        return title.replaceAll("`О", "О́");
-      }
-      if (title.contains("`У")) {
-        return title.replaceAll("`У", "У́");
-      }
-      if (title.contains("`Ы")) {
-        return title.replaceAll("`Ы", "Ы́");
-      }
-      if (title.contains("`Э")) {
-        return title.replaceAll("`Э", "Э́");
-      }
-      if (title.contains("`Ю")) {
-        return title.replaceAll("`Ю", "Ю́");
-      }
-      if (title.contains("`Я")) {
-        return title.replaceAll("`Я", "Я́");
-      }
-    }
-    return title;
-  }
 
   @override
   void initState() {
@@ -123,13 +63,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Esperanto'),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () => Navigator.of(context).pushNamed('/create-word'),
+            onPressed: () => Navigator.pushNamed(context, createWordRoute),
           )
         ],
       ),
@@ -172,11 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.all(8),
                     child: ListTile(
                       title: Text(
-                        _stressWord(word.title),
+                        utils.stressWord(word.title),
                         style: const TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w400),
                       ),
-                      subtitle: Text(word.translation),
+                      subtitle: Text(utils.stressWord(word.translation)),
                       trailing: Column(
                         children: [
                           Expanded(
