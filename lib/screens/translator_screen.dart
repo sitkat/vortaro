@@ -11,6 +11,7 @@ class TranslatorScreen extends StatefulWidget {
 class _TranslatorScreenState extends State<TranslatorScreen> {
   var chosenValueFrom = 'ru';
   var chosenValueTo = 'eo';
+
   // var chosenValue = 'ru';
   String _txtTranslated = '';
   final _translator = GoogleTranslator();

@@ -31,7 +31,8 @@ class DetailWord extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            if (word.description != "null") Text(utils.stressWord(word.description)),
+            if (word.description != "null")
+              Text(utils.stressWord(word.description)),
             Container(
               child: TextButton(
                 child: Text('Изменить'),

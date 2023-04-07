@@ -4,8 +4,6 @@ import 'package:vortaro/UI/app_router/custom_router.dart';
 import 'package:vortaro/Utils/utils.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
-import 'package:vortaro/screens/detail_word_screen.dart';
-import 'package:vortaro/screens/update_word_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
       // _isLoading = false;
     });
   }
-
 
   @override
   void initState() {

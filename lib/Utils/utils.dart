@@ -1,4 +1,4 @@
-class Utils{
+class Utils {
   String stressWord(String string) {
     if (string.contains("`")) {
       // Маленькие

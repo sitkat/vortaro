@@ -7,9 +7,6 @@ final lightTheme = ThemeData(
     iconTheme: IconThemeData(color: Colors.green),
     elevation: 0,
     titleTextStyle: TextStyle(
-      color: Colors.green,
-      fontSize: 20,
-      fontWeight: FontWeight.w700
-    ),
+        color: Colors.green, fontSize: 20, fontWeight: FontWeight.w700),
   ),
 );

@@ -32,7 +32,7 @@ class _UpdateWordState extends State<UpdateWord> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Word Update'),
+        title: Text('Изменение'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -51,7 +51,7 @@ class _UpdateWordState extends State<UpdateWord> {
               width: 350,
               height: 40,
               child: TextButton(
-                child: Text('Save'),
+                child: Text('Сохранить'),
                 onPressed: () async {
                   await helper.onUpdateWord(Word(
                       id: widget.word.id,

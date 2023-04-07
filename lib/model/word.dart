@@ -2,11 +2,11 @@ import 'package:vortaro/entity/word_entity.dart';
 
 class Word extends WordEntity {
   Word({
-  super.id = 0,
-  required super.edition,
-  required super.title,
-  required super.translation,
-  required super.description,
+    super.id = 0,
+    required super.edition,
+    required super.title,
+    required super.translation,
+    required super.description,
   });
 
   Map<String, dynamic> toMap() {

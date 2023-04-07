@@ -3,7 +3,6 @@ import 'package:vortaro/UI/app_router/constants_router.dart';
 import 'package:vortaro/Utils/utils.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
-import 'package:vortaro/screens/home_screen.dart';
 
 class CreateWord extends StatefulWidget {
   const CreateWord({Key? key}) : super(key: key);
@@ -75,7 +74,7 @@ class _CreateWordState extends State<CreateWord> {
                 width: 350,
                 height: 40,
                 child: TextButton(
-                  child: Text('Сохранить'),
+                  child: Text('Добавить'),
                   onPressed: () async {
                     await helper.onCreateWord(Word(
                         edition: DateTime.now()

@@ -1,5 +1,4 @@
 import 'dart:io' as io;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,6 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:path/path.dart';
 import 'package:vortaro/model/word.dart';
-
 import 'data_base_request.dart';
 
 class DbHelper {
@@ -23,7 +21,7 @@ class DbHelper {
 
   Future<void> init() async {
     _appDocumentDirectory =
-    await path_provider.getApplicationDocumentsDirectory();
+        await path_provider.getApplicationDocumentsDirectory();
 
     _pathDB = join(_appDocumentDirectory.path, "dbMain.db");
 
@@ -32,7 +30,7 @@ class DbHelper {
     if (!dbExists) {
       ByteData data = await rootBundle.load(join("assets", "dbTest.db"));
       List<int> bytes =
-      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
       await io.File(_pathDB).writeAsBytes(bytes, flush: true);
     }
@@ -67,9 +65,7 @@ class DbHelper {
   Future<void> onUpdateTable(Database db) async {
     var tables = await db.rawQuery('SELECT name FROM sqlite_master');
     for (var table in DataBaseRequest.tableList.reversed) {
-      if (tables
-          .where((element) => element['name'] == table)
-          .isNotEmpty) {
+      if (tables.where((element) => element['name'] == table).isNotEmpty) {
         await db.execute(DataBaseRequest.deleteTable(table));
       }
     }
@@ -106,7 +102,6 @@ class DbHelper {
         orderBy: "title", limit: 2000);
     // return dbClient.query(DataBaseRequest.tableWord, where: "Replace(title, '`', '')", limit: 200, orderBy: "title");
     // return dbClient.query(DataBaseRequest.tableWord, where: "Replace(title, '`', '')", limit: 200, orderBy: "title");
-
   }
 
   Future<void> getWord() async {
