@@ -20,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Map<String, dynamic>> _words = [];
   List<Map<String, dynamic>> items = [];
 
+  TextEditingController textSearchEditingController = TextEditingController();
+
   void _refreshWords() async {
     final data = await helper.getWords();
     setState(() {
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     helper = DbHelper.instance;
     _refreshWords();
+    textSearchEditingController.text = "";
   }
 
   void filterSearch(String query) async {
@@ -76,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextField(
+              controller: textSearchEditingController,
               onChanged: (value) {
                 setState(() {
                   filterSearch(value);
@@ -127,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 setState(() {
                                   helper.onDeleteWord(word.id);
                                   _refreshWords();
+                                  textSearchEditingController.text = "";
                                 });
                               },
                             ),

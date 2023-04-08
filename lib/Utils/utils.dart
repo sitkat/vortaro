@@ -17,6 +17,9 @@ class Utils {
       if (string.contains("`у")) {
         return string.replaceAll("`у", "у́");
       }
+      // if (string.contains("'у")) {
+      //   return string.replaceAll("'у", "у́");
+      // }
       if (string.contains("`ы")) {
         return string.replaceAll("`ы", "ы́");
       }
