@@ -8,7 +8,8 @@ import 'package:vortaro/data_base/data_base_helper.dart';
 
 Future<void> main() async {
   // new
-  final runner = MainAppRunner();
+  const env = String.fromEnvironment("env", defaultValue: "dev");
+  const runner = MainAppRunner(env);
   final builder = MainAppBuilder();
   runner.run(builder);
   //
