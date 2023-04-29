@@ -14,16 +14,16 @@ class CreateWord extends StatefulWidget {
 }
 
 class _CreateWordState extends State<CreateWord> {
-  String title = "";
-  String description = "";
-  String translation = "";
+  String _title = "";
+  String _description = "";
+  String _translation = "";
 
-  var helper;
+  var _helper;
 
   @override
   void initState() {
     super.initState();
-    helper = DbHelper.instance;
+    _helper = DbHelper.instance;
   }
 
   @override
@@ -41,7 +41,7 @@ class _CreateWordState extends State<CreateWord> {
                 decoration: InputDecoration(hintText: 'Введи слово'),
                 onChanged: (value) {
                   setState(() {
-                    title = value;
+                    _title = value;
                   });
                 },
               ),
@@ -52,7 +52,7 @@ class _CreateWordState extends State<CreateWord> {
                 decoration: InputDecoration(hintText: 'Введите перевод'),
                 onChanged: (value) {
                   setState(() {
-                    translation = value;
+                    _translation = value;
                   });
                 },
               ),
@@ -63,7 +63,7 @@ class _CreateWordState extends State<CreateWord> {
                 decoration: InputDecoration(hintText: 'Введите описание'),
                 onChanged: (value) {
                   setState(() {
-                    description = value;
+                    _description = value;
                   });
                 },
               ),
@@ -76,13 +76,13 @@ class _CreateWordState extends State<CreateWord> {
                 child: TextButton(
                   child: Text('Добавить'),
                   onPressed: () async {
-                    await helper.onCreateWord(Word(
+                    await _helper.onCreateWord(Word(
                         edition: DateTime.now()
                             .add(const Duration(hours: 3))
                             .toString(),
-                        title: title,
-                        translation: translation,
-                        description: description));
+                        title: _title,
+                        translation: _translation,
+                        description: _description));
                     Navigator.pushNamed(context, homeRoute);
                   },
                 ),

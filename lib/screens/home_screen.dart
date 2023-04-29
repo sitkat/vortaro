@@ -15,18 +15,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var helper;
+  var _helper;
 
   List<Map<String, dynamic>> _words = [];
-  List<Map<String, dynamic>> items = [];
+  List<Map<String, dynamic>> _items = [];
 
   TextEditingController textSearchEditingController = TextEditingController();
 
-  void _refreshWords() async {
-    final data = await helper.getWords();
+  void refreshWords() async {
+    final data = await _helper.getWords();
     setState(() {
       _words = data;
-      items = _words;
+      _items = _words;
       // _isLoading = false;
     });
   }
@@ -34,8 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    helper = DbHelper.instance;
-    _refreshWords();
+    _helper = DbHelper.instance;
+    refreshWords();
     textSearchEditingController.text = "";
   }
 
@@ -50,13 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       });
       setState(() {
-        items = <Map<String, dynamic>>[];
-        items.addAll(dummyListData);
+        _items = <Map<String, dynamic>>[];
+        _items.addAll(dummyListData);
       });
       return;
     } else {
       setState(() {
-        _refreshWords();
+        refreshWords();
       });
     }
   }
@@ -106,9 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: items.length,
+                itemCount: _items.length,
                 itemBuilder: (context, i) {
-                  Word word = Word.toFromMap(items[i]);
+                  Word word = Word.toFromMap(_items[i]);
                   return Card(
                     color: Colors.grey.shade300,
                     margin: const EdgeInsets.all(8),
@@ -129,8 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  helper.onDeleteWord(word.id);
-                                  _refreshWords();
+                                  _helper.onDeleteWord(word.id);
+                                  refreshWords();
                                   textSearchEditingController.text = "";
                                 });
                               },
