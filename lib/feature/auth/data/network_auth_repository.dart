@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:vortaro/app/domain/app_api.dart';
 import 'package:vortaro/feature/auth/data/dto/user_dto.dart';
@@ -21,10 +22,15 @@ class NetworkAuthRepository implements AuthRepository {
   }
 
   @override
-  Future passwordUpdate(
-      {required String oldPassword, required String newPassword}) {
-    // TODO: implement passwordUpdate
-    throw UnimplementedError();
+  Future<String> passwordUpdate(
+      {required String oldPassword, required String newPassword}) async {
+    try {
+      final Response response = await api.passwordUpdate(
+          oldPassword: oldPassword, newPassword: newPassword);
+      return response.data["message"];
+    } catch (_) {
+      rethrow;
+    }
   }
 
   @override

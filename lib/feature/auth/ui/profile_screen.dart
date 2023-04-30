@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vortaro/app/di/init_di.dart';
-import 'package:vortaro/app/domain/app_api.dart';
+import 'package:vortaro/app/domain/error_entity/error_entity.dart';
+import 'package:vortaro/app/ui/app_loader.dart';
 import 'package:vortaro/app/ui/components/app_button.dart';
+import 'package:vortaro/app/ui/components/app_snack_bar.dart';
 import 'package:vortaro/app/ui/components/app_text_field.dart';
-import 'package:vortaro/feature/auth/domain/entities/user_entity/user_entity.dart';
 
 import '../domain/auth_state/auth_cubit.dart';
 
@@ -25,9 +25,25 @@ class ProfileScreen extends StatelessWidget {
               icon: const Icon(Icons.exit_to_app))
         ],
       ),
-      body: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+      body: BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+        state.whenOrNull(
+          authorized: (userEntity) {
+            if (userEntity.userState?.hasData == true) {
+              AppSnackBar.showSnackBarWithMessage(
+                  context, userEntity.userState?.data);
+            }
+            if (userEntity.userState?.hasError == true) {
+              AppSnackBar.showSnackBarWithError(context,
+                  ErrorEntity.fromException(userEntity.userState?.error));
+            }
+          },
+        );
+      }, builder: (context, state) {
         final userEntity =
             state.whenOrNull(authorized: (userEntity) => userEntity);
+        if (userEntity?.userState?.connectionState == ConnectionState.waiting) {
+          return const AppLoader();
+        }
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -53,12 +69,18 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
-                      onPressed: () {}, child: const Text("Обновить пароль")),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                const _ProfileUpdatePasswordDialog());
+                      },
+                      child: const Text("Обновить пароль")),
                   TextButton(
                       onPressed: () {
                         showDialog(
                             context: context,
-                            builder: (context) => _ProfileUpdateDialog());
+                            builder: (context) => const _ProfileUpdateDialog());
                       },
                       child: const Text("Обновить данные")),
                 ],
@@ -104,9 +126,60 @@ class _ProfileUpdateDialogState extends State<_ProfileUpdateDialog> {
               const SizedBox(height: 16),
               AppButton(
                   onPressed: () {
+                    Navigator.pop(context);
                     context.read<AuthCubit>().userUpdate(
                         email: emailController.text,
                         username: usernameController.text);
+                  },
+                  text: "Применить"),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class _ProfileUpdatePasswordDialog extends StatefulWidget {
+  const _ProfileUpdatePasswordDialog({Key? key}) : super(key: key);
+
+  @override
+  State<_ProfileUpdatePasswordDialog> createState() =>
+      _ProfileUpdatePasswordDialogState();
+}
+
+class _ProfileUpdatePasswordDialogState
+    extends State<_ProfileUpdatePasswordDialog> {
+  final oldPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    oldPasswordController.dispose();
+    newPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              AppTextField(
+                  controller: oldPasswordController, labelText: "Пароль"),
+              const SizedBox(height: 16),
+              AppTextField(
+                  controller: newPasswordController, labelText: "Новый пароль"),
+              const SizedBox(height: 16),
+              AppButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    context.read<AuthCubit>().passwordUpdate(
+                        oldPassword: oldPasswordController.text,
+                        newPassword: newPasswordController.text);
                   },
                   text: "Применить"),
             ],
