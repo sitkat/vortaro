@@ -12,7 +12,7 @@ part 'auth_cubit.g.dart';
 
 @Singleton()
 class AuthCubit extends HydratedCubit<AuthState> {
-  AuthCubit(this.authRepository) : super(AuthState.notAuthrized());
+  AuthCubit(this.authRepository) : super(AuthState.notAuthorized());
   final AuthRepository authRepository;
 
   Future<void> signIn(
@@ -21,13 +21,13 @@ class AuthCubit extends HydratedCubit<AuthState> {
     try {
       final UserEntity userEntity =
           await authRepository.signIn(password: password, username: username);
-      emit(AuthState.authrized(userEntity));
+      emit(AuthState.authorized(userEntity));
     } catch (error, stackTrace) {
       addError(error, stackTrace);
     }
   }
 
-  void logOut() => emit(AuthState.notAuthrized());
+  void logOut() => emit(AuthState.notAuthorized());
 
   Future<void> signUp(
       {required String username,
@@ -37,7 +37,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
     try {
       final UserEntity userEntity = await authRepository.signUp(
           password: password, username: username, email: email);
-      emit(AuthState.authrized(userEntity));
+      emit(AuthState.authorized(userEntity));
     } catch (error, stackTrace) {
       addError(error, stackTrace);
     }
@@ -45,11 +45,11 @@ class AuthCubit extends HydratedCubit<AuthState> {
 
   Future<void> refreshToken() async {
     final refreshToken =
-        state.whenOrNull(authrized: (userEntity) => userEntity.refreshToken);
+        state.whenOrNull(authorized: (userEntity) => userEntity.refreshToken);
     try {
       final UserEntity userEntity =
           await authRepository.refreshToken(refreshToken: refreshToken);
-      emit(AuthState.authrized(userEntity));
+      emit(AuthState.authorized(userEntity));
     } catch (error, st) {
       addError(error, st);
     }
@@ -60,7 +60,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
       final UserEntity newUserEntity = await authRepository.getProfile();
       emit(state.maybeWhen(
         orElse: () => state,
-        authrized: (userEntity) => AuthState.authrized(userEntity.copyWith(
+        authorized: (userEntity) => AuthState.authorized(userEntity.copyWith(
             email: newUserEntity.email, username: newUserEntity.username)),
       ));
     } catch (error, st) {
@@ -72,7 +72,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
   AuthState? fromJson(Map<String, dynamic> json) {
     final state = AuthState.fromJson(json);
     return state.whenOrNull(
-      authrized: (userEntity) => AuthState.authrized(userEntity),
+      authorized: (userEntity) => AuthState.authorized(userEntity),
     );
   }
 
@@ -80,10 +80,10 @@ class AuthCubit extends HydratedCubit<AuthState> {
   Map<String, dynamic>? toJson(AuthState state) {
     return state
             .whenOrNull(
-              authrized: (userEntity) => AuthState.authrized(userEntity),
+              authorized: (userEntity) => AuthState.authorized(userEntity),
             )
             ?.toJson() ??
-        AuthState.notAuthrized().toJson();
+        AuthState.notAuthorized().toJson();
   }
 
   @override

@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 AuthState _$AuthStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
-    case 'notAuthrized':
+    case 'notAuthorized':
       return _$AuthStateNotAuthrized.fromJson(json);
-    case 'authrized':
+    case 'authorized':
       return _$AuthStateAuthrized.fromJson(json);
     case 'waiting':
       return _$AuthStateWaiting.fromJson(json);
@@ -35,24 +35,24 @@ AuthState _$AuthStateFromJson(Map<String, dynamic> json) {
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notAuthrized,
-    required TResult Function(UserEntity userEntity) authrized,
+    required TResult Function() notAuthorized,
+    required TResult Function(UserEntity userEntity) authorized,
     required TResult Function() waiting,
     required TResult Function(dynamic error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notAuthrized,
-    TResult? Function(UserEntity userEntity)? authrized,
+    TResult? Function()? notAuthorized,
+    TResult? Function(UserEntity userEntity)? authorized,
     TResult? Function()? waiting,
     TResult? Function(dynamic error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notAuthrized,
-    TResult Function(UserEntity userEntity)? authrized,
+    TResult Function()? notAuthorized,
+    TResult Function(UserEntity userEntity)? authorized,
     TResult Function()? waiting,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
@@ -60,24 +60,24 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthrized,
-    required TResult Function(_$AuthStateAuthrized value) authrized,
+    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
+    required TResult Function(_$AuthStateAuthrized value) authorized,
     required TResult Function(_$AuthStateWaiting value) waiting,
     required TResult Function(_$AuthStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult? Function(_$AuthStateAuthrized value)? authrized,
+    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult? Function(_$AuthStateAuthrized value)? authorized,
     TResult? Function(_$AuthStateWaiting value)? waiting,
     TResult? Function(_$AuthStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult Function(_$AuthStateAuthrized value)? authrized,
+    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult Function(_$AuthStateAuthrized value)? authorized,
     TResult Function(_$AuthStateWaiting value)? waiting,
     TResult Function(_$AuthStateError value)? error,
     required TResult orElse(),
@@ -123,7 +123,7 @@ class __$$_$AuthStateNotAuthrizedCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
   _$_$AuthStateNotAuthrized({final String? $type})
-      : $type = $type ?? 'notAuthrized';
+      : $type = $type ?? 'notAuthorized';
 
   factory _$_$AuthStateNotAuthrized.fromJson(Map<String, dynamic> json) =>
       _$$_$AuthStateNotAuthrizedFromJson(json);
@@ -133,7 +133,7 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
 
   @override
   String toString() {
-    return 'AuthState.notAuthrized()';
+    return 'AuthState.notAuthorized()';
   }
 
   @override
@@ -150,36 +150,36 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notAuthrized,
-    required TResult Function(UserEntity userEntity) authrized,
+    required TResult Function() notAuthorized,
+    required TResult Function(UserEntity userEntity) authorized,
     required TResult Function() waiting,
     required TResult Function(dynamic error) error,
   }) {
-    return notAuthrized();
+    return notAuthorized();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notAuthrized,
-    TResult? Function(UserEntity userEntity)? authrized,
+    TResult? Function()? notAuthorized,
+    TResult? Function(UserEntity userEntity)? authorized,
     TResult? Function()? waiting,
     TResult? Function(dynamic error)? error,
   }) {
-    return notAuthrized?.call();
+    return notAuthorized?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notAuthrized,
-    TResult Function(UserEntity userEntity)? authrized,
+    TResult Function()? notAuthorized,
+    TResult Function(UserEntity userEntity)? authorized,
     TResult Function()? waiting,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
-    if (notAuthrized != null) {
-      return notAuthrized();
+    if (notAuthorized != null) {
+      return notAuthorized();
     }
     return orElse();
   }
@@ -187,36 +187,36 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthrized,
-    required TResult Function(_$AuthStateAuthrized value) authrized,
+    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
+    required TResult Function(_$AuthStateAuthrized value) authorized,
     required TResult Function(_$AuthStateWaiting value) waiting,
     required TResult Function(_$AuthStateError value) error,
   }) {
-    return notAuthrized(this);
+    return notAuthorized(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult? Function(_$AuthStateAuthrized value)? authrized,
+    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult? Function(_$AuthStateAuthrized value)? authorized,
     TResult? Function(_$AuthStateWaiting value)? waiting,
     TResult? Function(_$AuthStateError value)? error,
   }) {
-    return notAuthrized?.call(this);
+    return notAuthorized?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult Function(_$AuthStateAuthrized value)? authrized,
+    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult Function(_$AuthStateAuthrized value)? authorized,
     TResult Function(_$AuthStateWaiting value)? waiting,
     TResult Function(_$AuthStateError value)? error,
     required TResult orElse(),
   }) {
-    if (notAuthrized != null) {
-      return notAuthrized(this);
+    if (notAuthorized != null) {
+      return notAuthorized(this);
     }
     return orElse();
   }
@@ -281,7 +281,7 @@ class __$$_$AuthStateAuthrizedCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   _$_$AuthStateAuthrized(this.userEntity, {final String? $type})
-      : $type = $type ?? 'authrized';
+      : $type = $type ?? 'authorized';
 
   factory _$_$AuthStateAuthrized.fromJson(Map<String, dynamic> json) =>
       _$$_$AuthStateAuthrizedFromJson(json);
@@ -294,7 +294,7 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
 
   @override
   String toString() {
-    return 'AuthState.authrized(userEntity: $userEntity)';
+    return 'AuthState.authorized(userEntity: $userEntity)';
   }
 
   @override
@@ -320,36 +320,36 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notAuthrized,
-    required TResult Function(UserEntity userEntity) authrized,
+    required TResult Function() notAuthorized,
+    required TResult Function(UserEntity userEntity) authorized,
     required TResult Function() waiting,
     required TResult Function(dynamic error) error,
   }) {
-    return authrized(userEntity);
+    return authorized(userEntity);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notAuthrized,
-    TResult? Function(UserEntity userEntity)? authrized,
+    TResult? Function()? notAuthorized,
+    TResult? Function(UserEntity userEntity)? authorized,
     TResult? Function()? waiting,
     TResult? Function(dynamic error)? error,
   }) {
-    return authrized?.call(userEntity);
+    return authorized?.call(userEntity);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notAuthrized,
-    TResult Function(UserEntity userEntity)? authrized,
+    TResult Function()? notAuthorized,
+    TResult Function(UserEntity userEntity)? authorized,
     TResult Function()? waiting,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
-    if (authrized != null) {
-      return authrized(userEntity);
+    if (authorized != null) {
+      return authorized(userEntity);
     }
     return orElse();
   }
@@ -357,36 +357,36 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthrized,
-    required TResult Function(_$AuthStateAuthrized value) authrized,
+    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
+    required TResult Function(_$AuthStateAuthrized value) authorized,
     required TResult Function(_$AuthStateWaiting value) waiting,
     required TResult Function(_$AuthStateError value) error,
   }) {
-    return authrized(this);
+    return authorized(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult? Function(_$AuthStateAuthrized value)? authrized,
+    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult? Function(_$AuthStateAuthrized value)? authorized,
     TResult? Function(_$AuthStateWaiting value)? waiting,
     TResult? Function(_$AuthStateError value)? error,
   }) {
-    return authrized?.call(this);
+    return authorized?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult Function(_$AuthStateAuthrized value)? authrized,
+    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult Function(_$AuthStateAuthrized value)? authorized,
     TResult Function(_$AuthStateWaiting value)? waiting,
     TResult Function(_$AuthStateError value)? error,
     required TResult orElse(),
   }) {
-    if (authrized != null) {
-      return authrized(this);
+    if (authorized != null) {
+      return authorized(this);
     }
     return orElse();
   }
@@ -457,8 +457,8 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notAuthrized,
-    required TResult Function(UserEntity userEntity) authrized,
+    required TResult Function() notAuthorized,
+    required TResult Function(UserEntity userEntity) authorized,
     required TResult Function() waiting,
     required TResult Function(dynamic error) error,
   }) {
@@ -468,8 +468,8 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notAuthrized,
-    TResult? Function(UserEntity userEntity)? authrized,
+    TResult? Function()? notAuthorized,
+    TResult? Function(UserEntity userEntity)? authorized,
     TResult? Function()? waiting,
     TResult? Function(dynamic error)? error,
   }) {
@@ -479,8 +479,8 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notAuthrized,
-    TResult Function(UserEntity userEntity)? authrized,
+    TResult Function()? notAuthorized,
+    TResult Function(UserEntity userEntity)? authorized,
     TResult Function()? waiting,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
@@ -494,8 +494,8 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthrized,
-    required TResult Function(_$AuthStateAuthrized value) authrized,
+    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
+    required TResult Function(_$AuthStateAuthrized value) authorized,
     required TResult Function(_$AuthStateWaiting value) waiting,
     required TResult Function(_$AuthStateError value) error,
   }) {
@@ -505,8 +505,8 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult? Function(_$AuthStateAuthrized value)? authrized,
+    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult? Function(_$AuthStateAuthrized value)? authorized,
     TResult? Function(_$AuthStateWaiting value)? waiting,
     TResult? Function(_$AuthStateError value)? error,
   }) {
@@ -516,8 +516,8 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult Function(_$AuthStateAuthrized value)? authrized,
+    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult Function(_$AuthStateAuthrized value)? authorized,
     TResult Function(_$AuthStateWaiting value)? waiting,
     TResult Function(_$AuthStateError value)? error,
     required TResult orElse(),
@@ -616,8 +616,8 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notAuthrized,
-    required TResult Function(UserEntity userEntity) authrized,
+    required TResult Function() notAuthorized,
+    required TResult Function(UserEntity userEntity) authorized,
     required TResult Function() waiting,
     required TResult Function(dynamic error) error,
   }) {
@@ -627,8 +627,8 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notAuthrized,
-    TResult? Function(UserEntity userEntity)? authrized,
+    TResult? Function()? notAuthorized,
+    TResult? Function(UserEntity userEntity)? authorized,
     TResult? Function()? waiting,
     TResult? Function(dynamic error)? error,
   }) {
@@ -638,8 +638,8 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notAuthrized,
-    TResult Function(UserEntity userEntity)? authrized,
+    TResult Function()? notAuthorized,
+    TResult Function(UserEntity userEntity)? authorized,
     TResult Function()? waiting,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
@@ -653,8 +653,8 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthrized,
-    required TResult Function(_$AuthStateAuthrized value) authrized,
+    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
+    required TResult Function(_$AuthStateAuthrized value) authorized,
     required TResult Function(_$AuthStateWaiting value) waiting,
     required TResult Function(_$AuthStateError value) error,
   }) {
@@ -664,8 +664,8 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult? Function(_$AuthStateAuthrized value)? authrized,
+    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult? Function(_$AuthStateAuthrized value)? authorized,
     TResult? Function(_$AuthStateWaiting value)? waiting,
     TResult? Function(_$AuthStateError value)? error,
   }) {
@@ -675,8 +675,8 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthrized,
-    TResult Function(_$AuthStateAuthrized value)? authrized,
+    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
+    TResult Function(_$AuthStateAuthrized value)? authorized,
     TResult Function(_$AuthStateWaiting value)? waiting,
     TResult Function(_$AuthStateError value)? error,
     required TResult orElse(),

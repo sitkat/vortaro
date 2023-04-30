@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vortaro/feature/auth/domain/entities/user_entity/user_entity.dart';
+import 'package:vortaro/feature/auth/ui/profile_screen.dart';
 
 import '../../auth/domain/auth_state/auth_cubit.dart';
 
@@ -15,6 +16,13 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("MainScreen"),
         actions: [
+          IconButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
+                  )),
+              icon: const Icon(Icons.account_box)),
           IconButton(
               onPressed: () => context.read<AuthCubit>().getProfile(),
               icon: const Icon(Icons.refresh)),
