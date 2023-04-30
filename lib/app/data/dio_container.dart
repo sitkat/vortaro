@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:vortaro/app/data/auth_interceptor.dart';
 import 'package:vortaro/app/domain/app_config.dart';
 
 @Singleton()
@@ -12,6 +15,8 @@ class DioContainer {
       connectTimeout: 15000,
     );
     dio = Dio(options);
+    if (kDebugMode) addInterceptor(PrettyDioLogger());
+    addInterceptor(AuthInterceptor());
   }
 
   void addInterceptor(Interceptor interceptor) {

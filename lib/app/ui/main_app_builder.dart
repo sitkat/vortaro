@@ -24,7 +24,7 @@ class _GlobalProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(
-        create: (context) => AuthCubit(locator<AuthRepository>()),
+        create: (context) => locator.get<AuthCubit>(),
       )
     ], child: child);
   }

@@ -9,6 +9,7 @@ import 'package:vortaro/data_base/data_base_helper.dart';
 // был Future<void> main() async {
 void main()  {
   // new
+  WidgetsFlutterBinding.ensureInitialized();
   const env = String.fromEnvironment("env", defaultValue: "prod");
   const runner = MainAppRunner(env);
   final builder = MainAppBuilder();

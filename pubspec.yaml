@@ -28,6 +28,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   json_serializable: ^6.5.1
   hydrated_bloc: ^8.1.0
+  pretty_dio_logger: ^1.1.1
 
 dev_dependencies:
   flutter_test:
