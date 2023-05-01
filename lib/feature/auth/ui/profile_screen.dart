@@ -5,6 +5,7 @@ import 'package:vortaro/app/ui/app_loader.dart';
 import 'package:vortaro/app/ui/components/app_button.dart';
 import 'package:vortaro/app/ui/components/app_snack_bar.dart';
 import 'package:vortaro/app/ui/components/app_text_field.dart';
+import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 
 import '../domain/auth_state/auth_cubit.dart';
 

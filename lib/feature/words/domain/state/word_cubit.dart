@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/word_repository.dart';
 
@@ -11,10 +14,19 @@ part 'word_cubit.freezed.dart';
 part 'word_cubit.g.dart';
 
 class WordCubit extends HydratedCubit<WordState> {
-  WordCubit(this.wordRepository)
-      : super(const WordState(asyncSnapshot: AsyncSnapshot.nothing()));
+  WordCubit(this.wordRepository, this.authCubit)
+      : super(const WordState(asyncSnapshot: AsyncSnapshot.nothing())) {
+    authSub = authCubit.stream.listen((event) {
+      event.mapOrNull(
+        authorized: (value) => fetchWords(),
+        notAuthorized: (value) => logOut(),
+      );
+    });
+  }
 
   final WordRepository wordRepository;
+  final AuthCubit authCubit;
+  late final StreamSubscription authSub;
 
   Future<void> fetchWords() async {
     await wordRepository.fetchWords().then((value) {
@@ -26,6 +38,12 @@ class WordCubit extends HydratedCubit<WordState> {
     }).catchError((error) {
       addError(error);
     });
+  }
+
+  void logOut() {
+    emit(
+      state.copyWith(asyncSnapshot: AsyncSnapshot.nothing(), wordList: []),
+    );
   }
 
   @override
@@ -43,5 +61,11 @@ class WordCubit extends HydratedCubit<WordState> {
   @override
   Map<String, dynamic>? toJson(WordState state) {
     return state.toJson();
+  }
+
+  @override
+  Future<void> close() {
+    authSub.cancel();
+    return super.close();
   }
 }
