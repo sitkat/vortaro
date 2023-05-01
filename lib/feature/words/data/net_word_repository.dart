@@ -23,7 +23,7 @@ class NetWordRepository implements WordRepository {
   Future<WordEntity> fetchWord(String id) async {
     try {
       final response = await api.fetchWord(id);
-      return WordEntity.fromJson(response.data["data"]);
+      return WordEntity.fromJson(response.data);
     } catch (_) {
       rethrow;
     }
