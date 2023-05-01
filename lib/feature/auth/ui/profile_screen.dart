@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     child: Text(
-                        userEntity?.username.split("").first ?? "Отсутствует"),
+                        userEntity?.username?.split("").first ?? "Отсутствует"),
                   ),
                   const SizedBox(
                     width: 16,

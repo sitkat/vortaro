@@ -32,17 +32,17 @@ class MainScreen extends StatelessWidget {
               icon: const Icon(Icons.exit_to_app))
         ],
       ),
-      // body: const WordList(),
-      body: Column(
-        children: [
-          Text("username: ${userEntity.username}"),
-          const SizedBox(height: 16),
-          Text("accessToken: ${userEntity.accessToken}"),
-          const SizedBox(height: 16),
-          Text("refreshToken: ${userEntity.refreshToken}"),
-          const SizedBox(height: 16),
-        ],
-      ),
+      body: const WordList(),
+      // body: Column(
+      //   children: [
+      //     Text("username: ${userEntity.username}"),
+      //     const SizedBox(height: 16),
+      //     Text("accessToken: ${userEntity.accessToken}"),
+      //     const SizedBox(height: 16),
+      //     Text("refreshToken: ${userEntity.refreshToken}"),
+      //     const SizedBox(height: 16),
+      //   ],
+      // ),
     );
   }
 }

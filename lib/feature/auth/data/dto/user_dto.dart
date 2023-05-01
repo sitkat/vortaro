@@ -26,9 +26,9 @@ class UserDto {
 
   UserEntity toEntity() {
     return UserEntity(
+      id: id,
       email: email.toString(),
       username: username.toString(),
-      id: id.toString(),
       accessToken: accessToken,
       refreshToken: refreshToken,
     );
