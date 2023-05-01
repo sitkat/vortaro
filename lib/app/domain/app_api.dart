@@ -32,5 +32,9 @@ abstract class AppApi {
 
   Future<dynamic> fetchWords();
 
+  Future<dynamic> fetchWord(String id);
+
+  Future<dynamic> deleteWord(String id);
+
   Future<dynamic> createWord(Map args);
 }

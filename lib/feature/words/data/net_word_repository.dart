@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:vortaro/app/domain/app_api.dart';
+import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/word_repository.dart';
 
 @Injectable(as: WordRepository)
@@ -13,6 +14,25 @@ class NetWordRepository implements WordRepository {
     try {
       final response = await api.fetchWords();
       return response.data;
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<WordEntity> fetchWord(String id) async {
+    try {
+      final response = await api.fetchWord(id);
+      return WordEntity.fromJson(response.data["data"]);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future deleteWord(String id) async {
+    try {
+      await api.deleteWord(id);
     } catch (_) {
       rethrow;
     }

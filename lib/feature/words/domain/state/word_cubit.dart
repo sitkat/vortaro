@@ -51,7 +51,7 @@ class WordCubit extends HydratedCubit<WordState> {
 
   void logOut() {
     emit(
-      state.copyWith(asyncSnapshot: AsyncSnapshot.nothing(), wordList: []),
+      state.copyWith(asyncSnapshot: const AsyncSnapshot.nothing(), wordList: []),
     );
   }
 
