@@ -28,6 +28,5 @@ final lightTheme = ThemeData(
       fontSize: 14,
       decoration: TextDecoration.underline,
     ),
-
   ),
 );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vortaro/app/ui/components/app_button.dart';
 import 'package:vortaro/app/ui/components/app_button_max.dart';
 import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
 import 'package:vortaro/app/ui/components/app_text_field.dart';
@@ -18,56 +17,6 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text("RegisterScreen"),
-    //   ),
-    //   body: Form(
-    //     key: formKey,
-    //     child: Center(
-    //       child: Padding(
-    //         padding: const EdgeInsets.all(8.0),
-    //         child: Column(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           children: [
-    //             // AppTextField(controller: controllerLogin, labelText: "Логин"),
-    //             // const SizedBox(height: 16),
-    //             // AppTextField(controller: controllerEmail, labelText: "Email"),
-    //             // const SizedBox(height: 16),
-    //             // AppTextField(
-    //             //   controller: controllerPassword,
-    //             //   labelText: "Пароль",
-    //             //   obscureText: true,
-    //             // ),
-    //             // const SizedBox(height: 16),
-    //             AppTextField(
-    //               controller: controllerRepeatPassword,
-    //               labelText: "Повторите пароль",
-    //               obscureText: true,
-    //             ),
-    //             const SizedBox(height: 16),
-    //             // AppButton(
-    //             //   backgroundColor: Colors.black,
-    //             //   onPressed: () {
-    //             //     if (formKey.currentState?.validate() != true) return;
-    //             //     if (controllerPassword.text !=
-    //             //         controllerRepeatPassword.text) {
-    //             //       ScaffoldMessenger.of(context).showSnackBar(
-    //             //           const SnackBar(content: Text("Пароли не совпадают")));
-    //             //     } else {
-    //             //       _onTapToSignUp(context.read<AuthCubit>());
-    //             //       Navigator.of(context).pop();
-    //             //     }
-    //             //   },
-    //             //   text: "Регистрация",
-    //             // )
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
-
     final theme = Theme.of(context);
     return Container(
       decoration: const BoxDecoration(
@@ -108,14 +57,15 @@ class RegisterScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black45,
-                            fontWeight: FontWeight.w400
-                        ),
+                            fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(height: 40),
                       // Icon(Icons.account_box)
-                      AppTextField(controller: controllerLogin, labelText: "Логин"),
+                      AppTextField(
+                          controller: controllerLogin, labelText: "Логин"),
                       const SizedBox(height: 16),
-                      AppTextField(controller: controllerEmail, labelText: "Email"),
+                      AppTextField(
+                          controller: controllerEmail, labelText: "Email"),
                       const SizedBox(height: 16),
                       AppTextField(
                         controller: controllerPassword,
@@ -136,7 +86,8 @@ class RegisterScreen extends StatelessWidget {
                           if (controllerPassword.text !=
                               controllerRepeatPassword.text) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("Пароли не совпадают")));
+                                const SnackBar(
+                                    content: Text("Пароли не совпадают")));
                           } else {
                             _onTapToSignUp(context.read<AuthCubit>());
                             Navigator.pushNamed(context, rootRoute);

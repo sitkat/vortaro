@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vortaro/app/ui/components/app_button.dart';
 import 'package:vortaro/app/ui/components/app_button_max.dart';
 import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
 import 'package:vortaro/app/ui/components/app_text_field.dart';
-import 'package:vortaro/feature/auth/ui/register_screen.dart';
 
 import '../domain/auth_state/auth_cubit.dart';
 
@@ -55,10 +53,9 @@ class LoginScreen extends StatelessWidget {
                       const Text(
                         "Веддите свои учетные данные, чтобы продолжить.",
                         style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black45,
-                          fontWeight: FontWeight.w400
-                        ),
+                            fontSize: 18,
+                            color: Colors.black45,
+                            fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(height: 40),
                       // Icon(Icons.account_box)
