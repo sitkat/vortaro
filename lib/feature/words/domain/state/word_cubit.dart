@@ -29,12 +29,21 @@ class WordCubit extends HydratedCubit<WordState> {
   late final StreamSubscription authSub;
 
   Future<void> fetchWords() async {
+    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
     await wordRepository.fetchWords().then((value) {
       final Iterable iterable = value;
       emit(state.copyWith(
           wordList: iterable.map((e) => WordEntity.fromJson(e)).toList(),
           asyncSnapshot:
               const AsyncSnapshot.withData(ConnectionState.done, true)));
+    }).catchError((error) {
+      addError(error);
+    });
+  }
+
+  Future<void> createWord(Map args) async {
+    await wordRepository.createWord(args).then((value) {
+      fetchWords();
     }).catchError((error) {
       addError(error);
     });

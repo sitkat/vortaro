@@ -7,13 +7,15 @@ class AppDialogThreeParams extends StatefulWidget {
     Key? key,
     required this.val1,
     required this.val2,
+    required this.val3,
     required this.onPressed,
   }) : super(key: key);
 
   final String val1;
   final String val2;
+  final String val3;
 
-  final Function(String v1, String v2) onPressed;
+  final Function(String v1, String v2, String v3) onPressed;
 
   @override
   State<AppDialogThreeParams> createState() => _AppDialogThreeParamsState();
@@ -22,12 +24,14 @@ class AppDialogThreeParams extends StatefulWidget {
 class _AppDialogThreeParamsState extends State<AppDialogThreeParams> {
   final val1Controller = TextEditingController();
   final val2Controller = TextEditingController();
+  final val3Controller = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     val1Controller.dispose();
     val2Controller.dispose();
+    val3Controller.dispose();
     super.dispose();
   }
 
@@ -47,6 +51,9 @@ class _AppDialogThreeParamsState extends State<AppDialogThreeParams> {
                 AppTextField(
                     controller: val2Controller, labelText: widget.val2),
                 const SizedBox(height: 16),
+                AppTextField(
+                    controller: val3Controller, labelText: widget.val3),
+                const SizedBox(height: 16),
                 AppButton(
                     onPressed: () {
                       if (formKey.currentState?.validate() == true) {
@@ -54,6 +61,7 @@ class _AppDialogThreeParamsState extends State<AppDialogThreeParams> {
                         widget.onPressed(
                           val1Controller.text,
                           val2Controller.text,
+                          val3Controller.text,
                         );
                       }
                     },

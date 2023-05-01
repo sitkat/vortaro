@@ -17,4 +17,14 @@ class NetWordRepository implements WordRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<String> createWord(Map args) async {
+    try {
+      final response = await api.createWord(args);
+      return response.data["message"];
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

@@ -15,8 +15,8 @@ class WordItem extends StatelessWidget {
         children: [
           Text(wordEntity.title),
           Text(wordEntity.translation),
-          // Text(wordEntity.edition.toString().split(" ")[0]),
-          // Text("Автор: ${wordEntity.user?.username ?? ""}"),
+          Text(wordEntity.edition.toString().split(" ")[0]),
+          Text("Автор: ${wordEntity.user?.id ?? ""}"),
         ],
       ),
     );

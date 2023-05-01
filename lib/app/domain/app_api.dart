@@ -31,4 +31,6 @@ abstract class AppApi {
   Future<dynamic> fetch(RequestOptions requestOptions);
 
   Future<dynamic> fetchWords();
+
+  Future<dynamic> createWord(Map args);
 }

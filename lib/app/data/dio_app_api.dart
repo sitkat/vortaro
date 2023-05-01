@@ -33,7 +33,10 @@ class DioAppApi implements AppApi {
   @override
   Future<Response> passwordUpdate(
       {required String oldPassword, required String newPassword}) {
-    return dio.put("/auth/user", queryParameters: {"oldPassword": oldPassword, "newPassword": newPassword});
+    return dio.put("/auth/user", queryParameters: {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword
+    });
   }
 
   @override
@@ -91,5 +94,14 @@ class DioAppApi implements AppApi {
   @override
   Future fetchWords() {
     return dio.get("/auth/word");
+  }
+
+  @override
+  Future createWord(Map args) {
+    return dio.post("/auth/word", data: {
+      "title": args["title"],
+      "translation": args["translation"],
+      "description": args["description"],
+    });
   }
 }
