@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vortaro/app/domain/error_entity/error_entity.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
-import 'package:vortaro/app/ui/components/app_button.dart';
+import 'package:vortaro/app/ui/components/app_dialog_two_params.dart';
 import 'package:vortaro/app/ui/components/app_snack_bar.dart';
-import 'package:vortaro/app/ui/components/app_text_field.dart';
-import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 
 import '../domain/auth_state/auth_cubit.dart';
 
@@ -73,15 +71,32 @@ class ProfileScreen extends StatelessWidget {
                       onPressed: () {
                         showDialog(
                             context: context,
-                            builder: (context) =>
-                                const _ProfileUpdatePasswordDialog());
+                            builder: (context) => AppDialogTwoParams(
+                                  val1: "Пароль",
+                                  val2: "Новый пароль",
+                                  onPressed: (v1, v2) {
+                                    context.read<AuthCubit>().passwordUpdate(
+                                          oldPassword: v1,
+                                          newPassword: v2,
+                                        );
+                                  },
+                                ));
                       },
                       child: const Text("Обновить пароль")),
                   TextButton(
                       onPressed: () {
                         showDialog(
                             context: context,
-                            builder: (context) => const _ProfileUpdateDialog());
+                            builder: (context) => AppDialogTwoParams(
+                                  val1: "Email",
+                                  val2: "Username",
+                                  onPressed: (v1, v2) {
+                                    context.read<AuthCubit>().userUpdate(
+                                          email: v1,
+                                          username: v2,
+                                        );
+                                  },
+                                ));
                       },
                       child: const Text("Обновить данные")),
                 ],
@@ -94,99 +109,93 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class _ProfileUpdateDialog extends StatefulWidget {
-  const _ProfileUpdateDialog({Key? key}) : super(key: key);
+// class _ProfileUpdateDialog extends StatefulWidget {
+//   const _ProfileUpdateDialog({Key? key}) : super(key: key);
+//
+//   @override
+//   State<_ProfileUpdateDialog> createState() => _ProfileUpdateDialogState();
+// }
+//
+// class _ProfileUpdateDialogState extends State<_ProfileUpdateDialog> {
+//   final emailController = TextEditingController();
+//   final usernameController = TextEditingController();
+//
+//   @override
+//   void dispose() {
+//     emailController.dispose();
+//     usernameController.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SimpleDialog(
+//       children: [
+//         Padding(
+//           padding: const EdgeInsets.all(8.0),
+//           child: Column(
+//             children: [
+//               AppTextField(controller: emailController, labelText: "email"),
+//               const SizedBox(height: 16),
+//               AppTextField(
+//                   controller: usernameController, labelText: "Username"),
+//               const SizedBox(height: 16),
+//               AppButton(
+//                   onPressed: () {
+//                     Navigator.pop(context);
+//                   },
+//                   text: "Применить"),
+//             ],
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
 
-  @override
-  State<_ProfileUpdateDialog> createState() => _ProfileUpdateDialogState();
-}
-
-class _ProfileUpdateDialogState extends State<_ProfileUpdateDialog> {
-  final emailController = TextEditingController();
-  final usernameController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    usernameController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SimpleDialog(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              AppTextField(controller: emailController, labelText: "email"),
-              const SizedBox(height: 16),
-              AppTextField(
-                  controller: usernameController, labelText: "Username"),
-              const SizedBox(height: 16),
-              AppButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    context.read<AuthCubit>().userUpdate(
-                        email: emailController.text,
-                        username: usernameController.text);
-                  },
-                  text: "Применить"),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class _ProfileUpdatePasswordDialog extends StatefulWidget {
-  const _ProfileUpdatePasswordDialog({Key? key}) : super(key: key);
-
-  @override
-  State<_ProfileUpdatePasswordDialog> createState() =>
-      _ProfileUpdatePasswordDialogState();
-}
-
-class _ProfileUpdatePasswordDialogState
-    extends State<_ProfileUpdatePasswordDialog> {
-  final oldPasswordController = TextEditingController();
-  final newPasswordController = TextEditingController();
-
-  @override
-  void dispose() {
-    oldPasswordController.dispose();
-    newPasswordController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SimpleDialog(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              AppTextField(
-                  controller: oldPasswordController, labelText: "Пароль"),
-              const SizedBox(height: 16),
-              AppTextField(
-                  controller: newPasswordController, labelText: "Новый пароль"),
-              const SizedBox(height: 16),
-              AppButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    context.read<AuthCubit>().passwordUpdate(
-                        oldPassword: oldPasswordController.text,
-                        newPassword: newPasswordController.text);
-                  },
-                  text: "Применить"),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
+// class _ProfileUpdatePasswordDialog extends StatefulWidget {
+//   const _ProfileUpdatePasswordDialog({Key? key}) : super(key: key);
+//
+//   @override
+//   State<_ProfileUpdatePasswordDialog> createState() =>
+//       _ProfileUpdatePasswordDialogState();
+// }
+//
+// class _ProfileUpdatePasswordDialogState
+//     extends State<_ProfileUpdatePasswordDialog> {
+//   final oldPasswordController = TextEditingController();
+//   final newPasswordController = TextEditingController();
+//
+//   @override
+//   void dispose() {
+//     oldPasswordController.dispose();
+//     newPasswordController.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SimpleDialog(
+//       children: [
+//         Padding(
+//           padding: const EdgeInsets.all(8.0),
+//           child: Column(
+//             children: [
+//               AppTextField(
+//                   controller: oldPasswordController, labelText: "Пароль"),
+//               const SizedBox(height: 16),
+//               AppTextField(
+//                   controller: newPasswordController, labelText: "Новый пароль"),
+//               const SizedBox(height: 16),
+//               AppButton(
+//                   onPressed: () {
+//                     Navigator.pop(context);
+//                   },
+//                   text: "Применить"),
+//             ],
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }

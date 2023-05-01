@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vortaro/app/ui/components/app_dialog_two_params.dart';
 import 'package:vortaro/feature/auth/domain/entities/user_entity/user_entity.dart';
 import 'package:vortaro/feature/auth/ui/profile_screen.dart';
 import 'package:vortaro/feature/words/ui/word_list.dart';
 
-import '../../auth/domain/auth_state/auth_cubit.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key, required this.userEntity}) : super(key: key);
@@ -25,11 +24,15 @@ class MainScreen extends StatelessWidget {
                   )),
               icon: const Icon(Icons.account_box)),
           IconButton(
-              onPressed: () => context.read<AuthCubit>().refreshToken(),
-              icon: const Icon(Icons.refresh)),
-          IconButton(
-              onPressed: () => context.read<AuthCubit>().logOut(),
-              icon: const Icon(Icons.exit_to_app))
+              onPressed: () {
+                showDialog(context: context, builder: (context) => AppDialogTwoParams(val1: "val1", val2: "val2", onPressed: ((v1, v2) {
+                  //
+                })),);
+              },
+              icon: const Icon(Icons.email)),
+          // IconButton(
+          //     onPressed: () => context.read<AuthCubit>().logOut(),
+          //     icon: const Icon(Icons.exit_to_app))
         ],
       ),
       body: const WordList(),
