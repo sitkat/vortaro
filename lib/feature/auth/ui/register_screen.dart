@@ -108,7 +108,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Есть аккаунт?"),
+                    const Text("Есть аккаунт?"),
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, loginScreenRoute);

@@ -98,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Ещё нет учетной записи?"),
+                    const Text("Ещё нет учетной записи?"),
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, registerScreenRoute);
