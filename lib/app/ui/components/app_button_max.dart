@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AppButton extends StatelessWidget {
-  const AppButton({
+class AppButtonMax extends StatelessWidget {
+  const AppButtonMax({
     Key? key,
     required this.onPressed,
     required this.text,
-    this.backgroundColor = Colors.blueAccent,
+    this.backgroundColor = Colors.blue,
   }) : super(key: key);
 
   final VoidCallback onPressed;
@@ -17,14 +17,15 @@ class AppButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor), //0xFF4E9752
+            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+            // backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF4E9752)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
               side: BorderSide.none,
             )),
             fixedSize: MaterialStateProperty.all<Size>(
-                const Size(double.nan, 30))),
+                const Size(double.maxFinite, 30))),
         // const Size(double.maxFinite, 40))),
         child: Text(text));
   }

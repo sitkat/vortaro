@@ -45,6 +45,7 @@ flutter:
 
   assets:
     - assets/dbTest.db
+    - assets/images/flagEsp.png
 
   # fonts:
   #   - family: Schyler
