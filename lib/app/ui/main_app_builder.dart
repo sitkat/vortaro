@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/domain/app_builder.dart';
 import 'package:vortaro/app/ui/root_screen.dart';
-import 'package:vortaro/feature/auth/domain/auth_repository.dart';
+import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
+import 'package:vortaro/feature/words/domain/word_repository.dart';
 
 import '../../feature/auth/domain/auth_state/auth_cubit.dart';
 
@@ -25,6 +26,10 @@ class _GlobalProvider extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (context) => locator.get<AuthCubit>(),
+      ),
+      BlocProvider(
+        create: (context) =>
+            WordCubit(locator.get<WordRepository>())..fetchWords(),
       )
     ], child: child);
   }

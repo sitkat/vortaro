@@ -15,6 +15,7 @@ part 'auth_cubit.g.dart';
 @Singleton()
 class AuthCubit extends HydratedCubit<AuthState> {
   AuthCubit(this.authRepository) : super(AuthState.notAuthorized());
+
   final AuthRepository authRepository;
 
   Future<void> signIn(

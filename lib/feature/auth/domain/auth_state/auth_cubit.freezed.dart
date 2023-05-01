@@ -17,13 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 AuthState _$AuthStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'notAuthorized':
-      return _$AuthStateNotAuthrized.fromJson(json);
+      return _AuthStateNotAuthorized.fromJson(json);
     case 'authorized':
-      return _$AuthStateAuthrized.fromJson(json);
+      return _AuthStateAuthorized.fromJson(json);
     case 'waiting':
-      return _$AuthStateWaiting.fromJson(json);
+      return _AuthStateWaiting.fromJson(json);
     case 'error':
-      return _$AuthStateError.fromJson(json);
+      return _AuthStateError.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'AuthState',
@@ -60,26 +60,26 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
-    required TResult Function(_$AuthStateAuthrized value) authorized,
-    required TResult Function(_$AuthStateWaiting value) waiting,
-    required TResult Function(_$AuthStateError value) error,
+    required TResult Function(_AuthStateNotAuthorized value) notAuthorized,
+    required TResult Function(_AuthStateAuthorized value) authorized,
+    required TResult Function(_AuthStateWaiting value) waiting,
+    required TResult Function(_AuthStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult? Function(_$AuthStateAuthrized value)? authorized,
-    TResult? Function(_$AuthStateWaiting value)? waiting,
-    TResult? Function(_$AuthStateError value)? error,
+    TResult? Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult? Function(_AuthStateAuthorized value)? authorized,
+    TResult? Function(_AuthStateWaiting value)? waiting,
+    TResult? Function(_AuthStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult Function(_$AuthStateAuthrized value)? authorized,
-    TResult Function(_$AuthStateWaiting value)? waiting,
-    TResult Function(_$AuthStateError value)? error,
+    TResult Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult Function(_AuthStateAuthorized value)? authorized,
+    TResult Function(_AuthStateWaiting value)? waiting,
+    TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -104,29 +104,29 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
 }
 
 /// @nodoc
-abstract class _$$_$AuthStateNotAuthrizedCopyWith<$Res> {
-  factory _$$_$AuthStateNotAuthrizedCopyWith(_$_$AuthStateNotAuthrized value,
-          $Res Function(_$_$AuthStateNotAuthrized) then) =
-      __$$_$AuthStateNotAuthrizedCopyWithImpl<$Res>;
+abstract class _$$_AuthStateNotAuthorizedCopyWith<$Res> {
+  factory _$$_AuthStateNotAuthorizedCopyWith(_$_AuthStateNotAuthorized value,
+          $Res Function(_$_AuthStateNotAuthorized) then) =
+      __$$_AuthStateNotAuthorizedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_$AuthStateNotAuthrizedCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_$AuthStateNotAuthrized>
-    implements _$$_$AuthStateNotAuthrizedCopyWith<$Res> {
-  __$$_$AuthStateNotAuthrizedCopyWithImpl(_$_$AuthStateNotAuthrized _value,
-      $Res Function(_$_$AuthStateNotAuthrized) _then)
+class __$$_AuthStateNotAuthorizedCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateNotAuthorized>
+    implements _$$_AuthStateNotAuthorizedCopyWith<$Res> {
+  __$$_AuthStateNotAuthorizedCopyWithImpl(_$_AuthStateNotAuthorized _value,
+      $Res Function(_$_AuthStateNotAuthorized) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
-  _$_$AuthStateNotAuthrized({final String? $type})
+class _$_AuthStateNotAuthorized implements _AuthStateNotAuthorized {
+  _$_AuthStateNotAuthorized({final String? $type})
       : $type = $type ?? 'notAuthorized';
 
-  factory _$_$AuthStateNotAuthrized.fromJson(Map<String, dynamic> json) =>
-      _$$_$AuthStateNotAuthrizedFromJson(json);
+  factory _$_AuthStateNotAuthorized.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthStateNotAuthorizedFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -140,7 +140,7 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_$AuthStateNotAuthrized);
+            other is _$_AuthStateNotAuthorized);
   }
 
   @JsonKey(ignore: true)
@@ -187,10 +187,10 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
-    required TResult Function(_$AuthStateAuthrized value) authorized,
-    required TResult Function(_$AuthStateWaiting value) waiting,
-    required TResult Function(_$AuthStateError value) error,
+    required TResult Function(_AuthStateNotAuthorized value) notAuthorized,
+    required TResult Function(_AuthStateAuthorized value) authorized,
+    required TResult Function(_AuthStateWaiting value) waiting,
+    required TResult Function(_AuthStateError value) error,
   }) {
     return notAuthorized(this);
   }
@@ -198,10 +198,10 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult? Function(_$AuthStateAuthrized value)? authorized,
-    TResult? Function(_$AuthStateWaiting value)? waiting,
-    TResult? Function(_$AuthStateError value)? error,
+    TResult? Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult? Function(_AuthStateAuthorized value)? authorized,
+    TResult? Function(_AuthStateWaiting value)? waiting,
+    TResult? Function(_AuthStateError value)? error,
   }) {
     return notAuthorized?.call(this);
   }
@@ -209,10 +209,10 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult Function(_$AuthStateAuthrized value)? authorized,
-    TResult Function(_$AuthStateWaiting value)? waiting,
-    TResult Function(_$AuthStateError value)? error,
+    TResult Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult Function(_AuthStateAuthorized value)? authorized,
+    TResult Function(_AuthStateWaiting value)? waiting,
+    TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {
     if (notAuthorized != null) {
@@ -223,24 +223,24 @@ class _$_$AuthStateNotAuthrized implements _$AuthStateNotAuthrized {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_$AuthStateNotAuthrizedToJson(
+    return _$$_AuthStateNotAuthorizedToJson(
       this,
     );
   }
 }
 
-abstract class _$AuthStateNotAuthrized implements AuthState {
-  factory _$AuthStateNotAuthrized() = _$_$AuthStateNotAuthrized;
+abstract class _AuthStateNotAuthorized implements AuthState {
+  factory _AuthStateNotAuthorized() = _$_AuthStateNotAuthorized;
 
-  factory _$AuthStateNotAuthrized.fromJson(Map<String, dynamic> json) =
-      _$_$AuthStateNotAuthrized.fromJson;
+  factory _AuthStateNotAuthorized.fromJson(Map<String, dynamic> json) =
+      _$_AuthStateNotAuthorized.fromJson;
 }
 
 /// @nodoc
-abstract class _$$_$AuthStateAuthrizedCopyWith<$Res> {
-  factory _$$_$AuthStateAuthrizedCopyWith(_$_$AuthStateAuthrized value,
-          $Res Function(_$_$AuthStateAuthrized) then) =
-      __$$_$AuthStateAuthrizedCopyWithImpl<$Res>;
+abstract class _$$_AuthStateAuthorizedCopyWith<$Res> {
+  factory _$$_AuthStateAuthorizedCopyWith(_$_AuthStateAuthorized value,
+          $Res Function(_$_AuthStateAuthorized) then) =
+      __$$_AuthStateAuthorizedCopyWithImpl<$Res>;
   @useResult
   $Res call({UserEntity userEntity});
 
@@ -248,11 +248,11 @@ abstract class _$$_$AuthStateAuthrizedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_$AuthStateAuthrizedCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_$AuthStateAuthrized>
-    implements _$$_$AuthStateAuthrizedCopyWith<$Res> {
-  __$$_$AuthStateAuthrizedCopyWithImpl(_$_$AuthStateAuthrized _value,
-      $Res Function(_$_$AuthStateAuthrized) _then)
+class __$$_AuthStateAuthorizedCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateAuthorized>
+    implements _$$_AuthStateAuthorizedCopyWith<$Res> {
+  __$$_AuthStateAuthorizedCopyWithImpl(_$_AuthStateAuthorized _value,
+      $Res Function(_$_AuthStateAuthorized) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -260,7 +260,7 @@ class __$$_$AuthStateAuthrizedCopyWithImpl<$Res>
   $Res call({
     Object? userEntity = null,
   }) {
-    return _then(_$_$AuthStateAuthrized(
+    return _then(_$_AuthStateAuthorized(
       null == userEntity
           ? _value.userEntity
           : userEntity // ignore: cast_nullable_to_non_nullable
@@ -279,12 +279,12 @@ class __$$_$AuthStateAuthrizedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
-  _$_$AuthStateAuthrized(this.userEntity, {final String? $type})
+class _$_AuthStateAuthorized implements _AuthStateAuthorized {
+  _$_AuthStateAuthorized(this.userEntity, {final String? $type})
       : $type = $type ?? 'authorized';
 
-  factory _$_$AuthStateAuthrized.fromJson(Map<String, dynamic> json) =>
-      _$$_$AuthStateAuthrizedFromJson(json);
+  factory _$_AuthStateAuthorized.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthStateAuthorizedFromJson(json);
 
   @override
   final UserEntity userEntity;
@@ -301,7 +301,7 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_$AuthStateAuthrized &&
+            other is _$_AuthStateAuthorized &&
             (identical(other.userEntity, userEntity) ||
                 other.userEntity == userEntity));
   }
@@ -313,8 +313,8 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_$AuthStateAuthrizedCopyWith<_$_$AuthStateAuthrized> get copyWith =>
-      __$$_$AuthStateAuthrizedCopyWithImpl<_$_$AuthStateAuthrized>(
+  _$$_AuthStateAuthorizedCopyWith<_$_AuthStateAuthorized> get copyWith =>
+      __$$_AuthStateAuthorizedCopyWithImpl<_$_AuthStateAuthorized>(
           this, _$identity);
 
   @override
@@ -357,10 +357,10 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
-    required TResult Function(_$AuthStateAuthrized value) authorized,
-    required TResult Function(_$AuthStateWaiting value) waiting,
-    required TResult Function(_$AuthStateError value) error,
+    required TResult Function(_AuthStateNotAuthorized value) notAuthorized,
+    required TResult Function(_AuthStateAuthorized value) authorized,
+    required TResult Function(_AuthStateWaiting value) waiting,
+    required TResult Function(_AuthStateError value) error,
   }) {
     return authorized(this);
   }
@@ -368,10 +368,10 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult? Function(_$AuthStateAuthrized value)? authorized,
-    TResult? Function(_$AuthStateWaiting value)? waiting,
-    TResult? Function(_$AuthStateError value)? error,
+    TResult? Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult? Function(_AuthStateAuthorized value)? authorized,
+    TResult? Function(_AuthStateWaiting value)? waiting,
+    TResult? Function(_AuthStateError value)? error,
   }) {
     return authorized?.call(this);
   }
@@ -379,10 +379,10 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult Function(_$AuthStateAuthrized value)? authorized,
-    TResult Function(_$AuthStateWaiting value)? waiting,
-    TResult Function(_$AuthStateError value)? error,
+    TResult Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult Function(_AuthStateAuthorized value)? authorized,
+    TResult Function(_AuthStateWaiting value)? waiting,
+    TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {
     if (authorized != null) {
@@ -393,48 +393,48 @@ class _$_$AuthStateAuthrized implements _$AuthStateAuthrized {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_$AuthStateAuthrizedToJson(
+    return _$$_AuthStateAuthorizedToJson(
       this,
     );
   }
 }
 
-abstract class _$AuthStateAuthrized implements AuthState {
-  factory _$AuthStateAuthrized(final UserEntity userEntity) =
-      _$_$AuthStateAuthrized;
+abstract class _AuthStateAuthorized implements AuthState {
+  factory _AuthStateAuthorized(final UserEntity userEntity) =
+      _$_AuthStateAuthorized;
 
-  factory _$AuthStateAuthrized.fromJson(Map<String, dynamic> json) =
-      _$_$AuthStateAuthrized.fromJson;
+  factory _AuthStateAuthorized.fromJson(Map<String, dynamic> json) =
+      _$_AuthStateAuthorized.fromJson;
 
   UserEntity get userEntity;
   @JsonKey(ignore: true)
-  _$$_$AuthStateAuthrizedCopyWith<_$_$AuthStateAuthrized> get copyWith =>
+  _$$_AuthStateAuthorizedCopyWith<_$_AuthStateAuthorized> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_$AuthStateWaitingCopyWith<$Res> {
-  factory _$$_$AuthStateWaitingCopyWith(_$_$AuthStateWaiting value,
-          $Res Function(_$_$AuthStateWaiting) then) =
-      __$$_$AuthStateWaitingCopyWithImpl<$Res>;
+abstract class _$$_AuthStateWaitingCopyWith<$Res> {
+  factory _$$_AuthStateWaitingCopyWith(
+          _$_AuthStateWaiting value, $Res Function(_$_AuthStateWaiting) then) =
+      __$$_AuthStateWaitingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_$AuthStateWaitingCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_$AuthStateWaiting>
-    implements _$$_$AuthStateWaitingCopyWith<$Res> {
-  __$$_$AuthStateWaitingCopyWithImpl(
-      _$_$AuthStateWaiting _value, $Res Function(_$_$AuthStateWaiting) _then)
+class __$$_AuthStateWaitingCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateWaiting>
+    implements _$$_AuthStateWaitingCopyWith<$Res> {
+  __$$_AuthStateWaitingCopyWithImpl(
+      _$_AuthStateWaiting _value, $Res Function(_$_AuthStateWaiting) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_$AuthStateWaiting implements _$AuthStateWaiting {
-  _$_$AuthStateWaiting({final String? $type}) : $type = $type ?? 'waiting';
+class _$_AuthStateWaiting implements _AuthStateWaiting {
+  _$_AuthStateWaiting({final String? $type}) : $type = $type ?? 'waiting';
 
-  factory _$_$AuthStateWaiting.fromJson(Map<String, dynamic> json) =>
-      _$$_$AuthStateWaitingFromJson(json);
+  factory _$_AuthStateWaiting.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthStateWaitingFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -447,7 +447,7 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_$AuthStateWaiting);
+        (other.runtimeType == runtimeType && other is _$_AuthStateWaiting);
   }
 
   @JsonKey(ignore: true)
@@ -494,10 +494,10 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
-    required TResult Function(_$AuthStateAuthrized value) authorized,
-    required TResult Function(_$AuthStateWaiting value) waiting,
-    required TResult Function(_$AuthStateError value) error,
+    required TResult Function(_AuthStateNotAuthorized value) notAuthorized,
+    required TResult Function(_AuthStateAuthorized value) authorized,
+    required TResult Function(_AuthStateWaiting value) waiting,
+    required TResult Function(_AuthStateError value) error,
   }) {
     return waiting(this);
   }
@@ -505,10 +505,10 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult? Function(_$AuthStateAuthrized value)? authorized,
-    TResult? Function(_$AuthStateWaiting value)? waiting,
-    TResult? Function(_$AuthStateError value)? error,
+    TResult? Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult? Function(_AuthStateAuthorized value)? authorized,
+    TResult? Function(_AuthStateWaiting value)? waiting,
+    TResult? Function(_AuthStateError value)? error,
   }) {
     return waiting?.call(this);
   }
@@ -516,10 +516,10 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult Function(_$AuthStateAuthrized value)? authorized,
-    TResult Function(_$AuthStateWaiting value)? waiting,
-    TResult Function(_$AuthStateError value)? error,
+    TResult Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult Function(_AuthStateAuthorized value)? authorized,
+    TResult Function(_AuthStateWaiting value)? waiting,
+    TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {
     if (waiting != null) {
@@ -530,34 +530,34 @@ class _$_$AuthStateWaiting implements _$AuthStateWaiting {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_$AuthStateWaitingToJson(
+    return _$$_AuthStateWaitingToJson(
       this,
     );
   }
 }
 
-abstract class _$AuthStateWaiting implements AuthState {
-  factory _$AuthStateWaiting() = _$_$AuthStateWaiting;
+abstract class _AuthStateWaiting implements AuthState {
+  factory _AuthStateWaiting() = _$_AuthStateWaiting;
 
-  factory _$AuthStateWaiting.fromJson(Map<String, dynamic> json) =
-      _$_$AuthStateWaiting.fromJson;
+  factory _AuthStateWaiting.fromJson(Map<String, dynamic> json) =
+      _$_AuthStateWaiting.fromJson;
 }
 
 /// @nodoc
-abstract class _$$_$AuthStateErrorCopyWith<$Res> {
-  factory _$$_$AuthStateErrorCopyWith(
-          _$_$AuthStateError value, $Res Function(_$_$AuthStateError) then) =
-      __$$_$AuthStateErrorCopyWithImpl<$Res>;
+abstract class _$$_AuthStateErrorCopyWith<$Res> {
+  factory _$$_AuthStateErrorCopyWith(
+          _$_AuthStateError value, $Res Function(_$_AuthStateError) then) =
+      __$$_AuthStateErrorCopyWithImpl<$Res>;
   @useResult
   $Res call({dynamic error});
 }
 
 /// @nodoc
-class __$$_$AuthStateErrorCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_$AuthStateError>
-    implements _$$_$AuthStateErrorCopyWith<$Res> {
-  __$$_$AuthStateErrorCopyWithImpl(
-      _$_$AuthStateError _value, $Res Function(_$_$AuthStateError) _then)
+class __$$_AuthStateErrorCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_AuthStateError>
+    implements _$$_AuthStateErrorCopyWith<$Res> {
+  __$$_AuthStateErrorCopyWithImpl(
+      _$_AuthStateError _value, $Res Function(_$_AuthStateError) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -565,7 +565,7 @@ class __$$_$AuthStateErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_$_$AuthStateError(
+    return _then(_$_AuthStateError(
       freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -576,12 +576,12 @@ class __$$_$AuthStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_$AuthStateError implements _$AuthStateError {
-  _$_$AuthStateError(this.error, {final String? $type})
+class _$_AuthStateError implements _AuthStateError {
+  _$_AuthStateError(this.error, {final String? $type})
       : $type = $type ?? 'error';
 
-  factory _$_$AuthStateError.fromJson(Map<String, dynamic> json) =>
-      _$$_$AuthStateErrorFromJson(json);
+  factory _$_AuthStateError.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthStateErrorFromJson(json);
 
   @override
   final dynamic error;
@@ -598,7 +598,7 @@ class _$_$AuthStateError implements _$AuthStateError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_$AuthStateError &&
+            other is _$_AuthStateError &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -610,8 +610,8 @@ class _$_$AuthStateError implements _$AuthStateError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_$AuthStateErrorCopyWith<_$_$AuthStateError> get copyWith =>
-      __$$_$AuthStateErrorCopyWithImpl<_$_$AuthStateError>(this, _$identity);
+  _$$_AuthStateErrorCopyWith<_$_AuthStateError> get copyWith =>
+      __$$_AuthStateErrorCopyWithImpl<_$_AuthStateError>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -653,10 +653,10 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$AuthStateNotAuthrized value) notAuthorized,
-    required TResult Function(_$AuthStateAuthrized value) authorized,
-    required TResult Function(_$AuthStateWaiting value) waiting,
-    required TResult Function(_$AuthStateError value) error,
+    required TResult Function(_AuthStateNotAuthorized value) notAuthorized,
+    required TResult Function(_AuthStateAuthorized value) authorized,
+    required TResult Function(_AuthStateWaiting value) waiting,
+    required TResult Function(_AuthStateError value) error,
   }) {
     return error(this);
   }
@@ -664,10 +664,10 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult? Function(_$AuthStateAuthrized value)? authorized,
-    TResult? Function(_$AuthStateWaiting value)? waiting,
-    TResult? Function(_$AuthStateError value)? error,
+    TResult? Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult? Function(_AuthStateAuthorized value)? authorized,
+    TResult? Function(_AuthStateWaiting value)? waiting,
+    TResult? Function(_AuthStateError value)? error,
   }) {
     return error?.call(this);
   }
@@ -675,10 +675,10 @@ class _$_$AuthStateError implements _$AuthStateError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$AuthStateNotAuthrized value)? notAuthorized,
-    TResult Function(_$AuthStateAuthrized value)? authorized,
-    TResult Function(_$AuthStateWaiting value)? waiting,
-    TResult Function(_$AuthStateError value)? error,
+    TResult Function(_AuthStateNotAuthorized value)? notAuthorized,
+    TResult Function(_AuthStateAuthorized value)? authorized,
+    TResult Function(_AuthStateWaiting value)? waiting,
+    TResult Function(_AuthStateError value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -689,20 +689,20 @@ class _$_$AuthStateError implements _$AuthStateError {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_$AuthStateErrorToJson(
+    return _$$_AuthStateErrorToJson(
       this,
     );
   }
 }
 
-abstract class _$AuthStateError implements AuthState {
-  factory _$AuthStateError(final dynamic error) = _$_$AuthStateError;
+abstract class _AuthStateError implements AuthState {
+  factory _AuthStateError(final dynamic error) = _$_AuthStateError;
 
-  factory _$AuthStateError.fromJson(Map<String, dynamic> json) =
-      _$_$AuthStateError.fromJson;
+  factory _AuthStateError.fromJson(Map<String, dynamic> json) =
+      _$_AuthStateError.fromJson;
 
   dynamic get error;
   @JsonKey(ignore: true)
-  _$$_$AuthStateErrorCopyWith<_$_$AuthStateError> get copyWith =>
+  _$$_AuthStateErrorCopyWith<_$_AuthStateError> get copyWith =>
       throw _privateConstructorUsedError;
 }
