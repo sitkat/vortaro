@@ -85,9 +85,9 @@ class _WordDetailItem extends StatelessWidget {
       children: [
         Text("Слово: ${wordEntity.title}"),
         Text("Перевод: ${wordEntity.translation}"),
-        // Text("Описание: ${wordEntity.description ?? ""}"),
-        // Text("Редакция: ${wordEntity.edition.toString().split(" ")[0]}"),
-        // Text("Автор: ${wordEntity.user?.id ?? ""}"),
+        Text("Описание: ${wordEntity.description ?? ""}"),
+        Text("Редакция: ${wordEntity.edition.toString().split(" ")[0]}"),
+        // Text("Автор: ${wordEntity.user?.username ?? ""}"),
       ],
     );
   }

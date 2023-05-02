@@ -29,6 +29,7 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: Form(
           key: formKey,
@@ -80,6 +81,7 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () {
                           if (formKey.currentState?.validate() == true) {
                             _onTapToSignIn(context.read<AuthCubit>());
+                            Navigator.pushNamed(context, rootRoute);
                           }
                         },
                         text: "Войти",
@@ -91,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 50,
+                height: 65,
                 decoration: const BoxDecoration(
                   color: Color(0xFFD8FFD8),
                 ),

@@ -10,6 +10,7 @@ final lightTheme = ThemeData(
         color: Colors.green, fontSize: 20, fontWeight: FontWeight.w700),
   ),
   textTheme: const TextTheme(
+    // Для кнопок
     labelLarge: TextStyle(
       color: Colors.black,
       fontWeight: FontWeight.w500,

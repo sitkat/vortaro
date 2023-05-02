@@ -31,6 +31,7 @@ class RegisterScreen extends StatelessWidget {
         ),
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: Form(
           key: formKey,
@@ -101,7 +102,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 50,
+                height: 65,
                 decoration: const BoxDecoration(
                   color: Color(0xFFD8FFD8),
                 ),

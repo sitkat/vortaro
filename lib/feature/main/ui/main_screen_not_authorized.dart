@@ -31,7 +31,7 @@ class _MainScreenNotAuthorizedState extends State<MainScreenNotAuthorized> {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 15.0,
-            vertical: 20.0,
+            vertical: 10.0,
           ),
           child: GNav(
             backgroundColor: Colors.lightGreenAccent,

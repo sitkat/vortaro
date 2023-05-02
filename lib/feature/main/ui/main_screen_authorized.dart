@@ -7,7 +7,8 @@ import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 import 'package:vortaro/feature/words/ui/word_list.dart';
 
 class MainScreenAuthorized extends StatelessWidget {
-  const MainScreenAuthorized({Key? key, required this.userEntity}) : super(key: key);
+  const MainScreenAuthorized({Key? key, required this.userEntity})
+      : super(key: key);
 
   final UserEntity userEntity;
 
