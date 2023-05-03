@@ -15,6 +15,7 @@ class AppIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      highlightColor: Colors.transparent,
       onPressed: onPressed,
       icon: icon,
       iconSize: size,

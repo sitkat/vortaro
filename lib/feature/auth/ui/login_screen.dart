@@ -67,7 +67,6 @@ class LoginScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400),
                         ),
                         const SizedBox(height: 30),
-                        // Icon(Icons.account_box)
                         AppTextField(
                           controller: controllerLogin,
                           labelText: "Логин",
