@@ -13,17 +13,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Личный кабинет"),
-      //   actions: [
-      //     IconButton(
-      //         onPressed: () {
-      //           Navigator.pop(context);
-      //           context.read<AuthCubit>().logOut();
-      //         },
-      //         icon: const Icon(Icons.exit_to_app))
-      //   ],
-      // ),
       body: BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
         state.whenOrNull(
           authorized: (userEntity) {
@@ -64,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
                       context.read<AuthCubit>().logOut();
                     },
                     icon: const Icon(Icons.exit_to_app),

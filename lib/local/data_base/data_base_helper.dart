@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:path/path.dart';
-import 'package:vortaro/model/word.dart';
+import 'package:vortaro/local/word.dart';
 import 'data_base_request.dart';
 
 class DbHelper {

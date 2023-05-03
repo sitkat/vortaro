@@ -4,7 +4,7 @@ import 'package:vortaro/feature/auth/ui/profile_screen.dart';
 import 'package:vortaro/feature/favorites/ui/favorite_list.dart';
 import 'package:vortaro/feature/words/ui/word_list.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:vortaro/screens/translator_screen.dart';
+import 'package:vortaro/local/screens/translator_screen.dart';
 
 class MainScreenAuthorized extends StatefulWidget {
   const MainScreenAuthorized({Key? key, required this.userEntity})
