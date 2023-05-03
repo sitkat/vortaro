@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vortaro/UI/app_theme/custom_theme.dart';
 import 'package:vortaro/app/ui/components/app_button.dart';
 import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
-import 'package:vortaro/app/ui/components/app_theme/app_theme.dart';
 
 class StartAuthorizeScreen extends StatelessWidget {
   const StartAuthorizeScreen({Key? key}) : super(key: key);

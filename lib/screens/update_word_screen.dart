@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
-import 'package:vortaro/screens/home_screen.dart';
 
 class UpdateWord extends StatefulWidget {
   const UpdateWord({super.key, required this.word});

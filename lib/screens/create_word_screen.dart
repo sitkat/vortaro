@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vortaro/UI/app_router/constants_router.dart';
-import 'package:vortaro/Utils/utils.dart';
+import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
 
@@ -29,9 +28,6 @@ class _CreateWordState extends State<CreateWord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Новое слово'),
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Form(

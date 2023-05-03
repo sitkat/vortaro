@@ -4,6 +4,8 @@ import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/domain/app_builder.dart';
 import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
 import 'package:vortaro/app/ui/components/app_theme/app_theme.dart';
+import 'package:vortaro/feature/favorites/domain/favorite_repository.dart';
+import 'package:vortaro/feature/favorites/domain/state/favorite_cubit.dart';
 import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 import 'package:vortaro/feature/words/domain/word_repository.dart';
 
@@ -40,7 +42,7 @@ class _GlobalProvider extends StatelessWidget {
         create: (context) =>
             WordCubit(locator.get<WordRepository>(), locator.get<AuthCubit>())
               ..fetchWords(),
-      )
+      ),
     ], child: child);
   }
 }

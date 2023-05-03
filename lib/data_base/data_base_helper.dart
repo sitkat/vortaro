@@ -104,6 +104,6 @@ class DbHelper {
 
   Future<List<Map<String, dynamic>>> getSearchedWords() async {
     var dbClient = await _db;
-    return dbClient.query(DataBaseRequest.tableWord, orderBy: "title");
+    return dbClient.query(DataBaseRequest.tableWord);
   }
 }

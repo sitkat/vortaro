@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:vortaro/UI/app_router/constants_router.dart';
-import 'package:vortaro/UI/app_router/custom_router.dart';
-import 'package:vortaro/app/ui/app_loader.dart';
+import 'package:vortaro/app/ui/components/app_router/app_router.dart';
+import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
 import 'package:vortaro/app/utils/app_utils.dart';
 import 'package:vortaro/data_base/data_base_helper.dart';
 import 'package:vortaro/model/word.dart';
@@ -26,9 +23,11 @@ class _WordListNotAuthState extends State<WordListNotAuth> {
   var dummySearchList;
 
   void initLists() async {
+
     dummyOffsetList = await helper.getWords();
     dummySearchList = await helper.getSearchedWords();
 
+    if (!mounted) return;
     setState(() {
       words = dummyOffsetList;
     });

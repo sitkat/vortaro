@@ -3,12 +3,9 @@ import 'package:vortaro/app/ui/root_screen.dart';
 import 'package:vortaro/feature/auth/ui/login_screen.dart';
 import 'package:vortaro/feature/auth/ui/register_screen.dart';
 import 'package:vortaro/feature/auth/ui/start_authorize_screen.dart';
-
-
 import 'package:vortaro/model/word.dart';
 import 'package:vortaro/screens/create_word_screen.dart';
 import 'package:vortaro/screens/detail_word_screen.dart';
-import 'package:vortaro/screens/home_screen.dart';
 import 'package:vortaro/screens/main_screen.dart';
 import 'package:vortaro/screens/not_found_screen.dart';
 import 'package:vortaro/screens/translator_screen.dart';
@@ -27,8 +24,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case registerScreenRoute:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
-      case mainRoute:
-        return MaterialPageRoute(builder: (_) => const MainScreen());
       case createWordRoute:
         return MaterialPageRoute(builder: (_) => const CreateWord());
       case updateWordRoute:

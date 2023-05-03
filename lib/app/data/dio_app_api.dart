@@ -119,4 +119,10 @@ class DioAppApi implements AppApi {
       "description": args["description"],
     });
   }
+  // TODO: Update Word
+
+  @override
+  Future fetchFavorites() {
+    return dio.get("/auth/favorite");
+  }
 }
