@@ -99,14 +99,11 @@ class DbHelper {
   Future<List<Map<String, dynamic>>> getWords() async {
     var dbClient = await _db;
     return dbClient.query(DataBaseRequest.tableWord,
-        orderBy: "title");
-    // return dbClient.query(DataBaseRequest.tableWord, where: "Replace(title, '`', '')", limit: 200, orderBy: "title");
-    // return dbClient.query(DataBaseRequest.tableWord, where: "Replace(title, '`', '')", limit: 200, orderBy: "title");
+        orderBy: "title", limit: 30, offset: 8000);
   }
 
-  Future<void> getWord() async {
+  Future<List<Map<String, dynamic>>> getSearchedWords() async {
     var dbClient = await _db;
-    return dbClient.execute(
-        'SELECT id, edition , Replace(title, "`", ""), translation, description FROM Word');
+    return dbClient.query(DataBaseRequest.tableWord, orderBy: "title");
   }
 }

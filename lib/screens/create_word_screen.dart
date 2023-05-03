@@ -29,9 +29,9 @@ class _CreateWordState extends State<CreateWord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Новое слово'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Новое слово'),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Form(

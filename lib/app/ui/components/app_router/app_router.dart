@@ -29,8 +29,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case mainRoute:
         return MaterialPageRoute(builder: (_) => const MainScreen());
-      case homeRoute:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
       case createWordRoute:
         return MaterialPageRoute(builder: (_) => const CreateWord());
       case updateWordRoute:

@@ -15,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final tabs = [
-    const HomeScreen(),
+    const NotFoundScreen(),
     const NotFoundScreen(),
     const TranslatorScreen(),
     const NotFoundScreen(),

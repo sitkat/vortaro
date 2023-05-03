@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
+import 'package:vortaro/app/ui/components/app_icon_button.dart';
+import 'package:vortaro/app/utils/app_tts.dart';
 
 class TranslatorScreen extends StatefulWidget {
   const TranslatorScreen({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   var chosenValueFrom = 'ru';
   var chosenValueTo = 'eo';
 
-  // var chosenValue = 'ru';
+  String _txtInput = '';
   String _txtTranslated = '';
   final _translator = GoogleTranslator();
 
@@ -26,18 +28,16 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppTts appTts = AppTts();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Esperanto'),
-      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.grey.shade300,
@@ -45,24 +45,22 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Русский', textAlign: TextAlign.start),
+                      const Text('Русский', textAlign: TextAlign.start),
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.swap_horiz),
+                          icon: const Icon(Icons.swap_horiz),
                           iconSize: 20,
                           splashRadius: 10),
-                      Text(
+                      const Text(
                         'Esperanto',
                         textAlign: TextAlign.end,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.grey.shade300,
@@ -71,37 +69,40 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     children: [
                       Row(
                         children: [
-                          Text('Русский'),
-                          Icon(Icons.volume_down_outlined),
+                          const Text('Русский'),
+                          AppIconButton(
+                            onPressed: () {
+                              appTts.speak(_txtInput, chosenValueFrom);
+                            },
+                            icon: const Icon(Icons.volume_down_outlined),
+                          ),
                         ],
                       ),
                       TextField(
                         decoration: InputDecoration(hintText: 'Введите текст'),
                         onChanged: (String? value) async {
                           _refreshTranslation(value.toString());
+                          _txtInput = value.toString();
                         },
                       ),
-                      SizedBox(
-                        height: 50,
-                      ),
+                      const SizedBox(height: 50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(Icons.mic),
                           ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Перевести'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.green,
-                              ))
+                            onPressed: () {},
+                            child: Text('Перевести'),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                            ),
+                          )
                         ],
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -114,20 +115,23 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                       Row(
                         children: [
                           Text('Esperanto'),
-                          Icon(Icons.volume_down_outlined),
+                          AppIconButton(
+                            onPressed: () {
+                              appTts.speak(_txtTranslated, chosenValueTo);
+                            },
+                            icon: const Icon(Icons.volume_down_outlined),
+                          ),
                         ],
                       ),
                       Text(_txtTranslated),
-                      SizedBox(
-                        height: 50,
-                      ),
+                      const SizedBox(height: 50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           IconButton(onPressed: () {}, icon: Icon(Icons.copy)),
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.favorite_border)),
+                          // IconButton(
+                          //     onPressed: () {},
+                          //     icon: Icon(Icons.favorite_border)),
                         ],
                       ),
                     ],

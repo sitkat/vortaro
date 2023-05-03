@@ -61,8 +61,8 @@ class _UpdateWordState extends State<UpdateWord> {
                       title: _controllerTitle.text,
                       translation: _controllerTranslation.text,
                       description: _controllerDescription.text));
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  // Navigator.of(context).push(
+                  //     MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
               ),
             ),

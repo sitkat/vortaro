@@ -30,20 +30,20 @@ class _WordDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Detail"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.read<DetailWordCubit>().deleteWord().then((_) {
-                context.read<WordCubit>().fetchWords();
-                Navigator.pop(context);
-              });
-            },
-            icon: const Icon(Icons.delete),
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: Text("Detail"),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         context.read<DetailWordCubit>().deleteWord().then((_) {
+      //           context.read<WordCubit>().fetchWords();
+      //           Navigator.pop(context);
+      //         });
+      //       },
+      //       icon: const Icon(Icons.delete),
+      //     )
+      //   ],
+      // ),
       body: BlocConsumer<DetailWordCubit, DetailWordState>(
         builder: (context, state) {
           if (state.asyncSnapshot.connectionState == ConnectionState.waiting) {

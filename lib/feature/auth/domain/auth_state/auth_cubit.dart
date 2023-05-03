@@ -58,7 +58,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
         return userEntity.accessToken;
       });
     } catch (error, stackTrace) {
-      addError(error, stackTrace);
+      // addError(error, stackTrace);
     }
   }
 

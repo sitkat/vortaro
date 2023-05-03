@@ -10,11 +10,11 @@ class NotFoundScreen extends StatefulWidget {
 class _NotFoundScreenState extends State<NotFoundScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Not Found"),
-      ),
-      body: const Center(
+    return const Scaffold(
+      // appBar: AppBar(
+      //   title: const Text("Not Found"),
+      // ),
+      body: Center(
         child: Text("Sorry, We couldn't found your page"),
       ),
     );

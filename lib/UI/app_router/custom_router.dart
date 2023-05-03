@@ -14,8 +14,8 @@ class CustomRouter {
     switch (settings.name) {
       case mainRoute:
         return MaterialPageRoute(builder: (_) => const MainScreen());
-      case homeRoute:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+      // case homeRoute:
+      //   return MaterialPageRoute(builder: (_) => const HomeScreen());
       case createWordRoute:
         return MaterialPageRoute(builder: (_) => const CreateWord());
       case updateWordRoute:

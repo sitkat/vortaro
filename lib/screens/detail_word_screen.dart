@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vortaro/UI/app_router/constants_router.dart';
 import 'package:vortaro/UI/app_router/custom_router.dart';
-import 'package:vortaro/Utils/utils.dart';
+import 'package:vortaro/app/utils/app_utils.dart';
 import 'package:vortaro/model/word.dart';
 
 class DetailWord extends StatelessWidget {
@@ -11,11 +11,11 @@ class DetailWord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Utils utils = Utils();
+    AppUtils utils = AppUtils();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Информация'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Информация'),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

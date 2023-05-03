@@ -16,102 +16,111 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xffcbf6c6),
-            Colors.white,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          tileMode: TileMode.clamp,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xffcbf6c6),
+              Colors.white,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            tileMode: TileMode.clamp,
+          ),
         ),
-      ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        body: Form(
-          key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pushNamed(context, rootRoute),
+            ),
+          ),
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.transparent,
+          body: Form(
+            key: formKey,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "С возвращением!",
+                          style: TextStyle(
+                            color: Color(0xFF4E9752),
+                            fontSize: 28,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        const Text(
+                          "Веддите свои учетные данные, чтобы продолжить.",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black45,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        const SizedBox(height: 30),
+                        // Icon(Icons.account_box)
+                        AppTextField(
+                          controller: controllerLogin,
+                          labelText: "Логин",
+                        ),
+                        const SizedBox(height: 16),
+                        AppTextField(
+                          controller: controllerPassword,
+                          labelText: "Пароль",
+                          obscureText: true,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Забыли пароль?",
+                            style: theme.textTheme.labelSmall,
+                          ),
+                        ),
+                        AppButtonMax(
+                          onPressed: () {
+                            if (formKey.currentState?.validate() == true) {
+                              _onTapToSignIn(context.read<AuthCubit>());
+                              Navigator.pushNamed(context, rootRoute);
+                            }
+                          },
+                          text: "Войти",
+                          backgroundColor: const Color(0xFF4E9752),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 65,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFD8FFD8),
+                  ),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "С возвращением!",
-                        style: TextStyle(
-                          color: Color(0xFF4E9752),
-                          fontSize: 28,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      const Text(
-                        "Веддите свои учетные данные, чтобы продолжить.",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black45,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      const SizedBox(height: 40),
-                      // Icon(Icons.account_box)
-                      AppTextField(
-                        controller: controllerLogin,
-                        labelText: "Логин",
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        controller: controllerPassword,
-                        labelText: "Пароль",
-                        obscureText: true,
-                      ),
+                      const Text("Ещё нет учетной записи?"),
                       TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Забыли пароль?",
-                          style: theme.textTheme.labelSmall,
-                        ),
-                      ),
-                      AppButtonMax(
                         onPressed: () {
-                          if (formKey.currentState?.validate() == true) {
-                            _onTapToSignIn(context.read<AuthCubit>());
-                            Navigator.pushNamed(context, rootRoute);
-                          }
+                          Navigator.pushNamed(context, registerScreenRoute);
                         },
-                        text: "Войти",
-                        backgroundColor: const Color(0xFF4E9752),
+                        child: Text("Зарегистрироваться",
+                            style: theme.textTheme.labelSmall),
                       ),
-                      const SizedBox(height: 16),
                     ],
                   ),
                 ),
-              ),
-              Container(
-                height: 65,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFD8FFD8),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Ещё нет учетной записи?"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, registerScreenRoute);
-                      },
-                      child: Text("Зарегистрироваться",
-                          style: theme.textTheme.labelSmall),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
