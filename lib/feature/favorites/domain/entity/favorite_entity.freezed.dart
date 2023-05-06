@@ -22,8 +22,8 @@ FavoriteEntity _$FavoriteEntityFromJson(Map<String, dynamic> json) {
 mixin _$FavoriteEntity {
   int get id => throw _privateConstructorUsedError;
   int? get idWord => throw _privateConstructorUsedError;
-  UserEntity get user => throw _privateConstructorUsedError;
-  WordEntity get word => throw _privateConstructorUsedError;
+  UserEntity? get user => throw _privateConstructorUsedError;
+  WordEntity? get word => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,10 +37,10 @@ abstract class $FavoriteEntityCopyWith<$Res> {
           FavoriteEntity value, $Res Function(FavoriteEntity) then) =
       _$FavoriteEntityCopyWithImpl<$Res, FavoriteEntity>;
   @useResult
-  $Res call({int id, int? idWord, UserEntity user, WordEntity word});
+  $Res call({int id, int? idWord, UserEntity? user, WordEntity? word});
 
-  $UserEntityCopyWith<$Res> get user;
-  $WordEntityCopyWith<$Res> get word;
+  $UserEntityCopyWith<$Res>? get user;
+  $WordEntityCopyWith<$Res>? get word;
 }
 
 /// @nodoc
@@ -58,8 +58,8 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
   $Res call({
     Object? id = null,
     Object? idWord = freezed,
-    Object? user = null,
-    Object? word = null,
+    Object? user = freezed,
+    Object? word = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -70,29 +70,37 @@ class _$FavoriteEntityCopyWithImpl<$Res, $Val extends FavoriteEntity>
           ? _value.idWord
           : idWord // ignore: cast_nullable_to_non_nullable
               as int?,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserEntity,
-      word: null == word
+              as UserEntity?,
+      word: freezed == word
           ? _value.word
           : word // ignore: cast_nullable_to_non_nullable
-              as WordEntity,
+              as WordEntity?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserEntityCopyWith<$Res> get user {
-    return $UserEntityCopyWith<$Res>(_value.user, (value) {
+  $UserEntityCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserEntityCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $WordEntityCopyWith<$Res> get word {
-    return $WordEntityCopyWith<$Res>(_value.word, (value) {
+  $WordEntityCopyWith<$Res>? get word {
+    if (_value.word == null) {
+      return null;
+    }
+
+    return $WordEntityCopyWith<$Res>(_value.word!, (value) {
       return _then(_value.copyWith(word: value) as $Val);
     });
   }
@@ -106,12 +114,12 @@ abstract class _$$_FavoriteEntityCopyWith<$Res>
       __$$_FavoriteEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int? idWord, UserEntity user, WordEntity word});
+  $Res call({int id, int? idWord, UserEntity? user, WordEntity? word});
 
   @override
-  $UserEntityCopyWith<$Res> get user;
+  $UserEntityCopyWith<$Res>? get user;
   @override
-  $WordEntityCopyWith<$Res> get word;
+  $WordEntityCopyWith<$Res>? get word;
 }
 
 /// @nodoc
@@ -127,8 +135,8 @@ class __$$_FavoriteEntityCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? idWord = freezed,
-    Object? user = null,
-    Object? word = null,
+    Object? user = freezed,
+    Object? word = freezed,
   }) {
     return _then(_$_FavoriteEntity(
       id: null == id
@@ -139,14 +147,14 @@ class __$$_FavoriteEntityCopyWithImpl<$Res>
           ? _value.idWord
           : idWord // ignore: cast_nullable_to_non_nullable
               as int?,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserEntity,
-      word: null == word
+              as UserEntity?,
+      word: freezed == word
           ? _value.word
           : word // ignore: cast_nullable_to_non_nullable
-              as WordEntity,
+              as WordEntity?,
     ));
   }
 }
@@ -155,7 +163,7 @@ class __$$_FavoriteEntityCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_FavoriteEntity implements _FavoriteEntity {
   const _$_FavoriteEntity(
-      {required this.id, this.idWord, required this.user, required this.word});
+      {required this.id, this.idWord, this.user, this.word});
 
   factory _$_FavoriteEntity.fromJson(Map<String, dynamic> json) =>
       _$$_FavoriteEntityFromJson(json);
@@ -165,9 +173,9 @@ class _$_FavoriteEntity implements _FavoriteEntity {
   @override
   final int? idWord;
   @override
-  final UserEntity user;
+  final UserEntity? user;
   @override
-  final WordEntity word;
+  final WordEntity? word;
 
   @override
   String toString() {
@@ -207,8 +215,8 @@ abstract class _FavoriteEntity implements FavoriteEntity {
   const factory _FavoriteEntity(
       {required final int id,
       final int? idWord,
-      required final UserEntity user,
-      required final WordEntity word}) = _$_FavoriteEntity;
+      final UserEntity? user,
+      final WordEntity? word}) = _$_FavoriteEntity;
 
   factory _FavoriteEntity.fromJson(Map<String, dynamic> json) =
       _$_FavoriteEntity.fromJson;
@@ -218,9 +226,9 @@ abstract class _FavoriteEntity implements FavoriteEntity {
   @override
   int? get idWord;
   @override
-  UserEntity get user;
+  UserEntity? get user;
   @override
-  WordEntity get word;
+  WordEntity? get word;
   @override
   @JsonKey(ignore: true)
   _$$_FavoriteEntityCopyWith<_$_FavoriteEntity> get copyWith =>

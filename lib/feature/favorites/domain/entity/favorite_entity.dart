@@ -11,8 +11,8 @@ class FavoriteEntity with _$FavoriteEntity {
   const factory FavoriteEntity({
     required int id,
     int? idWord,
-    required UserEntity user,
-    required WordEntity word,
+    UserEntity? user,
+    WordEntity? word,
   }) = _FavoriteEntity;
 
   factory FavoriteEntity.fromJson(Map<String, dynamic> json) =>

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
+import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 import 'package:vortaro/feature/words/ui/word_item.dart';
@@ -17,12 +21,20 @@ class _WordListState extends State<WordList> {
 
   List<WordEntity> result = [];
 
+  bool isFavorite = false;
+
+  final userId = locator
+      .get<AuthCubit>()
+      .state
+      .whenOrNull(authorized: (userEntity) => userEntity.id);
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<WordCubit, WordState>(
       listener: (context, state) {},
       builder: (context, state) {
         if (state.wordList.isNotEmpty) {
+          final List<FavoriteEntity> list = state.favoriteList.toList();
           return Column(
             children: [
               Padding(
@@ -57,7 +69,8 @@ class _WordListState extends State<WordList> {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1, color: Colors.black38),
+                      borderSide:
+                          const BorderSide(width: 1, color: Colors.black38),
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
@@ -72,7 +85,17 @@ class _WordListState extends State<WordList> {
                       shrinkWrap: true,
                       itemCount: result.length,
                       itemBuilder: (context, index) {
-                        return WordItem(wordEntity: result[index]);
+                        obj(element) =>
+                            element.word?.id == result[index].id &&
+                            element.user?.id == userId;
+                        var resultFav = list.where(obj);
+                        if (resultFav.length > 0) {
+                          isFavorite = true;
+                        } else {
+                          isFavorite = false;
+                        }
+                        return WordItem(
+                            wordEntity: result[index], isFavorite: isFavorite);
                       },
                     ),
                   ),
@@ -86,7 +109,28 @@ class _WordListState extends State<WordList> {
                       shrinkWrap: true,
                       itemCount: state.wordList.length,
                       itemBuilder: (context, index) {
-                        return WordItem(wordEntity: state.wordList[index]);
+                        obj(element) =>
+                            element.word?.id == state.wordList[index].id &&
+                            element.user?.id == userId;
+                        var resultFav = list.where(obj);
+                        if (resultFav.length > 0) {
+                          isFavorite = true;
+                        } else {
+                          isFavorite = false;
+                        }
+                        // return result.length > 0 ? isFavorite = true : isFavorite = false;
+                        // list.where((element) {
+                        //   if (element.idWord == state.wordList[index].id &&
+                        //       element.user?.id == userId) {
+                        //
+                        //   }
+                        //   return list.isNotEmpty
+                        //       ? isFavorite = true
+                        //       : isFavorite = false;
+                        // });
+                        return WordItem(
+                            wordEntity: state.wordList[index],
+                            isFavorite: isFavorite);
                       },
                     ),
                   ),
@@ -102,31 +146,3 @@ class _WordListState extends State<WordList> {
     );
   }
 }
-
-// class WordList extends StatelessWidget {
-//   const WordList({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocConsumer<WordCubit, WordState>(
-//       listener: (context, state) {
-//         // TODO
-//       },
-//       builder: (context, state) {
-//         if (state.wordList.isNotEmpty) {
-//           return ListView.builder(
-//             shrinkWrap: true,
-//             itemCount: state.wordList.length,
-//             itemBuilder: (context, index) {
-//               return WordItem(wordEntity: state.wordList[index]);
-//             },
-//           );
-//         }
-//         if (state.asyncSnapshot?.connectionState == ConnectionState.waiting) {
-//           return const AppLoader();
-//         }
-//         return const SizedBox.shrink();
-//       },
-//     );
-//   }
-// }

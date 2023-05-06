@@ -17,20 +17,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
   final WordRepository wordRepository;
 
-  Future<void> fetchFavorites() async {
-    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
-    await wordRepository.fetchFavorites().then((value) {
-      final Iterable iterable = value;
-      emit(state.copyWith(
-          favoriteList:
-          iterable.map((e) => FavoriteEntity.fromJson(e)).toList(),
-          asyncSnapshot:
-          const AsyncSnapshot.withData(ConnectionState.done, true)));
-    }).catchError((error) {
-      addError(error);
-    });
-  }
-
   @override
   void addError(Object error, [StackTrace? stackTrace]) {
     emit(state.copyWith(

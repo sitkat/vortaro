@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vortaro/app/domain/error_entity/error_entity.dart';
+import 'package:vortaro/app/ui/app_loader.dart';
+import 'package:vortaro/app/ui/components/app_snack_bar.dart';
 import 'package:vortaro/app/utils/app_utils.dart';
+import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 import 'package:vortaro/feature/words/ui/word_detail_screen.dart';
 
 class WordItem extends StatelessWidget {
-  const WordItem({Key? key, required this.wordEntity}) : super(key: key);
+  const WordItem({Key? key, required this.wordEntity, this.isFavorite})
+      : super(key: key);
 
   final WordEntity wordEntity;
+  final bool? isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,13 @@ class WordItem extends StatelessWidget {
         subtitle: Text(utils.stressWord(wordEntity.translation)),
         trailing: Column(
           children: [
+            isFavorite == true
+                ? const Expanded(child: Icon(Icons.favorite))
+                : const SizedBox.shrink(),
+            // favoriteEntity.user.id == userEntity?.id && favoriteEntity.word.id == wordEntity.id
+            //     ? const Expanded(child: Icon(Icons.favorite))
+            //     : const SizedBox.shrink(),
+
             // Expanded(
             //   child: wordEntity.isFavorite == false
             //       ? const SizedBox.shrink()

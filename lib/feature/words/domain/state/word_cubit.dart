@@ -19,7 +19,10 @@ class WordCubit extends HydratedCubit<WordState> {
       : super(const WordState(asyncSnapshot: AsyncSnapshot.nothing())) {
     authSub = authCubit.stream.listen((event) {
       event.mapOrNull(
-        authorized: (value) => fetchWords(),
+        authorized: (value) {
+          fetchWords();
+          fetchFavorites();
+        },
         notAuthorized: (value) => logOut(),
       );
     });
@@ -37,6 +40,20 @@ class WordCubit extends HydratedCubit<WordState> {
           wordList: iterable.map((e) => WordEntity.fromJson(e)).toList(),
           asyncSnapshot:
               const AsyncSnapshot.withData(ConnectionState.done, true)));
+    }).catchError((error) {
+      addError(error);
+    });
+  }
+
+  Future<void> fetchFavorites() async {
+    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
+    await wordRepository.fetchFavorites().then((value) {
+      final Iterable iterable = value;
+      emit(state.copyWith(
+          favoriteList:
+          iterable.map((e) => FavoriteEntity.fromJson(e)).toList(),
+          asyncSnapshot:
+          const AsyncSnapshot.withData(ConnectionState.done, true)));
     }).catchError((error) {
       addError(error);
     });

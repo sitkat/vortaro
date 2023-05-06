@@ -53,7 +53,7 @@ class __WordDetailViewState extends State<_WordDetailView> {
           IconButton(
             onPressed: () {
               context.read<DetailWordCubit>().deleteWord().then((_) {
-                context.read<WordCubit>().fetchWords();
+                // context.read<WordCubit>().fetchWords();
                 Navigator.pop(context);
               });
             },
@@ -61,10 +61,11 @@ class __WordDetailViewState extends State<_WordDetailView> {
           ),
           IconButton(
             onPressed: () {
+
               context.read<DetailWordCubit>().addToFavorite({
-                "idWord": widget.wordEntity.id
+                "idWord": widget.wordEntity.id.toInt()
               }).then((_) {
-                // context.read<DetailWordCubit>().fetchFavorites();
+                context.read<WordCubit>().fetchFavorites();
               });
               // if (widget.wordEntity.isFavorite == false) {
               //   setState(() {

@@ -15,11 +15,12 @@ class FavoriteList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-      FavoriteCubit(locator.get<WordRepository>())..fetchFavorites(),
-      child: const _FavoriteList(),
-    );
+    return _FavoriteList();
+    // return BlocProvider(
+    //   create: (context) =>
+    //   WordCubit(locator.get<WordRepository>())..fetchFavorites(),
+    //   child: const _FavoriteList(),
+    // );
   }
 }
 
@@ -37,7 +38,7 @@ class _FavoriteListState extends State<_FavoriteList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FavoriteCubit, FavoriteState>(
+    return BlocConsumer<WordCubit, WordState>(
       listener: (context, state) {},
       builder: (context, state) {
         if (state.favoriteList.isNotEmpty) {
@@ -50,15 +51,15 @@ class _FavoriteListState extends State<_FavoriteList> {
                   onChanged: (value) {
                     if (textSearchEditingController.text.isEmpty) {
                       result = state.favoriteList;
-                      context.read<FavoriteCubit>().fetchFavorites();
+                      context.read<WordCubit>().fetchFavorites();
                     } else {
                       result = state.favoriteList
-                          .where((element) => element.word.title
+                          .where((element) => element.word!.title
                           .toLowerCase()
                               .contains(textSearchEditingController.text
                                   .toLowerCase()))
                           .toList();
-                      context.read<FavoriteCubit>().fetchFavorites();
+                      context.read<WordCubit>().fetchFavorites();
                     }
                   },
                   decoration: InputDecoration(
@@ -82,35 +83,34 @@ class _FavoriteListState extends State<_FavoriteList> {
                   ),
                 ),
               ),
-              if (textSearchEditingController.text.isNotEmpty)
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 8),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: result.length,
-                      itemBuilder: (context, index) {
-                        return FavoriteItem(favoriteEntity: result[index]);
-                      },
+              textSearchEditingController.text.isNotEmpty
+                  ? Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 8),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: result.length,
+                          itemBuilder: (context, index) {
+                            return FavoriteItem(favoriteEntity: result[index]);
+                          },
+                        ),
+                      ),
+                    )
+                  : Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 8),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: state.favoriteList.length,
+                          itemBuilder: (context, index) {
+                            return FavoriteItem(
+                                favoriteEntity: state.favoriteList[index]);
+                          },
+                        ),
+                      ),
                     ),
-                  ),
-                )
-              else
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 8),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.favoriteList.length,
-                      itemBuilder: (context, index) {
-                        return FavoriteItem(
-                            favoriteEntity: state.favoriteList[index]);
-                      },
-                    ),
-                  ),
-                ),
             ],
           );
         }

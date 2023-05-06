@@ -10,8 +10,12 @@ _$_FavoriteEntity _$$_FavoriteEntityFromJson(Map<String, dynamic> json) =>
     _$_FavoriteEntity(
       id: json['id'] as int,
       idWord: json['idWord'] as int?,
-      user: UserEntity.fromJson(json['user'] as Map<String, dynamic>),
-      word: WordEntity.fromJson(json['word'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : UserEntity.fromJson(json['user'] as Map<String, dynamic>),
+      word: json['word'] == null
+          ? null
+          : WordEntity.fromJson(json['word'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_FavoriteEntityToJson(_$_FavoriteEntity instance) =>
