@@ -64,6 +64,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
+    // isListening = false;
   }
 
   @override
@@ -141,8 +142,8 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                       const SizedBox(height: 10),
                       AvatarGlow(
                         repeat: isListening,
-                        showTwoGlows: true,
-                        glowColor: Colors.grey,
+                        // showTwoGlows: true,
+                        glowColor: Colors.black,
                         duration: const Duration(milliseconds: 1500),
                         endRadius: 20,
                         child: AppIconButton(
