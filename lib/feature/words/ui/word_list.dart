@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
+import 'package:vortaro/app/ui/components/app_search_field.dart';
 import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';

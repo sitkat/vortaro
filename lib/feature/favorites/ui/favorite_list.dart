@@ -1,37 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
-import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
-import 'package:vortaro/feature/favorites/domain/state/favorite_cubit.dart';
 import 'package:vortaro/feature/favorites/ui/favorite_item.dart';
-import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
-import 'package:vortaro/feature/words/domain/word_repository.dart';
 
-class FavoriteList extends StatelessWidget {
+class FavoriteList extends StatefulWidget {
   const FavoriteList({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _FavoriteList();
-    // return BlocProvider(
-    //   create: (context) =>
-    //   WordCubit(locator.get<WordRepository>())..fetchFavorites(),
-    //   child: const _FavoriteList(),
-    // );
-  }
-}
-
-class _FavoriteList extends StatefulWidget {
-  const _FavoriteList({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _FavoriteListState();
 }
 
-class _FavoriteListState extends State<_FavoriteList> {
+class _FavoriteListState extends State<FavoriteList> {
   TextEditingController textSearchEditingController = TextEditingController();
 
   List<FavoriteEntity> result = [];
@@ -55,7 +36,7 @@ class _FavoriteListState extends State<_FavoriteList> {
                     } else {
                       result = state.favoriteList
                           .where((element) => element.word!.title
-                          .toLowerCase()
+                              .toLowerCase()
                               .contains(textSearchEditingController.text
                                   .toLowerCase()))
                           .toList();

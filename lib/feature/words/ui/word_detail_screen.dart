@@ -4,6 +4,8 @@ import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/domain/error_entity/error_entity.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
 import 'package:vortaro/app/ui/components/app_snack_bar.dart';
+import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/favorites/domain/state/detail_favorite/detail_favorite_cubit.dart';
 import 'package:vortaro/feature/favorites/domain/state/favorite_cubit.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
@@ -12,15 +14,17 @@ import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 import 'package:vortaro/feature/words/domain/word_repository.dart';
 
 class WordDetailScreen extends StatelessWidget {
-  const WordDetailScreen({Key? key, required this.wordEntity}) : super(key: key);
+  const WordDetailScreen({Key? key, required this.wordEntity})
+      : super(key: key);
 
   final WordEntity wordEntity;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          DetailWordCubit(locator.get<WordRepository>(), wordEntity.id.toString())..fetchWord(),
+      create: (context) => DetailWordCubit(
+          locator.get<WordRepository>(), wordEntity.id.toString())
+        ..fetchWord(),
       child: _WordDetailView(wordEntity),
     );
   }
@@ -36,13 +40,11 @@ class _WordDetailView extends StatefulWidget {
 }
 
 class __WordDetailViewState extends State<_WordDetailView> {
-  // bool? _isFavoritePressed;
-  //
-  // @override
-  // void initState() {
-  //   _isFavoritePressed = widget.wordEntity.isFavorite;
-  //   super.initState();
-  // }
+  final userId = locator
+      .get<AuthCubit>()
+      .state
+      .whenOrNull(authorized: (userEntity) => userEntity.id);
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,51 +55,56 @@ class __WordDetailViewState extends State<_WordDetailView> {
           IconButton(
             onPressed: () {
               context.read<DetailWordCubit>().deleteWord().then((_) {
-                // context.read<WordCubit>().fetchWords();
+                context.read<WordCubit>().fetchWords();
                 Navigator.pop(context);
               });
             },
             icon: const Icon(Icons.delete),
           ),
-          IconButton(
-            onPressed: () {
+          BlocConsumer<WordCubit, WordState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              final List<FavoriteEntity> list = state.favoriteList.toList();
+              obj(element) =>
+                  element.word?.id == widget.wordEntity.id &&
+                  element.user?.id == userId;
+              var resultFav = list.where(obj);
+              if (resultFav.length > 0) {
+                isFavorite = true;
+              }
+              if (resultFav.length == 0) {
+                isFavorite = false;
+              }
 
-              context.read<DetailWordCubit>().addToFavorite({
-                "idWord": widget.wordEntity.id.toInt()
-              }).then((_) {
-                context.read<WordCubit>().fetchFavorites();
-              });
-              // if (widget.wordEntity.isFavorite == false) {
-              //   setState(() {
-              //     _isFavoritePressed = true;
-              //   });
-              // } else {
-              //   setState(() {
-              //     _isFavoritePressed = false;
-              //   });
+              return IconButton(
+                onPressed: () {
+                  if (isFavorite == false) {
+                    context.read<DetailWordCubit>().addToFavorite(
+                        {"idWord": widget.wordEntity.id}).then((_) {
+                      context.read<WordCubit>().fetchFavorites();
+                      isFavorite = true;
+                    });
+                  } else {
+                    FavoriteEntity favoriteEntity = resultFav.first;
+                    context
+                        .read<DetailWordCubit>()
+                        .deleteFromFavorite(favoriteEntity.id.toString())
+                        .then((_) {
+                      context.read<WordCubit>().fetchFavorites();
+                      isFavorite = false;
+                    });
+                  }
+                },
+                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+              );
+
+              // if (state.asyncSnapshot?.connectionState ==
+              //     ConnectionState.waiting) {
+              //   return const AppLoader();
               // }
-              // context.read<WordCubit>().updateWord(
-              //     widget.wordEntity.id.toString(),
-              //     {
-              //       "title": widget.wordEntity.title,
-              //       "translation": widget.wordEntity.translation,
-              //       "description": widget.wordEntity.description,
-              //     }
-              // ).then((_) {
-              //   context.read<FavoriteCubit>().fetchFavorites();
-              //   if (_isFavoritePressed == false) {
-              //     context.read<DetailFavoriteCubit>().deleteFromFavorite();
-              //     context.read<FavoriteCubit>().fetchFavorites();
-              //   } else {
-              //     context.read<FavoriteCubit>().addToFavorite({
-              //       "idWord": widget.wordEntity.id
-              //     });
-              //     context.read<FavoriteCubit>().fetchFavorites();
-              //   }
-              // });
+              // return const SizedBox.shrink();
             },
-            icon: Icon(Icons.favorite_border),
-          )
+          ),
         ],
       ),
       body: BlocConsumer<DetailWordCubit, DetailWordState>(

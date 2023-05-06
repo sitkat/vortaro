@@ -49,6 +49,18 @@ class DetailWordCubit extends Cubit<DetailWordState> {
     });
   }
 
+  Future<void> deleteFromFavorite(String idFav) async {
+    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
+    await Future.delayed(const Duration(seconds: 1));
+    await wordRepository.deleteFromFavorite(idFav).then((value) {
+      emit(state.copyWith(
+          asyncSnapshot: const AsyncSnapshot.withData(
+              ConnectionState.done, "Успешное удаление слова из избранных")));
+    }).catchError((error) {
+      addError(error);
+    });
+  }
+
   @override
   void addError(Object error, [StackTrace? stackTrace]) {
     emit(state.copyWith(
