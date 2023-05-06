@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/word_repository.dart';
 
@@ -35,6 +36,14 @@ class DetailWordCubit extends Cubit<DetailWordState> {
       emit(state.copyWith(
           asyncSnapshot: const AsyncSnapshot.withData(
               ConnectionState.done, "Успешное удаление слова")));
+    }).catchError((error) {
+      addError(error);
+    });
+  }
+
+  Future<void> addToFavorite(Map args) async {
+    await wordRepository.addToFavorite(args).then((value) {
+      // fetchFavorites();
     }).catchError((error) {
       addError(error);
     });

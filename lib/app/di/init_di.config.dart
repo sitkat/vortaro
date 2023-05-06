@@ -10,11 +10,9 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../../feature/auth/data/network_auth_repository.dart' as _i8;
 import '../../feature/auth/domain/auth_repository.dart' as _i7;
-import '../../feature/auth/domain/auth_state/auth_cubit.dart' as _i13;
-import '../../feature/favorites/data/net_favorite_repository.dart' as _i10;
-import '../../feature/favorites/domain/favorite_repository.dart' as _i9;
-import '../../feature/words/data/net_word_repository.dart' as _i12;
-import '../../feature/words/domain/word_repository.dart' as _i11;
+import '../../feature/auth/domain/auth_state/auth_cubit.dart' as _i11;
+import '../../feature/words/data/net_word_repository.dart' as _i10;
+import '../../feature/words/domain/word_repository.dart' as _i9;
 import '../data/dio_app_api.dart' as _i6;
 import '../data/main_app_config.dart' as _i4;
 import '../domain/app_api.dart' as _i5;
@@ -51,10 +49,8 @@ _i1.GetIt $initGetIt(
   gh.singleton<_i5.AppApi>(_i6.DioAppApi(get<_i3.AppConfig>()));
   gh.factory<_i7.AuthRepository>(
       () => _i8.NetworkAuthRepository(get<_i5.AppApi>()));
-  gh.factory<_i9.FavoriteRepository>(
-      () => _i10.NetFavoriteRepository(get<_i5.AppApi>()));
-  gh.factory<_i11.WordRepository>(
-      () => _i12.NetWordRepository(get<_i5.AppApi>()));
-  gh.singleton<_i13.AuthCubit>(_i13.AuthCubit(get<_i7.AuthRepository>()));
+  gh.factory<_i9.WordRepository>(
+      () => _i10.NetWordRepository(get<_i5.AppApi>()));
+  gh.singleton<_i11.AuthCubit>(_i11.AuthCubit(get<_i7.AuthRepository>()));
   return get;
 }

@@ -47,4 +47,43 @@ class NetWordRepository implements WordRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<String> updateWord(String id, Map args) async {
+    try {
+      final response = await api.updateWord(id, args);
+      return response.data["message"];
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Iterable> fetchFavorites() async {
+    try {
+      final response = await api.fetchFavorites();
+      return response.data;
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<String> addToFavorite(Map args) async {
+    try {
+      final response = await api.addToFavorite(args);
+      return response.data["message"];
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future deleteFromFavorite(String id) async {
+    try {
+      await api.deleteFromFavorite(id);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

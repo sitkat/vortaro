@@ -41,9 +41,7 @@ class _CreateWordState extends State<CreateWord> {
                   });
                 },
               ),
-              SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               TextFormField(
                 decoration: InputDecoration(hintText: 'Введите перевод'),
                 onChanged: (value) {
@@ -52,9 +50,7 @@ class _CreateWordState extends State<CreateWord> {
                   });
                 },
               ),
-              SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               TextFormField(
                 decoration: InputDecoration(hintText: 'Введите описание'),
                 onChanged: (value) {
@@ -63,9 +59,7 @@ class _CreateWordState extends State<CreateWord> {
                   });
                 },
               ),
-              SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               Container(
                 width: 350,
                 height: 40,
@@ -79,7 +73,7 @@ class _CreateWordState extends State<CreateWord> {
                         title: _title,
                         translation: _translation,
                         description: _description));
-                    Navigator.pushNamed(context, homeRoute);
+                    Navigator.pushNamed(context, rootRoute);
                   },
                 ),
               ),

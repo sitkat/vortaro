@@ -52,17 +52,17 @@ class StartAuthorizeScreen extends StatelessWidget {
               const SizedBox(height: 10),
               const Divider(color: Colors.black, thickness: 0.7,),
               const SizedBox(height: 10),
-              InkWell(
-                focusColor: Colors.grey,
-                onTap: () {},
-                child: Row(
-                  children: const [
-                    Icon(Icons.settings),
-                    SizedBox(width: 5),
-                    Text("Настройки"),
-                  ],
-                ),
-              ),
+              // InkWell(
+              //   focusColor: Colors.grey,
+              //   onTap: () {},
+              //   child: Row(
+              //     children: const [
+              //       Icon(Icons.settings),
+              //       SizedBox(width: 5),
+              //       Text("Настройки"),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(height: 5),
               InkWell(
                 focusColor: Colors.grey,

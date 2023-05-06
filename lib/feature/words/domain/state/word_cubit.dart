@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/word_repository.dart';
 
@@ -43,6 +44,19 @@ class WordCubit extends HydratedCubit<WordState> {
 
   Future<void> createWord(Map args) async {
     await wordRepository.createWord(args).then((value) {
+      fetchWords();
+    }).catchError((error) {
+      addError(error);
+    });
+  }
+
+  Future<void> updateWord(String id, Map args) async {
+    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
+    await Future.delayed(const Duration(seconds: 1));
+    await wordRepository.updateWord(id, args).then((value) {
+      emit(state.copyWith(
+          asyncSnapshot: const AsyncSnapshot.withData(
+              ConnectionState.done, "Сохранено")));
       fetchWords();
     }).catchError((error) {
       addError(error);

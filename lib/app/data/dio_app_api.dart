@@ -119,10 +119,30 @@ class DioAppApi implements AppApi {
       "description": args["description"],
     });
   }
-  // TODO: Update Word
+
+  @override
+  Future updateWord(String id, Map args) {
+    return dio.put("/auth/word/$id", data: {
+      "title": args["title"],
+      "translation": args["translation"],
+      "description": args["description"],
+    });
+  }
 
   @override
   Future fetchFavorites() {
     return dio.get("/auth/favorite");
+  }
+
+  @override
+  Future deleteFromFavorite(String id) {
+    return dio.delete("/auth/favorite/$id");
+  }
+
+  @override
+  Future addToFavorite(Map args) {
+    return dio.post("/auth/favorite", data: {
+      "idWord": args["idWord"]
+    });
   }
 }

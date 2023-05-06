@@ -11,9 +11,14 @@ _$_WordState _$$_WordStateFromJson(Map<String, dynamic> json) => _$_WordState(
               ?.map((e) => WordEntity.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      favoriteList: (json['favoriteList'] as List<dynamic>?)
+              ?.map((e) => FavoriteEntity.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_WordStateToJson(_$_WordState instance) =>
     <String, dynamic>{
       'wordList': instance.wordList,
+      'favoriteList': instance.favoriteList,
     };

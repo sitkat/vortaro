@@ -38,5 +38,11 @@ abstract class AppApi {
 
   Future<dynamic> createWord(Map args);
 
+  Future<dynamic> updateWord(String id, Map args);
+
   Future<dynamic> fetchFavorites();
+
+  Future<dynamic> deleteFromFavorite(String id);
+
+  Future<dynamic> addToFavorite(Map args);
 }
