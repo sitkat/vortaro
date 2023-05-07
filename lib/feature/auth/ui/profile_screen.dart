@@ -12,7 +12,20 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Esperanto"),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<AuthCubit>().logOut();
+            },
+            icon: const Icon(Icons.exit_to_app),
+          )
+        ],
+      ),
       body: BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
         state.whenOrNull(
           authorized: (userEntity) {
@@ -36,24 +49,37 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              CircleAvatar(
+                backgroundColor: Colors.green,
+                child: Text(
+                  userEntity?.username?.split("").first ?? "Отсутствует",
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                userEntity?.username ?? "",
+                style: theme.textTheme.labelMedium,
+              ),
+              Text(userEntity?.email ?? ""),
               Row(
                 children: [
-                  CircleAvatar(
-                    child: Text(
-                        userEntity?.username?.split("").first ?? "Отсутствует"),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Column(
-                    children: [
-                      Text(userEntity?.username ?? ""),
-                      Text(userEntity?.email ?? ""),
-                    ],
-                  ),
+                  // CircleAvatar(
+                  //   child: Text(
+                  //       userEntity?.username?.split("").first ?? "Отсутствует"),
+                  // ),
+                  // const SizedBox(
+                  //   width: 16,
+                  // ),
+                  // Column(
+                  //   children: [
+                  //     Text(userEntity?.username ?? ""),
+                  //     Text(userEntity?.email ?? ""),
+                  //   ],
+                  // ),
                   IconButton(
                     onPressed: () {
-                      // Navigator.pop(context);
                       context.read<AuthCubit>().logOut();
                     },
                     icon: const Icon(Icons.exit_to_app),

@@ -71,6 +71,10 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   Widget build(BuildContext context) {
     AppTts appTts = AppTts();
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Esperanto"),
+        automaticallyImplyLeading: false,
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
