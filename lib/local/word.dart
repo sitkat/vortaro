@@ -1,4 +1,6 @@
-import 'package:vortaro/entity/word_entity.dart';
+
+
+import 'package:vortaro/local/entity/word_entity.dart';
 
 class Word extends WordEntity {
   Word({

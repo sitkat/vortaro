@@ -1,7 +1,9 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:translator/translator.dart';
 import 'package:vortaro/app/ui/components/app_icon_button.dart';
+import 'package:vortaro/app/ui/components/app_snack_bar.dart';
 import 'package:vortaro/app/utils/app_tts.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -128,7 +130,8 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                       ),
                       TextField(
                         controller: textInputEditingController,
-                        decoration: const InputDecoration(hintText: 'Введите текст'),
+                        decoration:
+                            const InputDecoration(hintText: 'Введите текст'),
                         onChanged: (String value) async {
                           if (!isListening) {
                             if (value.isEmpty ||
@@ -184,7 +187,17 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.copy)),
+                          IconButton(
+                              onPressed: () {
+                                if (txtTranslated.isNotEmpty) {
+                                  Clipboard.setData(
+                                          ClipboardData(text: txtTranslated))
+                                      .then((value) =>
+                                          AppSnackBar.showSnackBarWithMessage(
+                                              context, "Скопировано"));
+                                }
+                              },
+                              icon: const Icon(Icons.copy)),
                         ],
                       ),
                     ],

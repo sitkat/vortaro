@@ -18,7 +18,7 @@ abstract class AppSnackBar {
         duration: const Duration(seconds: 5),
         content: SingleChildScrollView(
           child: Text(
-            "Message: $message",
+            message,
             maxLines: 5,
           ),
         )));

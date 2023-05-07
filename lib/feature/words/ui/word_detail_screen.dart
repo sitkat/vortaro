@@ -44,7 +44,13 @@ class __WordDetailViewState extends State<_WordDetailView> {
       .get<AuthCubit>()
       .state
       .whenOrNull(authorized: (userEntity) => userEntity.id);
-  bool isFavorite = false;
+  late bool isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,39 +76,73 @@ class __WordDetailViewState extends State<_WordDetailView> {
                   element.user?.id == userId;
               var resultFav = list.where(obj);
               if (resultFav.length > 0) {
-                isFavorite = true;
-              }
-              if (resultFav.length == 0) {
-                isFavorite = false;
-              }
-
-              return IconButton(
-                onPressed: () {
-                  if (isFavorite == false) {
-                    context.read<DetailWordCubit>().addToFavorite(
-                        {"idWord": widget.wordEntity.id}).then((_) {
-                      context.read<WordCubit>().fetchFavorites();
-                      isFavorite = true;
-                    });
-                  } else {
+                // isFavorite = true;
+                print(
+                    'object----------------111111111111111111111111-------');
+                return IconButton(
+                  onPressed: () {
                     FavoriteEntity favoriteEntity = resultFav.first;
                     context
                         .read<DetailWordCubit>()
                         .deleteFromFavorite(favoriteEntity.id.toString())
                         .then((_) {
                       context.read<WordCubit>().fetchFavorites();
-                      isFavorite = false;
                     });
-                  }
-                },
-                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-              );
+                    // setState(() {
+                    //   isFavorite = false;
+                    // });
+                  },
+                  icon: Icon(Icons.favorite),
+                );
+              }
+              if (resultFav.length == 0) {
+                // isFavorite = false;
+                print(
+                    'object----------------22222222222222222222222222222----------------');
+                return IconButton(
+                  onPressed: () {
+                    context.read<DetailWordCubit>().addToFavorite(
+                        {"idWord": widget.wordEntity.id}).then((_) {
+                      context.read<WordCubit>().fetchFavorites();
+                    });
+                    // setState(() {
+                    //   isFavorite = true;
+                    // });
+                  },
+                  icon: Icon(Icons.favorite_border),
+                );
+              }
 
-              // if (state.asyncSnapshot?.connectionState ==
-              //     ConnectionState.waiting) {
-              //   return const AppLoader();
-              // }
-              // return const SizedBox.shrink();
+              // return IconButton(
+              //   onPressed: () {
+              //     if (isFavorite == false) {
+              //       context.read<DetailWordCubit>().addToFavorite(
+              //           {"idWord": widget.wordEntity.id}).then((_) {
+              //         context.read<WordCubit>().fetchFavorites();
+              //       });
+              //       setState(() {
+              //         isFavorite = true;
+              //       });
+              //     } else {
+              //       FavoriteEntity favoriteEntity = resultFav.first;
+              //       context
+              //           .read<DetailWordCubit>()
+              //           .deleteFromFavorite(favoriteEntity.id.toString())
+              //           .then((_) {
+              //         context.read<WordCubit>().fetchFavorites();
+              //       });
+              //       setState(() {
+              //         isFavorite = false;
+              //       });
+              //     }
+              //   },
+              //   icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+              // );
+              if (state.asyncSnapshot?.connectionState ==
+                  ConnectionState.waiting) {
+                return const AppLoader();
+              }
+              return const SizedBox.shrink();
             },
           ),
         ],
