@@ -56,7 +56,7 @@ class __WordDetailViewState extends State<_WordDetailView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Detail"),
+        title: const Text("Информация"),
         actions: [
           IconButton(
             onPressed: () {
@@ -76,9 +76,6 @@ class __WordDetailViewState extends State<_WordDetailView> {
                   element.user?.id == userId;
               var resultFav = list.where(obj);
               if (resultFav.length > 0) {
-                // isFavorite = true;
-                print(
-                    'object----------------111111111111111111111111-------');
                 return IconButton(
                   onPressed: () {
                     FavoriteEntity favoriteEntity = resultFav.first;
@@ -88,56 +85,21 @@ class __WordDetailViewState extends State<_WordDetailView> {
                         .then((_) {
                       context.read<WordCubit>().fetchFavorites();
                     });
-                    // setState(() {
-                    //   isFavorite = false;
-                    // });
                   },
                   icon: Icon(Icons.favorite),
                 );
               }
               if (resultFav.length == 0) {
-                // isFavorite = false;
-                print(
-                    'object----------------22222222222222222222222222222----------------');
                 return IconButton(
                   onPressed: () {
                     context.read<DetailWordCubit>().addToFavorite(
                         {"idWord": widget.wordEntity.id}).then((_) {
                       context.read<WordCubit>().fetchFavorites();
                     });
-                    // setState(() {
-                    //   isFavorite = true;
-                    // });
                   },
                   icon: Icon(Icons.favorite_border),
                 );
               }
-
-              // return IconButton(
-              //   onPressed: () {
-              //     if (isFavorite == false) {
-              //       context.read<DetailWordCubit>().addToFavorite(
-              //           {"idWord": widget.wordEntity.id}).then((_) {
-              //         context.read<WordCubit>().fetchFavorites();
-              //       });
-              //       setState(() {
-              //         isFavorite = true;
-              //       });
-              //     } else {
-              //       FavoriteEntity favoriteEntity = resultFav.first;
-              //       context
-              //           .read<DetailWordCubit>()
-              //           .deleteFromFavorite(favoriteEntity.id.toString())
-              //           .then((_) {
-              //         context.read<WordCubit>().fetchFavorites();
-              //       });
-              //       setState(() {
-              //         isFavorite = false;
-              //       });
-              //     }
-              //   },
-              //   icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-              // );
               if (state.asyncSnapshot?.connectionState ==
                   ConnectionState.waiting) {
                 return const AppLoader();

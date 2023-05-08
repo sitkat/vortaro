@@ -104,7 +104,10 @@ class _FavoriteListState extends State<FavoriteList> {
           if (state.asyncSnapshot?.connectionState == ConnectionState.waiting) {
             return const AppLoader();
           }
-          return const SizedBox.shrink();
+          // return const SizedBox.shrink();
+          return const Center(
+           child: Text("Нет избранных", style: TextStyle(fontSize: 28),),
+          );
         },
       ),
     );
