@@ -78,12 +78,12 @@ class ProfileScreen extends StatelessWidget {
                   //     Text(userEntity?.email ?? ""),
                   //   ],
                   // ),
-                  IconButton(
-                    onPressed: () {
-                      context.read<AuthCubit>().logOut();
-                    },
-                    icon: const Icon(Icons.exit_to_app),
-                  )
+                  // IconButton(
+                  //   onPressed: () {
+                  //     context.read<AuthCubit>().logOut();
+                  //   },
+                  //   icon: const Icon(Icons.exit_to_app),
+                  // )
                 ],
               ),
               Row(

@@ -16,6 +16,8 @@ class AppIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       highlightColor: Colors.transparent,
+      // hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
       onPressed: onPressed,
       icon: icon,
       iconSize: size,
