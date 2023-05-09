@@ -4,7 +4,7 @@ import 'package:vortaro/app/domain/error_entity/error_entity.dart';
 abstract class AppSnackBar {
   static void showSnackBarWithError(BuildContext context, ErrorEntity error) {
     ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 2),
         content: SingleChildScrollView(
           child: Text(
             "Error: ${error.errorMessage}, Message: ${error.message}",
@@ -15,7 +15,7 @@ abstract class AppSnackBar {
 
   static void showSnackBarWithMessage(BuildContext context, String message) {
     ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 2),
         content: SingleChildScrollView(
           child: Text(
             message,

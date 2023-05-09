@@ -5,7 +5,7 @@ import 'package:translator/translator.dart';
 import 'package:vortaro/app/ui/components/app_icon_button.dart';
 import 'package:vortaro/app/ui/components/app_snack_bar.dart';
 import 'package:vortaro/app/utils/app_tts.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:speech_to_text/speech_to_text.dart';
 
 class TranslatorScreen extends StatefulWidget {
   const TranslatorScreen({Key? key}) : super(key: key);
@@ -15,24 +15,58 @@ class TranslatorScreen extends StatefulWidget {
 }
 
 class _TranslatorScreenState extends State<TranslatorScreen> {
-  stt.SpeechToText _speech = stt.SpeechToText();
+  SpeechToText _speech = SpeechToText();
   bool isListening = false;
   double confidence = 1.0;
 
+  var textChosenValueFrom = 'Русский';
+  var textChosenValueTo = 'Esperanto';
   var chosenValueFrom = 'ru';
   var chosenValueTo = 'eo';
+  var hintTextValueFrom = 'Введите текст';
+  var textBtnCopySnackBar = 'Скопировано';
 
   String txtTranslated = '';
   final translator = GoogleTranslator();
 
+  bool convertLang = false;
+
   TextEditingController textInputEditingController = TextEditingController();
 
-  void _refreshTranslation(String value) async {
-    var trans = await translator.translate(value,
-        from: chosenValueFrom, to: chosenValueTo);
+  Future<dynamic> _refreshTranslation(String value) async {
+    if (value.isEmpty) {
+      setState(() {
+        txtTranslated = "";
+      });
+    } else {
+      var trans = await translator.translate(value,
+          from: chosenValueFrom, to: chosenValueTo);
+      setState(() {
+        txtTranslated = trans.text;
+      });
+    }
+  }
+
+  void _convertLang() {
     setState(() {
-      txtTranslated = trans.text;
+      textInputEditingController.text = txtTranslated;
+      if (convertLang) {
+        textChosenValueFrom = 'Esperanto';
+        textChosenValueTo = 'Русский';
+        chosenValueFrom = 'eo';
+        chosenValueTo = 'ru';
+        hintTextValueFrom = 'Enigu tekston';
+        textBtnCopySnackBar = 'Kopiita';
+      } else {
+        textChosenValueFrom = 'Русский';
+        textChosenValueTo = 'Esperanto';
+        chosenValueFrom = 'ru';
+        chosenValueTo = 'eo';
+        hintTextValueFrom = 'Введите текст';
+        textBtnCopySnackBar = 'Скопировано';
+      }
     });
+    _refreshTranslation(textInputEditingController.text);
   }
 
   void _listen() async {
@@ -57,6 +91,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
         setState(() {
           isListening = false;
           _speech.stop();
+          _refreshTranslation(textInputEditingController.text);
         });
       }
     }
@@ -65,7 +100,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   @override
   void initState() {
     super.initState();
-    _speech = stt.SpeechToText();
+    _speech = SpeechToText();
     // isListening = false;
   }
 
@@ -92,14 +127,17 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text('Русский', textAlign: TextAlign.start),
+                      Text(textChosenValueFrom, textAlign: TextAlign.start),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            convertLang = !convertLang;
+                            _convertLang();
+                          },
                           icon: const Icon(Icons.swap_horiz),
                           iconSize: 20,
                           splashRadius: 10),
-                      const Text(
-                        'Esperanto',
+                      Text(
+                        textChosenValueTo,
                         textAlign: TextAlign.end,
                       ),
                     ],
@@ -113,12 +151,11 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     color: Colors.grey.shade300,
                   ),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Row(
                         children: [
-                          const Text('Русский'),
+                          Text(textChosenValueFrom),
                           AppIconButton(
                             onPressed: () {
                               appTts.speak(textInputEditingController.text,
@@ -131,14 +168,22 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                       TextField(
                         controller: textInputEditingController,
                         decoration:
-                            const InputDecoration(hintText: 'Введите текст'),
+                            InputDecoration(hintText: hintTextValueFrom),
                         onChanged: (String value) async {
+                          print(value);
                           if (!isListening) {
-                            if (value.isEmpty ||
-                                textInputEditingController.text.isEmpty) {
-                              txtTranslated = "";
+                            if (textInputEditingController.text.length == 1){
+                              const Duration(milliseconds: 5000);
+                            }
+                            if (value.trim().isEmpty ||
+                                textInputEditingController.text
+                                    .trim()
+                                    .isEmpty) {
+                              setState(() {
+                                txtTranslated = "";
+                              });
                             } else {
-                              _refreshTranslation(value.toString());
+                              await _refreshTranslation(value.trim().toString());
                             }
                           }
                         },
@@ -173,7 +218,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     children: [
                       Row(
                         children: [
-                          const Text('Esperanto'),
+                          Text(textChosenValueTo),
                           AppIconButton(
                             onPressed: () {
                               appTts.speak(txtTranslated, chosenValueTo);
@@ -194,7 +239,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                                           ClipboardData(text: txtTranslated))
                                       .then((value) =>
                                           AppSnackBar.showSnackBarWithMessage(
-                                              context, "Скопировано"));
+                                              context, textBtnCopySnackBar));
                                 }
                               },
                               icon: const Icon(Icons.copy)),
