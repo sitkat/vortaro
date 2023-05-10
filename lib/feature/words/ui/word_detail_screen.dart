@@ -58,15 +58,6 @@ class __WordDetailViewState extends State<_WordDetailView> {
       appBar: AppBar(
         title: const Text("Информация"),
         actions: [
-          IconButton(
-            onPressed: () {
-              context.read<DetailWordCubit>().deleteWord().then((_) {
-                context.read<WordCubit>().fetchWords();
-                Navigator.pop(context);
-              });
-            },
-            icon: const Icon(Icons.delete),
-          ),
           BlocConsumer<WordCubit, WordState>(
             listener: (context, state) {},
             builder: (context, state) {

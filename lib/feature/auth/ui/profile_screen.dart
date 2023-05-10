@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vortaro/app/domain/app_notifications.dart';
 import 'package:vortaro/app/domain/error_entity/error_entity.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
 import 'package:vortaro/app/ui/components/app_dialog_two_params.dart';
@@ -20,6 +21,7 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              AppNotifications().cancelAllNotifications();
               context.read<AuthCubit>().logOut();
             },
             icon: const Icon(Icons.exit_to_app),

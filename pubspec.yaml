@@ -49,7 +49,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/dbTest.db
+    - assets/dbMain.db
     - assets/images/flagEsp.png
 
   # fonts:

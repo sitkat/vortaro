@@ -1,6 +1,5 @@
 import 'dart:io' as io;
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -28,14 +27,14 @@ class DbHelper {
     bool dbExists = await io.File(_pathDB).exists();
 
     if (!dbExists) {
-      ByteData data = await rootBundle.load(join("assets", "dbTest.db"));
+      ByteData data = await rootBundle.load(join("assets", "dbMain.db"));
       List<int> bytes =
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
       await io.File(_pathDB).writeAsBytes(bytes, flush: true);
     }
 
-    if (io.Platform.isMacOS) {
+    if (io.Platform.isIOS) {
       sqfliteFfiInit();
       _db = await databaseFactoryFfi.openDatabase(_pathDB,
           options: OpenDatabaseOptions(
@@ -44,16 +43,16 @@ class DbHelper {
             onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
           ));
     }
-    // if (io.Platform.isAndroid) {
-    _db = await openDatabase(
-      _pathDB,
-      version: _version,
-      onCreate: (db, version) async {
-        await onCreateTable(db);
-      },
-      onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
-    );
-    // }
+    if (io.Platform.isAndroid) {
+      _db = await openDatabase(
+        _pathDB,
+        version: _version,
+        onCreate: (db, version) async {
+          await onCreateTable(db);
+        },
+        onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
+      );
+    }
   }
 
   Future<void> onCreateTable(Database db) async {

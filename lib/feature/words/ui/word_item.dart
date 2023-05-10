@@ -19,40 +19,19 @@ class WordItem extends StatelessWidget {
       child: ListTile(
         title: Text(
           utils.stressWord(wordEntity.title),
+          maxLines: 1,
           style:
               const TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
         ),
-        subtitle: Text(utils.stressWord(wordEntity.translation)),
+        subtitle: Text(
+          utils.stressWord(wordEntity.translation),
+          maxLines: 1,
+        ),
         trailing: Column(
           children: [
             isFavorite == true
                 ? const Expanded(child: Icon(Icons.favorite))
                 : const SizedBox.shrink(),
-            // favoriteEntity.user.id == userEntity?.id && favoriteEntity.word.id == wordEntity.id
-            //     ? const Expanded(child: Icon(Icons.favorite))
-            //     : const SizedBox.shrink(),
-
-            // Expanded(
-            //   child: wordEntity.isFavorite == false
-            //       ? const SizedBox.shrink()
-            //       : const Icon(
-            //           Icons.favorite,
-            //         ),
-            // ),
-            // Expanded(
-            //   child: IconButton(
-            //     icon: const Icon(
-            //       Icons.delete,
-            //       color: Colors.black87,
-            //     ),
-            //     onPressed: () {
-            //       // context.read<DetailWordCubit>().deleteWord().then((_) {
-            //       //   context.read<WordCubit>().fetchWords();
-            //       //   Navigator.pop(context);
-            //       // });
-            //     },
-            //   ),
-            // ),
           ],
         ),
         onTap: () {
