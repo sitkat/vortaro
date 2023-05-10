@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vortaro/app/di/init_di.dart';
+import 'package:vortaro/app/domain/app_notifications.dart';
 import 'package:vortaro/app/domain/error_entity/error_entity.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
 import 'package:vortaro/app/ui/components/app_snack_bar.dart';
+import 'package:vortaro/app/utils/app_utils.dart';
 import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
@@ -32,6 +36,7 @@ class _WordListState extends State<WordList> {
 
   @override
   Widget build(BuildContext context) {
+    AppUtils utils = AppUtils();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Esperanto"),
@@ -41,6 +46,9 @@ class _WordListState extends State<WordList> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state.wordList.isNotEmpty) {
+            int randomIndex = Random().nextInt(state.wordList.toList().length);
+            var randomChoice = state.wordList[randomIndex];
+            AppNotifications().showNotification(title: "Слово дня", body: "Слово: ${utils.stressWord(randomChoice.title)}, перевод: ${randomChoice.translation}");
             final List<FavoriteEntity> list = state.favoriteList.toList();
             return Column(
               children: [

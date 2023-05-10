@@ -1,8 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-int id = 0;
-
 class AppNotifications {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -35,7 +33,7 @@ class AppNotifications {
   //   return notificationsPlugin.periodicallyShow(id, title, body, RepeatInterval.everyMinute, await notificationDetails());
   // }
 
-  Future<void> showNotification(
+  Future showNotification(
       {int id = 0, String? title, String? body, String? payload}) async {
     return notificationsPlugin.zonedSchedule(
       id,
