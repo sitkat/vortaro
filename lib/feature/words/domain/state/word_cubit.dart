@@ -10,97 +10,104 @@ import 'package:vortaro/feature/words/domain/word_repository.dart';
 
 part 'word_state.dart';
 
+part 'word_event.dart';
+
 part 'word_cubit.freezed.dart';
 
-part 'word_cubit.g.dart';
-
-class WordCubit extends HydratedCubit<WordState> {
-  WordCubit(this.wordRepository, this.authCubit)
+class WordBloc extends Bloc<WordEvent, WordState> {
+  WordBloc(this.wordRepository, this.authCubit)
       : super(const WordState(asyncSnapshot: AsyncSnapshot.nothing())) {
     authSub = authCubit.stream.listen((event) {
       event.mapOrNull(
         authorized: (value) {
-          fetchWords();
-          fetchFavorites();
+          this.add(WordEvent.fetchWords());
+          this.add(WordEvent.fetchFavorites());
         },
-        notAuthorized: (value) => logOut(),
+        notAuthorized: (value) => this.add(WordEvent.logOut()),
       );
     });
+
+    on<_WordEventFetchWords>(fetchWords);
+    on<_WordEventFetchFavorites>(fetchFavorites);
+    on<_WordEventCreateWord>(createWord);
+    on<_WordEventUpdateWord>(updateWord);
+    on<_WordEventLogOut>(logOut);
   }
 
   final WordRepository wordRepository;
   final AuthCubit authCubit;
   late final StreamSubscription authSub;
 
-  Future<void> fetchWords() async {
-    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
-    await wordRepository.fetchWords().then((value) {
+  Future<void> fetchWords(WordEvent event, Emitter emitter) async {
+    if (state.asyncSnapshot?.connectionState == ConnectionState.waiting) return;
+
+    emitter(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
+    await wordRepository
+        .fetchWords(state.fetchLimit, state.offset)
+        .then((value) {
       final Iterable iterable = value;
-      emit(state.copyWith(
-          wordList: iterable.map((e) => WordEntity.fromJson(e)).toList(),
+      final fetchedList = iterable.map((e) => WordEntity.fromJson(e)).toList();
+      final mergedList = [...state.wordList, ...fetchedList];
+      emitter(state.copyWith(
+          offset: state.offset + fetchedList.length,
+          wordList: mergedList,
           asyncSnapshot:
               const AsyncSnapshot.withData(ConnectionState.done, true)));
     }).catchError((error) {
-      addError(error);
+      stateError(error, emitter);
     });
   }
 
-  Future<void> fetchFavorites() async {
-    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
+  Future<void> fetchFavorites(WordEvent event, Emitter emitter) async {
+    emitter(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
     await wordRepository.fetchFavorites().then((value) {
       final Iterable iterable = value;
-      emit(state.copyWith(
+      emitter(state.copyWith(
           favoriteList:
-          iterable.map((e) => FavoriteEntity.fromJson(e)).toList(),
+              iterable.map((e) => FavoriteEntity.fromJson(e)).toList(),
           asyncSnapshot:
-          const AsyncSnapshot.withData(ConnectionState.done, true)));
+              const AsyncSnapshot.withData(ConnectionState.done, true)));
     }).catchError((error) {
-      addError(error);
+      stateError(error, emitter);
     });
   }
 
-  Future<void> createWord(Map args) async {
-    await wordRepository.createWord(args).then((value) {
-      fetchWords();
+  Future<void> createWord(WordEvent event, Emitter emitter) async {
+    await wordRepository
+        .createWord((event as _WordEventCreateWord).args)
+        .then((value) {
+      this.add(WordEvent.fetchWords());
     }).catchError((error) {
-      addError(error);
+      stateError(error, emitter);
     });
   }
 
-  Future<void> updateWord(String id, Map args) async {
-    emit(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
+  Future<void> updateWord(WordEvent event, Emitter emitter) async {
+    emitter(state.copyWith(asyncSnapshot: const AsyncSnapshot.waiting()));
     await Future.delayed(const Duration(seconds: 1));
-    await wordRepository.updateWord(id, args).then((value) {
-      emit(state.copyWith(
-          asyncSnapshot: const AsyncSnapshot.withData(
-              ConnectionState.done, "Сохранено")));
-      fetchWords();
+    await wordRepository
+        .updateWord((event as _WordEventUpdateWord).id, (event).args)
+        .then((value) {
+      emitter(state.copyWith(
+          asyncSnapshot:
+              const AsyncSnapshot.withData(ConnectionState.done, "Сохранено")));
+      this.add(WordEvent.fetchWords());
     }).catchError((error) {
-      addError(error);
+      stateError(error, emitter);
     });
   }
 
-  void logOut() {
-    emit(
-      state.copyWith(asyncSnapshot: const AsyncSnapshot.nothing(), wordList: []),
-    );
+  void logOut(WordEvent event, Emitter emitter) {
+    emitter(const WordState());
+    // emitter(
+    //   state.copyWith(asyncSnapshot: const AsyncSnapshot.nothing(), wordList: [])
+    // );
   }
 
-  @override
-  void addError(Object error, [StackTrace? stackTrace]) {
-    emit(state.copyWith(
+  void stateError(Object error, Emitter emitter) {
+    emitter(state.copyWith(
         asyncSnapshot: AsyncSnapshot.withError(ConnectionState.done, error)));
-    super.addError(error, stackTrace);
-  }
-
-  @override
-  WordState? fromJson(Map<String, dynamic> json) {
-    return WordState.fromJson(json);
-  }
-
-  @override
-  Map<String, dynamic>? toJson(WordState state) {
-    return state.toJson();
+    addError(error);
   }
 
   @override

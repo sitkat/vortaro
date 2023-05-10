@@ -10,9 +10,10 @@ class NetWordRepository implements WordRepository {
   NetWordRepository(this.api);
 
   @override
-  Future<Iterable> fetchWords() async {
+  Future<Iterable> fetchWords(int fetchLimit, int offset) async {
     try {
-      final response = await api.fetchWords();
+      final response = await api.fetchWords(fetchLimit, offset);
+      if(response.data is !Iterable ) throw Exception(response.data['message']);
       return response.data;
     } catch (_) {
       rethrow;

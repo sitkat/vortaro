@@ -24,7 +24,7 @@ class _FavoriteListState extends State<FavoriteList> {
         title: const Text("Esperanto"),
         automaticallyImplyLeading: false,
       ),
-      body: BlocConsumer<WordCubit, WordState>(
+      body: BlocConsumer<WordBloc, WordState>(
         listener: (context, state) {},
         builder: (context, state) {
           if (state.favoriteList.isNotEmpty) {
@@ -37,7 +37,7 @@ class _FavoriteListState extends State<FavoriteList> {
                     onChanged: (value) {
                       if (textSearchEditingController.text.isEmpty) {
                         result = state.favoriteList;
-                        context.read<WordCubit>().fetchFavorites();
+                        context.read<WordBloc>().add(WordEvent.fetchFavorites());
                       } else {
                         result = state.favoriteList
                             .where((element) => element.word!.title
@@ -45,8 +45,8 @@ class _FavoriteListState extends State<FavoriteList> {
                                 .contains(textSearchEditingController.text
                                     .toLowerCase()))
                             .toList();
-                        context.read<WordCubit>().fetchWords();
-                        context.read<WordCubit>().fetchFavorites();
+                        context.read<WordBloc>().add(WordEvent.fetchWords());
+                        context.read<WordBloc>().add(WordEvent.fetchFavorites());
                       }
                     },
                     decoration: InputDecoration(

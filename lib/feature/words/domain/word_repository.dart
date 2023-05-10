@@ -1,5 +1,5 @@
 abstract class WordRepository {
-  Future fetchWords();
+  Future fetchWords(int fetchLimit, int offset);
 
   Future fetchWord(String id);
 

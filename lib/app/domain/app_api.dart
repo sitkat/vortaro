@@ -30,7 +30,7 @@ abstract class AppApi {
 
   Future<dynamic> fetch(RequestOptions requestOptions);
 
-  Future<dynamic> fetchWords();
+  Future<dynamic> fetchWords(int fetchLimit, int offset);
 
   Future<dynamic> fetchWord(String id);
 

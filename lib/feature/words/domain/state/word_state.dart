@@ -6,8 +6,7 @@ class WordState with _$WordState {
     @JsonKey(ignore: true) AsyncSnapshot? asyncSnapshot,
     @Default([])List<WordEntity> wordList,
     @Default([])List<FavoriteEntity> favoriteList,
+    @Default(15) int fetchLimit,
+    @Default(0) int offset,
   }) = _WordState;
-
-  factory WordState.fromJson(Map<String, dynamic> json) =>
-      _$WordStateFromJson(json);
 }

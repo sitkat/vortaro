@@ -58,7 +58,7 @@ class __WordDetailViewState extends State<_WordDetailView> {
       appBar: AppBar(
         title: const Text("Информация"),
         actions: [
-          BlocConsumer<WordCubit, WordState>(
+          BlocConsumer<WordBloc, WordState>(
             listener: (context, state) {},
             builder: (context, state) {
               final List<FavoriteEntity> list = state.favoriteList.toList();
@@ -74,7 +74,7 @@ class __WordDetailViewState extends State<_WordDetailView> {
                         .read<DetailWordCubit>()
                         .deleteFromFavorite(favoriteEntity.id.toString())
                         .then((_) {
-                      context.read<WordCubit>().fetchFavorites();
+                      context.read<WordBloc>().add(WordEvent.fetchFavorites());
                     });
                   },
                   icon: Icon(Icons.favorite),
@@ -85,7 +85,7 @@ class __WordDetailViewState extends State<_WordDetailView> {
                   onPressed: () {
                     context.read<DetailWordCubit>().addToFavorite(
                         {"idWord": widget.wordEntity.id}).then((_) {
-                      context.read<WordCubit>().fetchFavorites();
+                      context.read<WordBloc>().add(WordEvent.fetchFavorites());
                     });
                   },
                   icon: Icon(Icons.favorite_border),

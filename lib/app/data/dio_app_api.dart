@@ -97,8 +97,9 @@ class DioAppApi implements AppApi {
   }
 
   @override
-  Future fetchWords() {
-    return dio.get("/auth/word");
+  Future fetchWords(int fetchLimit, int offset) {
+    return dio.get("/auth/word",
+        queryParameters: {'fetchLimit': fetchLimit, 'offset': offset});
   }
 
   @override
@@ -141,8 +142,6 @@ class DioAppApi implements AppApi {
 
   @override
   Future addToFavorite(Map args) {
-    return dio.post("/auth/favorite", data: {
-      "idWord": args["idWord"]
-    });
+    return dio.post("/auth/favorite", data: {"idWord": args["idWord"]});
   }
 }

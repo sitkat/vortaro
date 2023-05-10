@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/domain/app_notifications.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
+import 'package:vortaro/app/ui/components/app_snack_bar.dart';
 import 'package:vortaro/app/utils/app_utils.dart';
 import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
@@ -39,13 +40,17 @@ class _WordListState extends State<WordList> {
         title: const Text("Esperanto"),
         automaticallyImplyLeading: false,
       ),
-      body: BlocConsumer<WordCubit, WordState>(
-        listener: (context, state) {},
+      body: BlocConsumer<WordBloc, WordState>(
+        listener: (context, state) {
+          if (state.asyncSnapshot?.hasError ?? false) {
+            AppSnackBar.showSnackBarWithMessage(
+                context, state.asyncSnapshot?.error.toString() ?? "");
+          }
+        },
         builder: (context, state) {
           if (state.wordList.isNotEmpty) {
-            int randomIndex = Random().nextInt(state.wordList.toList().length);
-            var randomChoice = state.wordList[randomIndex];
-            AppNotifications().showNotification(title: "Слово дня", body: "Слово: ${utils.stressWord(randomChoice.title)}, перевод: ${randomChoice.translation}");
+            var randomWord = state.wordList[Random().nextInt(state.wordList.toList().length)];
+            AppNotifications().showNotification(title: "Слово дня", body: "Слово: ${utils.stressWord(randomWord.title)}, перевод: ${randomWord.translation}");
             final List<FavoriteEntity> list = state.favoriteList.toList();
             return Column(
               children: [
@@ -56,7 +61,7 @@ class _WordListState extends State<WordList> {
                     onChanged: (value) {
                       if (textSearchEditingController.text.isEmpty) {
                         result = state.wordList;
-                        context.read<WordCubit>().fetchWords();
+                        context.read<WordBloc>().add(WordEvent.fetchWords());
                       } else {
                         result = state.wordList
                             .where((element) => element.title
@@ -64,7 +69,7 @@ class _WordListState extends State<WordList> {
                                 .contains(textSearchEditingController.text
                                     .toLowerCase()))
                             .toList();
-                        context.read<WordCubit>().fetchWords();
+                        context.read<WordBloc>().add(WordEvent.fetchWords());
                       }
                     },
                     decoration: InputDecoration(
@@ -93,22 +98,35 @@ class _WordListState extends State<WordList> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 8),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: result.length,
-                        itemBuilder: (context, index) {
-                          obj(element) =>
-                              element.word?.id == result[index].id &&
-                              element.user?.id == userId;
-                          var resultFav = list.where(obj);
-                          if (resultFav.length > 0) {
-                              isFavorite = true;
-                          } else {
-                              isFavorite = false;
+                      child: NotificationListener<ScrollEndNotification>(
+                        onNotification: (notification) {
+                          if (notification.metrics.maxScrollExtent ==
+                              notification.metrics.pixels) {
+                            context
+                                .read<WordBloc>()
+                                .add(WordEvent.fetchWords());
+                            return true;
                           }
-                          return WordItem(
-                              wordEntity: result[index], isFavorite: isFavorite);
+                          return false;
                         },
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: result.length,
+                          itemBuilder: (context, index) {
+                            obj(element) =>
+                                element.word?.id == result[index].id &&
+                                element.user?.id == userId;
+                            var resultFav = list.where(obj);
+                            if (resultFav.length > 0) {
+                              isFavorite = true;
+                            } else {
+                              isFavorite = false;
+                            }
+                            return WordItem(
+                                wordEntity: result[index],
+                                isFavorite: isFavorite);
+                          },
+                        ),
                       ),
                     ),
                   )
@@ -117,23 +135,35 @@ class _WordListState extends State<WordList> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 8),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: state.wordList.length,
-                        itemBuilder: (context, index) {
-                          obj(element) =>
-                              element.word?.id == state.wordList[index].id &&
-                              element.user?.id == userId;
-                          var resultFav = list.where(obj);
-                          if (resultFav.length > 0) {
-                              isFavorite = true;
-                          } else {
-                              isFavorite = false;
+                      child: NotificationListener<ScrollEndNotification>(
+                        onNotification: (notification) {
+                          if (notification.metrics.maxScrollExtent ==
+                              notification.metrics.pixels) {
+                            context
+                                .read<WordBloc>()
+                                .add(WordEvent.fetchWords());
+                            return true;
                           }
-                          return WordItem(
-                              wordEntity: state.wordList[index],
-                              isFavorite: isFavorite);
+                          return false;
                         },
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: state.wordList.length,
+                          itemBuilder: (context, index) {
+                            obj(element) =>
+                                element.word?.id == state.wordList[index].id &&
+                                element.user?.id == userId;
+                            var resultFav = list.where(obj);
+                            if (resultFav.length > 0) {
+                              isFavorite = true;
+                            } else {
+                              isFavorite = false;
+                            }
+                            return WordItem(
+                                wordEntity: state.wordList[index],
+                                isFavorite: isFavorite);
+                          },
+                        ),
                       ),
                     ),
                   ),

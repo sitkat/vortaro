@@ -38,8 +38,8 @@ class _GlobalProvider extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) =>
-            WordCubit(locator.get<WordRepository>(), locator.get<AuthCubit>())
-              ..fetchWords(),
+            WordBloc(locator.get<WordRepository>(), locator.get<AuthCubit>())
+            ..add(WordEvent.fetchWords()),
       ),
     ], child: child);
   }
