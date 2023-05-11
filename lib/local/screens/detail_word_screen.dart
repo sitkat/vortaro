@@ -13,6 +13,9 @@ class DetailWord extends StatelessWidget {
   Widget build(BuildContext context) {
     AppUtils utils = AppUtils();
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Esperanto"),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -26,13 +29,13 @@ class DetailWord extends StatelessWidget {
             const SizedBox(height: 20),
             if (word.description != "null")
               Text(utils.stressWord(word.description)),
-            TextButton(
-              child: const Text('Изменить'),
-              onPressed: () {
-                Navigator.pushNamed(context, updateWordRoute,
-                    arguments: WordRouteArguments(wordArguments: word));
-              },
-            ),
+            // TextButton(
+            //   child: const Text('Изменить'),
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, updateWordRoute,
+            //         arguments: WordRouteArguments(wordArguments: word));
+            //   },
+            // ),
           ],
         ),
       ),

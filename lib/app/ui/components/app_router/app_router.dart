@@ -9,6 +9,7 @@ import 'package:vortaro/general/not_found_screen.dart';
 import 'package:vortaro/general/translator_screen.dart';
 import 'package:vortaro/local/screens/update_word_screen.dart';
 import 'package:vortaro/local/word.dart';
+import 'package:vortaro/local/word_list_not_auth.dart';
 
 import 'app_router_constants.dart';
 
@@ -23,6 +24,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case registerScreenRoute:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
+      case wordListNotAuthRoute:
+        return MaterialPageRoute(builder: (_) => const WordListNotAuth());
       case createWordRoute:
         return MaterialPageRoute(builder: (_) => const CreateWord());
       case updateWordRoute:
@@ -37,8 +40,6 @@ class AppRouter {
                     (settings.arguments as WordRouteArguments).wordArguments));
       case translatorRoute:
         return MaterialPageRoute(builder: (_) => const TranslatorScreen());
-      case notFoundPageRoute:
-        return MaterialPageRoute(builder: (_) => const NotFoundScreen());
       default:
         return MaterialPageRoute(builder: (_) => const NotFoundScreen());
     }

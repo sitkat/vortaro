@@ -98,7 +98,7 @@ class DbHelper {
   Future<List<Map<String, dynamic>>> getWords() async {
     var dbClient = await _db;
     return dbClient.query(DataBaseRequest.tableWord,
-        orderBy: "title", limit: 30, offset: 8000);
+        orderBy: "title", limit: 30);
   }
 
   Future<List<Map<String, dynamic>>> getSearchedWords() async {

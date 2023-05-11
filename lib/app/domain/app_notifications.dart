@@ -1,5 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 class AppNotifications {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
@@ -23,18 +25,12 @@ class AppNotifications {
             (NotificationResponse notificationResponse) async {});
   }
 
-  // Future showNotification(
-  //     {int id = 0, String? title, String? body, String? payload}) async {
-  //   return notificationsPlugin.show(id, title, body, await notificationDetails());
-  // }
-
-  // Future showNotification(
-  //     {int id = 0, String? title, String? body, String? payload}) async {
-  //   return notificationsPlugin.periodicallyShow(id, title, body, RepeatInterval.everyMinute, await notificationDetails());
-  // }
-
   Future showNotification(
       {int id = 0, String? title, String? body, String? payload}) async {
+    tz.initializeTimeZones();
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
+
     return notificationsPlugin.zonedSchedule(
       id,
       title,

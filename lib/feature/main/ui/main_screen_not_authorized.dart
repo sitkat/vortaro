@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vortaro/feature/auth/ui/start_authorize_screen.dart';
-import 'package:vortaro/feature/words/ui/word_list_not_auth.dart';
+import 'package:vortaro/local/word_list_not_auth.dart';
 
 class MainScreenNotAuthorized extends StatefulWidget {
   const MainScreenNotAuthorized({Key? key}) : super(key: key);
