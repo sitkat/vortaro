@@ -5,7 +5,6 @@ import 'package:vortaro/feature/auth/ui/register_screen.dart';
 import 'package:vortaro/feature/auth/ui/start_authorize_screen.dart';
 import 'package:vortaro/local/screens/create_word_screen.dart';
 import 'package:vortaro/local/screens/detail_word_screen.dart';
-import 'package:vortaro/general/not_found_screen.dart';
 import 'package:vortaro/general/translator_screen.dart';
 import 'package:vortaro/local/screens/update_word_screen.dart';
 import 'package:vortaro/local/word.dart';
@@ -41,7 +40,7 @@ class AppRouter {
       case translatorRoute:
         return MaterialPageRoute(builder: (_) => const TranslatorScreen());
       default:
-        return MaterialPageRoute(builder: (_) => const NotFoundScreen());
+        return MaterialPageRoute(builder: (_) => const RootScreen());
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vortaro/app/ui/components/app_progress_indicator.dart';
 import 'package:vortaro/app/ui/components/app_router/app_router.dart';
 import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
 import 'package:vortaro/app/utils/app_utils.dart';
@@ -24,10 +25,8 @@ class _WordListNotAuthState extends State<WordListNotAuth> {
   var dummySearchList;
 
   void initLists() async {
-
     dummyOffsetList = await helper.getWords();
     dummySearchList = await helper.getSearchedWords();
-
     if (!mounted) return;
     setState(() {
       words = dummyOffsetList;
@@ -95,45 +94,46 @@ class _WordListNotAuthState extends State<WordListNotAuth> {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: words.length,
-                itemBuilder: (context, i) {
-                  Word word = Word.toFromMap(words[i]);
-                  return Card(
-                    color: Colors.grey.shade300,
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
-                      title: Text(
-                        utils.stressWord(word.title),
-                        style: const TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w400),
-                      ),
-                      subtitle: Text(utils.stressWord(word.translation)),
-                      // trailing: Column(
-                      //   children: [
-                      //     Expanded(
-                      //       child: IconButton(
-                      //         icon: const Icon(
-                      //           Icons.delete,
-                      //           color: Colors.black87,
-                      //         ),
-                      //         onPressed: () {
-                      //           setState(() {
-                      //             helper.onDeleteWord(word.id);
-                      //             refreshWords("");
-                      //             textSearchEditingController.text = "";
-                      //           });
-                      //         },
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      onTap: () {
-                        Navigator.pushNamed(context, detailWordRoute,
-                            arguments: WordRouteArguments(wordArguments: word));
-                      },
+              itemCount: words.length,
+              itemBuilder: (context, i) {
+                Word word = Word.toFromMap(words[i]);
+                return Card(
+                  color: Colors.grey.shade300,
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    title: Text(
+                      utils.stressWord(word.title),
+                      style: const TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w400),
                     ),
-                  );
-                }),
+                    subtitle: Text(utils.stressWord(word.translation)),
+                    // trailing: Column(
+                    //   children: [
+                    //     Expanded(
+                    //       child: IconButton(
+                    //         icon: const Icon(
+                    //           Icons.delete,
+                    //           color: Colors.black87,
+                    //         ),
+                    //         onPressed: () {
+                    //           setState(() {
+                    //             helper.onDeleteWord(word.id);
+                    //             refreshWords("");
+                    //             textSearchEditingController.text = "";
+                    //           });
+                    //         },
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    onTap: () {
+                      Navigator.pushNamed(context, detailWordRoute,
+                          arguments: WordRouteArguments(wordArguments: word));
+                    },
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
