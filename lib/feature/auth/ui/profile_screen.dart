@@ -112,8 +112,8 @@ class ProfileScreen extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (context) => AppDialogTwoParams(
-                                  val1: "Email",
-                                  val2: "Username",
+                                  val1: "Почта",
+                                  val2: "Логин",
                                   onPressed: (v1, v2) {
                                     context.read<AuthCubit>().userUpdate(
                                           email: v1,

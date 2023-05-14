@@ -16,7 +16,7 @@ class AppTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
-      validator: emptyValidator,
+      validator: validator,
       maxLines: 1,
       controller: controller,
       decoration: InputDecoration(
@@ -27,9 +27,40 @@ class AppTextField extends StatelessWidget {
     );
   }
 
-  String? emptyValidator(String? value) {
+  String? validator(String? value) {
     if (value?.isEmpty == true) {
       return "Обязательное поле";
+    }
+    if (labelText == "Логин") {
+      final regexLogin =
+          RegExp(r'^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$');
+      if (!regexLogin.hasMatch(value!)) {
+        return "Поле может содержать только латиницу и цифры";
+      }
+      final sizeLogin = RegExp(r'^.{5,20}$');
+      if (!sizeLogin.hasMatch(value)) {
+        return "Длина должна быть от 5 до 20 символов";
+      }
+    }
+
+    if (labelText == "Почта") {
+      final regexEmail =
+      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+      if (!regexEmail.hasMatch(value!)) {
+        return "Неправильная почта";
+      }
+    }
+
+    if (labelText == "Пароль" || labelText == "Повторите пароль") {
+      final regexPassword =
+      RegExp(r'^[A-Za-z0-9_.-]+$');
+      if (!regexPassword.hasMatch(value!)) {
+        return "Пароль может содержать только латинские буквы";
+      }
+      final sizePassword = RegExp(r'^.{5,20}$');
+      if (!sizePassword.hasMatch(value)) {
+        return "Длина должна быть от 5 до 20 символов";
+      }
     }
     return null;
   }
