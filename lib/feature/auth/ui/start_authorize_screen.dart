@@ -31,7 +31,10 @@ class StartAuthorizeScreen extends StatelessWidget {
                 "Имей больше возможностей с Vortaro",
                 style: theme.textTheme.labelMedium,
               ),
-              const Text("Присоединяйся сейчас и пользуйся расширенными возможностями приложения", textAlign: TextAlign.center,),
+              const Text(
+                "Присоединяйся сейчас и пользуйся расширенными возможностями приложения",
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +53,10 @@ class StartAuthorizeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              const Divider(color: Colors.black, thickness: 0.7,),
+              const Divider(
+                color: Colors.black,
+                thickness: 0.7,
+              ),
               const SizedBox(height: 10),
               // InkWell(
               //   focusColor: Colors.grey,
@@ -78,7 +84,9 @@ class StartAuthorizeScreen extends StatelessWidget {
               const SizedBox(height: 5),
               InkWell(
                 focusColor: Colors.grey,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, aboutUsScreenRoute);
+                },
                 child: Row(
                   children: const [
                     Icon(Icons.info),

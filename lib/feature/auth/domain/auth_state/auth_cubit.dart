@@ -80,7 +80,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
 
   void _updateUserState(AsyncSnapshot asyncSnapshot) {
     emit(state.maybeWhen(
-      orElse: () => state,
+     orElse: () => state,
       authorized: (userEntity) {
         return AuthState.authorized(
             userEntity.copyWith(userState: asyncSnapshot));

@@ -8,3 +8,4 @@ const String wordListNotAuthRoute = "wordListNotAuth";
 const String startAuthorizeScreenRoute = "startAuthorizeScreen";
 const String loginScreenRoute = "loginScreen";
 const String registerScreenRoute = "registerScreen";
+const String aboutUsScreenRoute = "aboutUsScreen";
