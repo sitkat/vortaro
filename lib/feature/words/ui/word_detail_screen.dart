@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vortaro/app/di/init_di.dart';
 import 'package:vortaro/app/domain/error_entity/error_entity.dart';
 import 'package:vortaro/app/ui/app_loader.dart';
+import 'package:vortaro/app/ui/components/app_icon_button.dart';
 import 'package:vortaro/app/ui/components/app_snack_bar.dart';
+import 'package:vortaro/app/utils/app_tts.dart';
 import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
 import 'package:vortaro/feature/favorites/domain/state/detail_favorite/detail_favorite_cubit.dart';
@@ -54,10 +56,18 @@ class __WordDetailViewState extends State<_WordDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    AppTts appTts = AppTts();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Информация"),
         actions: [
+          AppIconButton(
+            onPressed: () {
+              appTts.speak(widget.wordEntity.translation,
+                  'eo');
+            },
+            icon: const Icon(Icons.volume_down_outlined),
+          ),
           BlocConsumer<WordBloc, WordState>(
             listener: (context, state) {},
             builder: (context, state) {
