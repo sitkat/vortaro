@@ -13,29 +13,60 @@ class DetailWord extends StatelessWidget {
   Widget build(BuildContext context) {
     AppUtils utils = AppUtils();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Esperanto"),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: SafeArea(
+          child: AppBar(
+            title: const Text("Esperanto"),
+          ),
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: ListView(
           children: [
-            Text(utils.stressWord(word.title)),
-            const SizedBox(height: 20),
+            Text(
+              utils.stressWord(word.title),
+              style: const TextStyle(
+                  fontFamily: "Jura",
+                  color: Colors.black87,
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700),
+            ),
             Text(
               utils.stressWord(word.translation),
+              style: const TextStyle(
+                  fontFamily: "Jura",
+                  color: Colors.green, fontSize: 26, fontWeight: FontWeight.normal),
             ),
-            const SizedBox(height: 20),
-            if (word.description != "null")
-              Text(utils.stressWord(word.description)),
-            // TextButton(
-            //   child: const Text('Изменить'),
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, updateWordRoute,
-            //         arguments: WordRouteArguments(wordArguments: word));
-            //   },
-            // ),
+            const Divider(),
+            Container(
+              padding: const EdgeInsets.all(15),
+              height: 160,
+              width: 180,
+              decoration: BoxDecoration(
+                color: Colors.lightGreen.shade100,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text("Описание",
+                    style: TextStyle(
+                        fontFamily: "Muli",
+                        color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w700),),
+                  const SizedBox(height: 15),
+                  Text("- ${utils.stressWord(word.description) ?? ""}",
+                    style: const TextStyle(
+                        fontFamily: "Muli",
+                        color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w200),
+                  ),
+                ],
+              ),
+            ),
+            // if (word.description != "null")
+            //   Text(utils.stressWord(word.description)),
           ],
         ),
       ),

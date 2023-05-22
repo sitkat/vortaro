@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 final lightTheme = ThemeData(
+  fontFamily: "Muli",
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.transparent,
-    iconTheme: IconThemeData(color: Colors.green),
+    iconTheme: IconThemeData(color: Colors.black87),
     elevation: 0,
     titleTextStyle: TextStyle(
         color: Colors.green, fontSize: 20, fontWeight: FontWeight.w700),
@@ -29,5 +30,8 @@ final lightTheme = ThemeData(
       fontSize: 14,
       decoration: TextDecoration.underline,
     ),
+    displayLarge: TextStyle(
+        fontFamily: "Jura",
+        color: Colors.black87, fontSize: 32, fontWeight: FontWeight.w700),
   ),
 );

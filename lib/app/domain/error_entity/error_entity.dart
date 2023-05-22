@@ -21,9 +21,9 @@ class ErrorEntity {
         return ErrorEntity(
             stackTrace: error.stackTrace,
             error: error,
-            message: error.response?.data["message"] ?? "Неизвестная ошибка",
+            message: error.response?.data["message"] ?? "Нет подключения к интернету",
             errorMessage:
-                error.response?.data["error"] ?? "Неизвестная ошибка");
+                error.response?.data["error"] ?? "Нет подключения к интернету");
       } catch (_) {
         return entity;
       }
