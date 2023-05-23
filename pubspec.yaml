@@ -51,6 +51,7 @@ flutter:
   assets:
     - assets/dbMain.db
     - assets/images/flagEsp.png
+    - assets/images/default_user.png
 
 
   fonts:

@@ -16,17 +16,11 @@ class ProfileScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Esperanto"),
+        title: Text(
+          "Esperanto",
+          style: theme.textTheme.displayLarge,
+        ),
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              AppNotifications().cancelAllNotifications();
-              context.read<AuthCubit>().logOut();
-            },
-            icon: const Icon(Icons.exit_to_app),
-          )
-        ],
       ),
       body: BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
         state.whenOrNull(
@@ -50,80 +44,122 @@ class ProfileScreen extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-                backgroundColor: Colors.green,
-                child: Text(
-                  userEntity?.username?.split("").first ?? "Отсутствует",
+              Row(
+                children: [
+                  const CircleAvatar(
+                    radius: 65,
+                    backgroundColor: Colors.lightGreenAccent,
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.white,
+                      backgroundImage: AssetImage(
+                        'assets/images/default_user.png',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 45),
+                      Text(
+                        userEntity?.username ?? "",
+                        style: const TextStyle(
+                          fontFamily: "Muli",
+                          fontSize: 24,
+                          color: Color(0xff070707),
+                        ),
+                      ),
+                      Text(
+                          userEntity?.email ?? "",
+                        style: TextStyle(
+                          fontFamily: "Muli",
+                          fontSize: 16,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const Divider(color: Colors.grey),
+              TextButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AppDialogTwoParams(
+                          val1: "Почта",
+                          val2: "Логин",
+                          onPressed: (v1, v2) {
+                            context.read<AuthCubit>().userUpdate(
+                              email: v1,
+                              username: v2,
+                            );
+                          },
+                        ));
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.edit),
+                      const SizedBox(width: 5),
+                      Text(
+                        "Обновить данные",
+                        style: theme.textTheme.displayMedium,
+                      ),
+                    ],
+                  ),
+              ),
+              const Divider(color: Colors.grey),
+              TextButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AppDialogTwoParams(
+                          val1: "Пароль",
+                          val2: "Новый пароль",
+                          onPressed: (v1, v2) {
+                            context.read<AuthCubit>().passwordUpdate(
+                              oldPassword: v1,
+                              newPassword: v2,
+                            );
+                          },
+                        ));
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.lock),
+                      const SizedBox(width: 5),
+                      Text(
+                        "Изменить пароль",
+                        style: theme.textTheme.displayMedium,
+                      ),
+                    ],
+                  ),
+              ),
+              const Divider(color: Colors.grey),
+              TextButton(
+                onPressed: () {
+                  AppNotifications().cancelAllNotifications();
+                  context.read<AuthCubit>().logOut();
+                },
+                child: Row(
+                  children: const [
+                    Icon(Icons.exit_to_app, color: Colors.black),
+                    SizedBox(width: 5),
+                    Text(
+                      "Выйти",
+                      style: TextStyle(
+                        fontFamily: "Muli",
+                        fontSize: 16,
+                          color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                userEntity?.username ?? "",
-                style: theme.textTheme.labelMedium,
-              ),
-              Text(userEntity?.email ?? ""),
-              Row(
-                children: [
-                  // CircleAvatar(
-                  //   child: Text(
-                  //       userEntity?.username?.split("").first ?? "Отсутствует"),
-                  // ),
-                  // const SizedBox(
-                  //   width: 16,
-                  // ),
-                  // Column(
-                  //   children: [
-                  //     Text(userEntity?.username ?? ""),
-                  //     Text(userEntity?.email ?? ""),
-                  //   ],
-                  // ),
-                  // IconButton(
-                  //   onPressed: () {
-                  //     context.read<AuthCubit>().logOut();
-                  //   },
-                  //   icon: const Icon(Icons.exit_to_app),
-                  // )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AppDialogTwoParams(
-                                  val1: "Пароль",
-                                  val2: "Новый пароль",
-                                  onPressed: (v1, v2) {
-                                    context.read<AuthCubit>().passwordUpdate(
-                                          oldPassword: v1,
-                                          newPassword: v2,
-                                        );
-                                  },
-                                ));
-                      },
-                      child: const Text("Обновить пароль")),
-                  TextButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AppDialogTwoParams(
-                                  val1: "Почта",
-                                  val2: "Логин",
-                                  onPressed: (v1, v2) {
-                                    context.read<AuthCubit>().userUpdate(
-                                          email: v1,
-                                          username: v2,
-                                        );
-                                  },
-                                ));
-                      },
-                      child: const Text("Обновить данные")),
-                ],
               ),
             ],
           ),

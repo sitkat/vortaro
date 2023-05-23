@@ -31,7 +31,14 @@ final lightTheme = ThemeData(
       decoration: TextDecoration.underline,
     ),
     displayLarge: TextStyle(
-        fontFamily: "Jura",
-        color: Colors.black87, fontSize: 32, fontWeight: FontWeight.w700),
+      fontFamily: "Muli",
+      fontSize: 24,
+      color: Color(0xff070707),
+    ),
+    displayMedium: TextStyle(
+      fontFamily: "Muli",
+      fontSize: 16,
+      color: Colors.blue,
+    ),
   ),
 );
