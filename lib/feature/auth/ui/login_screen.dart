@@ -77,13 +77,14 @@ class LoginScreen extends StatelessWidget {
                           labelText: "Пароль",
                           obscureText: true,
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Забыли пароль?",
-                            style: theme.textTheme.labelSmall,
-                          ),
-                        ),
+                        // TextButton(
+                        //   onPressed: () {},
+                        //   child: Text(
+                        //     "Забыли пароль?",
+                        //     style: theme.textTheme.labelSmall,
+                        //   ),
+                        // ),
+                        const SizedBox(height: 16),
                         AppButtonMax(
                           onPressed: () {
                             if (formKey.currentState?.validate() == true) {

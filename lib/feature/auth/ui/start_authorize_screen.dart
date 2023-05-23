@@ -69,18 +69,18 @@ class StartAuthorizeScreen extends StatelessWidget {
               //     ],
               //   ),
               // ),
-              const SizedBox(height: 5),
-              InkWell(
-                focusColor: Colors.grey,
-                onTap: () {},
-                child: Row(
-                  children: const [
-                    Icon(Icons.question_mark),
-                    SizedBox(width: 5),
-                    Text("Помощь"),
-                  ],
-                ),
-              ),
+              // const SizedBox(height: 5),
+              // InkWell(
+              //   focusColor: Colors.grey,
+              //   onTap: () {},
+              //   child: Row(
+              //     children: const [
+              //       Icon(Icons.question_mark),
+              //       SizedBox(width: 5),
+              //       Text("Помощь"),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(height: 5),
               InkWell(
                 focusColor: Colors.grey,

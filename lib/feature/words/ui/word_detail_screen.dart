@@ -188,8 +188,6 @@ class _WordDetailItem extends StatelessWidget {
           const Divider(),
           Container(
             padding: const EdgeInsets.all(15),
-            height: 160,
-            width: 180,
             decoration: BoxDecoration(
               color: Colors.lightGreen.shade100,
               borderRadius: BorderRadius.circular(20),
@@ -199,6 +197,7 @@ class _WordDetailItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text("Описание",
+                  maxLines: 20,
                   style: TextStyle(
                       fontFamily: "Muli",
                       color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w700),),
@@ -214,8 +213,6 @@ class _WordDetailItem extends StatelessWidget {
           const Divider(),
           Container(
             padding: const EdgeInsets.all(15),
-            height: 130,
-            width: 180,
             decoration: BoxDecoration(
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(20),
@@ -225,6 +222,7 @@ class _WordDetailItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text("Редакция",
+                  maxLines: 20,
                   style: TextStyle(
                       fontFamily: "Muli",
                       color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w700),),

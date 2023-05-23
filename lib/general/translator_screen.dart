@@ -15,7 +15,7 @@ class TranslatorScreen extends StatefulWidget {
 }
 
 class _TranslatorScreenState extends State<TranslatorScreen> {
-  SpeechToText _speech = SpeechToText();
+  SpeechToText speech = SpeechToText();
   bool isListening = false;
   double confidence = 1.0;
 
@@ -26,30 +26,28 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   var hintTextValueFrom = 'Введите текст';
   var textBtnCopySnackBar = 'Скопировано';
 
-  String txtTranslated = '';
   final translator = GoogleTranslator();
 
   bool convertLang = false;
 
   TextEditingController textInputEditingController = TextEditingController();
+  TextEditingController textOutputEditingController = TextEditingController();
 
   Future<dynamic> _refreshTranslation(String value) async {
-    if (value.isEmpty) {
-      setState(() {
-        txtTranslated = "";
-      });
-    } else {
-      var trans = await translator.translate(value,
-          from: chosenValueFrom, to: chosenValueTo);
-      setState(() {
-        txtTranslated = trans.text;
-      });
-    }
+    var trans = await translator.translate(value,
+        from: chosenValueFrom, to: chosenValueTo);
+    setState(() {
+      if (textInputEditingController.text.trim().isNotEmpty) {
+        textOutputEditingController.text = trans.text;
+      } else {
+        textOutputEditingController.clear();
+      }
+    });
   }
 
   void _convertLang() {
     setState(() {
-      textInputEditingController.text = txtTranslated;
+      textInputEditingController.text = textOutputEditingController.text;
       if (convertLang) {
         textChosenValueFrom = 'Esperanto';
         textChosenValueTo = 'Русский';
@@ -69,39 +67,11 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
     _refreshTranslation(textInputEditingController.text);
   }
 
-  void _listen() async {
-    if (!isListening) {
-      bool available = await _speech.initialize(
-        onStatus: (status) => print('onStatus: $status'),
-        onError: (errorNotification) => print('onError: $errorNotification'),
-      );
-      if (available) {
-        setState(() {
-          isListening = true;
-        });
-        _speech.listen(
-          onResult: (result) => setState(() {
-            textInputEditingController.text = result.recognizedWords;
-            if (result.hasConfidenceRating && result.confidence > 0) {
-              confidence = result.confidence;
-            }
-          }),
-        );
-      } else {
-        setState(() {
-          isListening = false;
-          _speech.stop();
-          _refreshTranslation(textInputEditingController.text);
-        });
-      }
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    _speech = SpeechToText();
-    // isListening = false;
+    speech = SpeechToText();
+    textOutputEditingController.text = "";
   }
 
   @override
@@ -154,55 +124,95 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(textChosenValueFrom),
-                          AppIconButton(
-                            onPressed: () {
-                              appTts.speak(textInputEditingController.text,
-                                  chosenValueFrom);
-                            },
-                            icon: const Icon(Icons.volume_down_outlined),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(textChosenValueFrom),
+                              AppIconButton(
+                                onPressed: () {
+                                  appTts.speak(textInputEditingController.text,
+                                      chosenValueFrom);
+                                },
+                                icon: const Icon(Icons.volume_down_outlined),
+                              ),
+                            ],
+                          ),
+                          AvatarGlow(
+                            animate: isListening,
+                            glowColor: Colors.black,
+                            duration: const Duration(milliseconds: 1500),
+                            repeatPauseDuration:
+                                const Duration(milliseconds: 100),
+                            repeat: true,
+                            endRadius: 20,
+                            child: GestureDetector(
+                              onTapDown: (details) async {
+                                if (!isListening) {
+                                  textOutputEditingController.text = "";
+                                  var available = await speech.initialize();
+                                  if (available) {
+                                    setState(() {
+                                      isListening = true;
+                                      speech.listen(
+                                        onResult: (result) {
+                                          setState(() {
+                                            textInputEditingController.text =
+                                                result.recognizedWords;
+                                          });
+                                        },
+                                      );
+                                    });
+                                  }
+                                }
+                              },
+                              onTapUp: (details) {
+                                setState(() => isListening = false);
+                                speech.stop();
+                                _refreshTranslation(
+                                    textInputEditingController.text);
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                foregroundColor: Colors.black,
+                                radius: 25,
+                                child: Icon(
+                                    isListening ? Icons.mic : Icons.mic_none),
+                              ),
+                            ),
                           ),
                         ],
                       ),
                       TextField(
                         controller: textInputEditingController,
-                        decoration:
-                            InputDecoration(hintText: hintTextValueFrom),
+                        decoration: InputDecoration(
+                          hintText: hintTextValueFrom,
+                          suffixIcon: IconButton(
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              if (textInputEditingController.text != "") {
+                                setState(() {
+                                  textInputEditingController.clear();
+                                  textOutputEditingController.clear();
+                                });
+                              }
+                            },
+                          ),
+                        ),
                         onChanged: (String value) async {
-                          print(value);
                           if (!isListening) {
-                            if (textInputEditingController.text.length == 1){
-                              const Duration(milliseconds: 5000);
-                            }
-                            if (value.trim().isEmpty ||
-                                textInputEditingController.text
-                                    .trim()
-                                    .isEmpty) {
-                              setState(() {
-                                txtTranslated = "";
-                              });
-                            } else {
-                              await _refreshTranslation(value.trim().toString());
-                            }
+                            await _refreshTranslation(value.trim().toString());
                           }
                         },
                         minLines: 1,
-                        maxLines: 4,
-                        maxLength: 100,
+                        maxLines: 6,
+                        maxLength: 150,
                       ),
                       const SizedBox(height: 10),
-                      AvatarGlow(
-                        repeat: isListening,
-                        // showTwoGlows: true,
-                        glowColor: Colors.black,
-                        duration: const Duration(milliseconds: 1500),
-                        endRadius: 20,
-                        child: AppIconButton(
-                          onPressed: _listen,
-                          icon: Icon(isListening ? Icons.mic : Icons.mic_none),
-                        ),
-                      )
                     ],
                   ),
                 ),
@@ -221,22 +231,29 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                           Text(textChosenValueTo),
                           AppIconButton(
                             onPressed: () {
-                              appTts.speak(txtTranslated, chosenValueTo);
+                              appTts.speak(textOutputEditingController.text,
+                                  chosenValueTo);
                             },
                             icon: const Icon(Icons.volume_down_outlined),
                           ),
                         ],
                       ),
-                      Text(txtTranslated, maxLines: 5),
+                      Text(
+                        textOutputEditingController.text,
+                        maxLines: 5,
+                      ),
                       const SizedBox(height: 5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           IconButton(
                               onPressed: () {
-                                if (txtTranslated.isNotEmpty) {
+                                if (textOutputEditingController
+                                    .text.isNotEmpty) {
                                   Clipboard.setData(
-                                          ClipboardData(text: txtTranslated))
+                                          ClipboardData(
+                                              text: textOutputEditingController
+                                                  .text))
                                       .then((value) =>
                                           AppSnackBar.showSnackBarWithMessage(
                                               context, textBtnCopySnackBar));
