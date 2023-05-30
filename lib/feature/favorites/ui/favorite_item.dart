@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vortaro/app/utils/app_utils.dart';
 import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
-import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
-import 'package:vortaro/feature/words/domain/state/detail_word/detail_word_cubit.dart';
-import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
 import 'package:vortaro/feature/words/ui/word_detail_screen.dart';
 
 class FavoriteItem extends StatelessWidget {

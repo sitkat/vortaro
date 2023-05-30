@@ -10,8 +10,6 @@ import 'package:vortaro/app/utils/app_tts.dart';
 import 'package:vortaro/app/utils/app_utils.dart';
 import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/favorites/domain/entity/favorite_entity.dart';
-import 'package:vortaro/feature/favorites/domain/state/detail_favorite/detail_favorite_cubit.dart';
-import 'package:vortaro/feature/favorites/domain/state/favorite_cubit.dart';
 import 'package:vortaro/feature/words/domain/entity/word_entity.dart';
 import 'package:vortaro/feature/words/domain/state/detail_word/detail_word_cubit.dart';
 import 'package:vortaro/feature/words/domain/state/word_cubit.dart';
