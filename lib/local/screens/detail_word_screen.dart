@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vortaro/app/ui/components/app_router/app_router.dart';
-import 'package:vortaro/app/ui/components/app_router/app_router_constants.dart';
 import 'package:vortaro/app/utils/app_utils.dart';
 import 'package:vortaro/local/word.dart';
 

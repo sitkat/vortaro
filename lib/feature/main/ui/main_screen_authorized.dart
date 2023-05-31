@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vortaro/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:vortaro/feature/auth/domain/entities/user_entity/user_entity.dart';
 import 'package:vortaro/feature/auth/ui/profile_screen.dart';
 import 'package:vortaro/feature/favorites/ui/favorite_list.dart';
@@ -30,18 +28,6 @@ class _MainScreenAuthorizedState extends State<MainScreenAuthorized> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Esperanto"),
-      //   automaticallyImplyLeading: false,
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () {
-      //         context.read<AuthCubit>().logOut();
-      //       },
-      //       icon: const Icon(Icons.exit_to_app),
-      //     )
-      //   ],
-      // ),
       body: tabs[_currentIndex],
       bottomNavigationBar: Container(
         color: Colors.lightGreenAccent,

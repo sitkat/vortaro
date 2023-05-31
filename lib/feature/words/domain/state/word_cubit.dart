@@ -99,9 +99,6 @@ class WordBloc extends Bloc<WordEvent, WordState> {
 
   void logOut(WordEvent event, Emitter emitter) {
     emitter(const WordState());
-    // emitter(
-    //   state.copyWith(asyncSnapshot: const AsyncSnapshot.nothing(), wordList: [])
-    // );
   }
 
   void stateError(Object error, Emitter emitter) {

@@ -1,5 +1,3 @@
-
-
 import 'package:vortaro/local/entity/word_entity.dart';
 
 class Word extends WordEntity {

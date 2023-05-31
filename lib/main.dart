@@ -4,7 +4,6 @@ import 'package:vortaro/app/ui/main_app_runner.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await DbHelper.instance.init();
   const env = String.fromEnvironment("env", defaultValue: "prod");
   const runner = MainAppRunner(env);
   final builder = MainAppBuilder();
