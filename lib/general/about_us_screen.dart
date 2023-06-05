@@ -5,9 +5,10 @@ class AboutUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Esperanto"),
+        title: Text("Esperanto", style: theme.textTheme.displayLarge),
       ),
       body: const SingleChildScrollView(
         child: Padding(
@@ -76,6 +77,8 @@ class AboutUsScreen extends StatelessWidget {
             "  Даже если такие словари раньше невозможно было издать, всё равно они должны были составляться. Ведь и многие "
             "писатели в те приснопамятные годы работали, что называется, в стол.",
             style: TextStyle(
+              fontFamily: "Jura",
+              fontWeight: FontWeight.w700,
               fontSize: 16,
             ),
           ),

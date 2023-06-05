@@ -16,12 +16,12 @@ class _FavoriteListState extends State<FavoriteList> {
   TextEditingController textSearchEditingController = TextEditingController();
 
   List<FavoriteEntity> result = [];
-
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Esperanto"),
+        title: Text("Esperanto", style: theme.textTheme.displayLarge),
         automaticallyImplyLeading: false,
       ),
       body: BlocConsumer<WordBloc, WordState>(
@@ -104,7 +104,6 @@ class _FavoriteListState extends State<FavoriteList> {
           if (state.asyncSnapshot?.connectionState == ConnectionState.waiting) {
             return const AppLoader();
           }
-          // return const SizedBox.shrink();
           return const Center(
            child: Text("Нет избранных", style: TextStyle(fontSize: 28),),
           );

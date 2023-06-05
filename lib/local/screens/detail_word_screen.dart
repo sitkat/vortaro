@@ -10,12 +10,13 @@ class DetailWord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppUtils utils = AppUtils();
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: SafeArea(
           child: AppBar(
-            title: const Text("Esperanto"),
+            title: Text("Esperanto", style: theme.textTheme.displayLarge),
           ),
         ),
       ),

@@ -21,31 +21,6 @@ class FavoriteItem extends StatelessWidget {
               color: Colors.black, fontWeight: FontWeight.w400),
         ),
         subtitle: Text(utils.stressWord(favoriteEntity.word!.translation)),
-        // trailing: Column(
-        //   children: [
-        //     Expanded(
-        //       child: IconButton(
-        //         icon: const Icon(
-        //           Icons.delete,
-        //           color: Colors.black87,
-        //         ),
-        //         onPressed: () {
-        //           context.read<DetailWordCubit>().deleteFromFavorite().then((_) {
-        //             context.read<WordCubit>().fetchFavorites();
-        //           });
-        //           context.read<WordCubit>().updateWord(
-        //               favoriteEntity.idWord.toString(),
-        //               {
-        //                 "title": favoriteEntity.word!.title,
-        //                 "translation": favoriteEntity.word!.translation,
-        //                 "description": favoriteEntity.word!.description,
-        //                 "isFavorite": false
-        //               });
-        //         },
-        //       ),
-        //     ),
-        //   ],
-        // ),
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => WordDetailScreen(wordEntity: favoriteEntity.word!),

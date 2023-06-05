@@ -44,16 +44,15 @@ class AppTextField extends StatelessWidget {
     }
 
     if (labelText == "Почта") {
-      final regexEmail =
-      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+      final regexEmail = RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
       if (!regexEmail.hasMatch(value!)) {
         return "Неправильная почта";
       }
     }
 
-    if (labelText == "Пароль" || labelText == "Повторите пароль") {
-      final regexPassword =
-      RegExp(r'^[A-Za-z0-9_.-]+$');
+    if (labelText == "Пароль" || labelText == "Повторите пароль" || labelText == "Новый пароль" || labelText == "Текущий пароль" || labelText == "Повторите новый пароль") {
+      final regexPassword = RegExp(r'^[A-Za-z0-9_.-]+$');
       if (!regexPassword.hasMatch(value!)) {
         return "Пароль может содержать только латинские буквы";
       }

@@ -20,9 +20,10 @@ class _MainScreenNotAuthorizedState extends State<MainScreenNotAuthorized> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Esperanto"),
+        title: Text("Esperanto", style: theme.textTheme.displayLarge),
         automaticallyImplyLeading: false,
       ),
       body: tabs[_currentIndex],

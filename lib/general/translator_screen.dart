@@ -77,9 +77,10 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   @override
   Widget build(BuildContext context) {
     AppTts appTts = AppTts();
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Esperanto"),
+        title: Text("Esperanto", style: theme.textTheme.displayLarge),
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(

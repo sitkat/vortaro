@@ -35,9 +35,10 @@ class _WordListState extends State<WordList> {
   @override
   Widget build(BuildContext context) {
     AppUtils utils = AppUtils();
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Esperanto"),
+        title: Text("Esperanto", style: theme.textTheme.displayLarge),
         automaticallyImplyLeading: false,
       ),
       body: BlocConsumer<WordBloc, WordState>(
